@@ -452,17 +452,18 @@ h1 {
   pointer-events: none;
 }
 
-.entry-card[data-category="apparitions"] { --collection-color: #733c66; --collection-wash: rgb(115 60 102 / 9%); }
-.entry-card[data-category="items"] { --collection-color: #9a5c24; --collection-wash: rgb(154 92 36 / 9%); }
-.entry-card[data-category="creatures"] { --collection-color: #42633b; --collection-wash: rgb(66 99 59 / 9%); }
-.entry-card[data-category="spells"] { --collection-color: #4d4985; --collection-wash: rgb(77 73 133 / 9%); }
-.entry-card[data-category="subsystem"] { --collection-color: #41647b; --collection-wash: rgb(65 100 123 / 9%); }
-.entry-card[data-category="house-rules"] { --collection-color: #7d2d36; --collection-wash: rgb(125 45 54 / 9%); }
-.entry-card[data-category="we4land"] { --collection-color: #24766f; --collection-wash: rgb(36 118 111 / 9%); }
-.entry-card[data-category="oziza"] { --collection-color: #315f8b; --collection-wash: rgb(49 95 139 / 9%); }
-.entry-card[data-category="ritsa"] { --collection-color: #6b7434; --collection-wash: rgb(107 116 52 / 9%); }
-.entry-card[data-category="sara"] { --collection-color: #a1692d; --collection-wash: rgb(161 105 45 / 9%); }
-.entry-card[data-category="language"] { --collection-color: #6e4a8b; --collection-wash: rgb(110 74 139 / 9%); }
+.entry-card[data-category="animist"] { --collection-color: #99a7b0; --collection-wash: rgb(153 167 176 / 14%); }
+.entry-card[data-category="items"] { --collection-color: #9000cc; --collection-wash: rgb(144 0 204 / 10%); }
+.entry-card[data-category="fauna-flora"] { --collection-color: #824500; --collection-wash: rgb(130 69 0 / 10%); }
+.entry-card[data-category="spells"] { --collection-color: #ffdf1a; --collection-wash: rgb(255 223 26 / 16%); }
+.entry-card[data-category="subsystems"] { --collection-color: #f24000; --collection-wash: rgb(242 64 0 / 10%); }
+.entry-card[data-category="house-rules"] { --collection-color: #8c0000; --collection-wash: rgb(140 0 0 / 10%); }
+.entry-card[data-category="we4land"] { --collection-color: #b3b3b3; --collection-wash: rgb(179 179 179 / 15%); }
+.entry-card[data-category="oziza"] { --collection-color: #00354a; --collection-wash: rgb(0 53 74 / 10%); }
+.entry-card[data-category="ritsa"] { --collection-color: #5bba61; --collection-wash: rgb(91 186 97 / 12%); }
+.entry-card[data-category="sara"] { --collection-color: #a6ffd8; --collection-wash: rgb(166 255 216 / 18%); }
+.entry-card[data-category="language"] { --collection-color: #d192d4; --collection-wash: rgb(209 146 212 / 14%); }
+.entry-card[data-category="maps"] { --collection-color: #153b00; --collection-wash: rgb(21 59 0 / 10%); }
 
 .entry-card[data-category="items"]::after,
 .entry-card[data-category="sara"]::after {
@@ -470,7 +471,7 @@ h1 {
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
-.entry-card[data-category="subsystem"]::after,
+.entry-card[data-category="subsystems"]::after,
 .entry-card[data-category="we4land"]::after {
   border-radius: 0;
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
