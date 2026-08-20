@@ -4,7 +4,8 @@ Checkpoint date: August 20, 2026
 
 ## Current state
 
-The dependency-free GitHub Pages project is complete and ready to place in an empty repository. It contains 33 distinct catalogue entries:
+The dependency-free GitHub Pages project is complete and published to
+`Casstform/pathfinder-gaileia-homebrew` on the `main` branch. It contains 33 distinct catalogue entries:
 
 - 1 apparition
 - 19 items
@@ -35,8 +36,8 @@ The dependency-free GitHub Pages project is complete and ready to place in an em
 
 See `SOURCE_INVENTORY.md` for the complete entry-by-entry provenance record.
 
-## Only remaining publication action
+## Only remaining account-level action
 
-Create one empty public GitHub repository, without initializing a README, `.gitignore`, or license. The suggested name is `pf2e-homebrew-compendium`. Once its repository URL is available, upload the contents of this project to the repository root and enable Pages from `main` / `root` as described in `README.md`.
+In the repository's **Settings → Pages** panel, select **Deploy from a branch**, choose `main` and `/(root)`, and save. After GitHub finishes its deployment, run the post-deployment smoke test against the public Pages URL.
 
-No further Google Drive search is required to publish this checkpoint.
+The repository upload is verified file-for-file. No further Google Drive search is required for this release checkpoint.
