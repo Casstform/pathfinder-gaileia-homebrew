@@ -6,7 +6,7 @@
     ? window.HOMEBREW_CATEGORIES
     : ["All"];
 
-  const GM_PASSCODE_SHA256 = "79b674bc56be7688e38d430bf0e59daccd25b00c74f0703d2495da6a4304ee40";
+  const GM_PASSCODE_SHA256 = "dc44b22d590f2f351d8fa792f7dfc7f6bffb01c00c2bdc020d4489d2c306b03b";
   const GM_ONLY_STORAGE_KEY = "gaileia-compendium-preview-gm-only-v1";
 
   const state = {
@@ -40,17 +40,18 @@
   );
 
   const categorySymbols = {
-    Apparitions: "◎",
+    Animist: "◎",
+    "Fauna/Flora": "⬟",
+    "House Rules": "⬢",
     Items: "◇",
-    Creatures: "爪",
-    Spells: "✦",
-    Subsystem: "⌘",
-    "House Rules": "⌂",
-    WE4LAND: "⬡",
-    Oziza: "☾",
-    Ritsa: "❧",
+    Language: "◈",
+    Maps: "▱",
+    Oziza: "◐",
+    Ritsa: "⬥",
     Sara: "△",
-    Language: "文"
+    Spells: "✦",
+    Subsystems: "⬡",
+    WE4LAND: "▣"
   };
 
   function loadGmOnlyIds() {
@@ -129,8 +130,8 @@
   }
 
   function canOpenInCurrentMode(entry) {
-    if (entry.externalUrl || entry.pcAccessible) return true;
-    return state.mode === "gm";
+    if (entry.externalUrl || state.mode === "gm") return true;
+    return !isGmOnly(entry);
   }
 
   function traitMarkup(traits) {
@@ -277,7 +278,7 @@
       <div class="not-found restricted-entry">
         <p class="kicker">${marked ? "GM-only entry" : "PC preview"}</p>
         <h1 tabindex="-1">${escapeHtml(entry.title)}</h1>
-        <p>${marked ? "This entry has been marked for the GM's view." : "PC mode shows catalogue previews without opening full entries."} Unlock GM mode to read the full entry.</p>
+        <p>This entry has been marked for the GM's view. Unlock GM mode to read the full entry.</p>
         <a class="button button-primary" href="#catalogue">Return to the catalogue</a>
       </div>
     `;
@@ -376,7 +377,7 @@
         const status = document.getElementById("gm-only-status");
         status.hidden = false;
         status.textContent = marked
-          ? "Marked GM-only in this preview browser. This prototype setting is not yet shared to other devices."
+          ? "Marked GM-only in this preview browser. Publish the visibility list to apply this choice for players on other devices."
           : "Removed from the GM-only preview list on this browser.";
       });
     }
