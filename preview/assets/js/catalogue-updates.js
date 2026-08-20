@@ -5,17 +5,18 @@
 
   window.HOMEBREW_CATEGORIES = [
     "All",
-    "Apparitions",
-    "Items",
-    "Creatures",
-    "Spells",
-    "Subsystem",
+    "Animist",
+    "Fauna/Flora",
     "House Rules",
-    "WE4LAND",
+    "Items",
+    "Language",
+    "Maps",
     "Oziza",
     "Ritsa",
     "Sara",
-    "Language"
+    "Spells",
+    "Subsystems",
+    "WE4LAND"
   ];
 
   function updateEntry(id, changes) {
@@ -23,8 +24,13 @@
     if (entry) Object.assign(entry, changes);
   }
 
-  updateEntry("alternate-chase-rules", { category: "Subsystem" });
-  updateEntry("camp-meal-and-cooking-rules", { category: "Subsystem" });
+  entries.forEach((entry) => {
+    if (entry.category === "Apparitions") entry.category = "Animist";
+    if (entry.category === "Creatures") entry.category = "Fauna/Flora";
+  });
+
+  updateEntry("alternate-chase-rules", { category: "Subsystems" });
+  updateEntry("camp-meal-and-cooking-rules", { category: "Subsystems" });
   updateEntry("campaign-house-rules", { category: "House Rules" });
   updateEntry("we4land-venting-and-submersion", { category: "WE4LAND" });
 
@@ -333,6 +339,22 @@
       externalLabel: "Open translator",
       pcAccessible: true,
       contentHtml: `<p>Open the companion translator to convert phrases into Gaileia's consistent, Simlish-inspired Goblish language.</p>`
+    },
+    {
+      id: "gaileia-world-map",
+      title: "Gaileia",
+      category: "Maps",
+      typeLabel: "World Map",
+      levelLabel: "External Site",
+      headingLabel: "Gaileia",
+      traits: ["Gaileia", "Map", "World"],
+      summary: "Explore the interactive world map of Gaileia and its campaign geography.",
+      intro: "A companion map for exploring the world of Gaileia.",
+      source: "Casstform/World-Map-of-Gaileia",
+      externalUrl: "https://casstform.github.io/World-Map-of-Gaileia/",
+      externalLabel: "Open map",
+      pcAccessible: true,
+      contentHtml: `<p>Open the companion world map to explore Gaileia and its campaign geography.</p>`
     }
   );
 })();
