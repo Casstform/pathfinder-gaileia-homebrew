@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#20272c">
+    <meta
+      name="description"
+      content="The searchable Gaileia collection of Pathfinder Second Edition homebrew, campaign material, and language tools."
+    >
+    <title>Gaileia Compendium</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script defer src="assets/js/content.js"></script>
+    <script defer src="assets/js/catalogue-updates.js"></script>
+    <script defer src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="masthead wrap">
+        <a class="brand" href="#catalogue" aria-label="Gaileia Compendium home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="assets/img/gaileia-globe.webp" alt="">
+          </span>
+          <span class="brand-copy">
+            <span class="eyebrow">Pathfinder Homebrew</span>
+            <span class="brand-title">Gaileia Compendium</span>
+          </span>
+        </a>
+        <div class="viewer-switch" aria-label="Viewer mode">
+          <span class="viewer-label">View</span>
+          <div class="viewer-options" role="group" aria-label="Choose PC or GM view">
+            <button id="pc-mode" class="viewer-option" type="button" aria-pressed="true">PC</button>
+            <button id="gm-mode" class="viewer-option" type="button" aria-pressed="false">GM</button>
+          </div>
+        </div>
+      </div>
+      <div class="gold-rule" aria-hidden="true"></div>
+    </header>
+
+    <main id="main-content" class="wrap">
+      <section id="catalogue-view" aria-labelledby="catalogue-title">
+        <div class="hero">
+          <h1 id="catalogue-title">Browse the Compendium</h1>
+          <dl class="catalogue-stats" aria-label="Catalogue summary">
+            <div><dt id="entry-total">45</dt><dd>Entries</dd></div>
+            <div><dt id="collection-total">11</dt><dd>Collections</dd></div>
+            <div><dt>PF2e</dt><dd>Ruleset</dd></div>
+          </dl>
+        </div>
+
+        <section class="catalogue-tools" aria-label="Catalogue controls">
+          <label class="search-field" for="search-input">
+            <span>Search entries</span>
+            <span class="search-control">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m21 21-4.35-4.35m2.35-5.15A7.5 7.5 0 1 1 4 11.5a7.5 7.5 0 0 1 15 0Z"></path>
+              </svg>
+              <input id="search-input" type="search" placeholder="Name, keyword, collection, etc." autocomplete="off">
+            </span>
+          </label>
+          <div>
+            <span class="control-label">Filter by collection</span>
+            <div id="category-filters" class="filter-list" role="group" aria-label="Filter entries by collection"></div>
+          </div>
+        </section>
+
+        <div class="results-heading">
+          <h2 id="results-title">All entries</h2>
+          <p id="results-count" aria-live="polite"></p>
+        </div>
+        <div id="catalogue-grid" class="catalogue-grid"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <h2>No matching entries</h2>
+          <p>Try a different search term or return to all collections.</p>
+          <button id="clear-search" class="button button-secondary" type="button">Clear filters</button>
+        </div>
+      </section>
+
+      <section id="detail-view" class="detail-view" aria-live="polite" hidden></section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div>
+          <p class="footer-title">Gaileia Compendium</p>
+          <p>Unofficial fan-made game material for personal campaign use.</p>
+        </div>
+        <div>
+          <p><strong>Source sync:</strong> August 20, 2026</p>
+          <p>Pathfinder and Starfinder are trademarks of Paizo Inc. This project is not affiliated with or endorsed by Paizo.</p>
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="gm-access-dialog" class="access-dialog" aria-labelledby="gm-access-title">
+      <form id="gm-access-form">
+        <p class="kicker">Restricted view</p>
+        <h2 id="gm-access-title">Unlock GM mode</h2>
+        <p>Enter the GM preview passcode. PC mode is restored whenever this page is opened afresh.</p>
+        <label class="dialog-field" for="gm-passcode">
+          <span>Passcode</span>
+          <input id="gm-passcode" type="password" autocomplete="current-password" required>
+        </label>
+        <p id="gm-access-error" class="form-error" role="alert" hidden>That passcode did not match.</p>
+        <div class="dialog-actions">
+          <button id="cancel-gm-access" class="button button-secondary" type="button">Cancel</button>
+          <button class="button button-primary" type="submit">Unlock GM mode</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
