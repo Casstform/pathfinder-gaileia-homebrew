@@ -1,0 +1,11 @@
+name = "gaileia-compendium-visibility"
+main = "src/index.js"
+compatibility_date = "2026-08-21"
+
+[vars]
+ALLOWED_ORIGIN = "https://casstform.github.io"
+
+[[kv_namespaces]]
+binding = "VISIBILITY"
+id = "REPLACE_WITH_PRODUCTION_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
