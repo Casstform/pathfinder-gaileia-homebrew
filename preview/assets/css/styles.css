@@ -455,18 +455,20 @@ h1 {
 .entry-card[data-category="animist"] { --collection-color: #99a7b0; --collection-wash: rgb(153 167 176 / 14%); }
 .entry-card[data-category="items"] { --collection-color: #9000cc; --collection-wash: rgb(144 0 204 / 10%); }
 .entry-card[data-category="fauna-flora"] { --collection-color: #824500; --collection-wash: rgb(130 69 0 / 10%); }
-.entry-card[data-category="spells"] { --collection-color: #ffdf1a; --collection-wash: rgb(255 223 26 / 16%); }
+.entry-card[data-category="spells"] { --collection-color: #9a7200; --collection-wash: rgb(154 114 0 / 13%); }
 .entry-card[data-category="subsystems"] { --collection-color: #f24000; --collection-wash: rgb(242 64 0 / 10%); }
 .entry-card[data-category="house-rules"] { --collection-color: #8c0000; --collection-wash: rgb(140 0 0 / 10%); }
 .entry-card[data-category="we4land"] { --collection-color: #b3b3b3; --collection-wash: rgb(179 179 179 / 15%); }
 .entry-card[data-category="oziza"] { --collection-color: #00354a; --collection-wash: rgb(0 53 74 / 10%); }
 .entry-card[data-category="ritsa"] { --collection-color: #5bba61; --collection-wash: rgb(91 186 97 / 12%); }
-.entry-card[data-category="sara"] { --collection-color: #a6ffd8; --collection-wash: rgb(166 255 216 / 18%); }
-.entry-card[data-category="language"] { --collection-color: #d192d4; --collection-wash: rgb(209 146 212 / 14%); }
+.entry-card[data-category="saraik"] { --collection-color: #278a65; --collection-wash: rgb(39 138 101 / 13%); }
+.entry-card[data-category="language"] { --collection-color: #963f82; --collection-wash: rgb(150 63 130 / 13%); }
 .entry-card[data-category="maps"] { --collection-color: #153b00; --collection-wash: rgb(21 59 0 / 10%); }
+.entry-card[data-category="formulae"] { --collection-color: #286373; --collection-wash: rgb(40 99 115 / 12%); }
 
 .entry-card[data-category="items"]::after,
-.entry-card[data-category="sara"]::after {
+.entry-card[data-category="saraik"]::after,
+.entry-card[data-category="formulae"]::after {
   border-radius: 18%;
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
@@ -550,6 +552,26 @@ h1 {
   font: 800 0.59rem/1 "Arial Narrow", Arial, sans-serif;
   letter-spacing: 0.045em;
   text-transform: uppercase;
+}
+
+.trait a {
+  display: inline-flex;
+  align-items: center;
+  min-height: inherit;
+  color: inherit;
+  text-decoration-color: rgb(255 255 255 / 70%);
+  text-underline-offset: 0.15em;
+}
+
+.trait a:hover,
+.trait a:focus-visible {
+  color: #fff;
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.inline-traits {
+  margin-top: 0.4rem;
 }
 
 .trait[data-trait="rare"] {
@@ -819,6 +841,19 @@ h1 {
 
 .rules-subcard > :last-child {
   margin-bottom: 0;
+}
+
+.flavour-quote {
+  margin: 1.25rem 0 0;
+  padding: 0.9rem 1rem;
+  border-left: 5px solid var(--gold);
+  background: #f3e8ce;
+  font-style: italic;
+}
+
+.flavour-quote footer {
+  margin-top: 0.5rem;
+  font-weight: 700;
 }
 
 .action-icon {

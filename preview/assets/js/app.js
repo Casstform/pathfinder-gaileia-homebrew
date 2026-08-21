@@ -7,13 +7,16 @@
     : ["All"];
 
   const GM_PASSCODE_SHA256 = "dc44b22d590f2f351d8fa792f7dfc7f6bffb01c00c2bdc020d4489d2c306b03b";
-  const GM_ONLY_STORAGE_KEY = "gaileia-compendium-preview-gm-only-v1";
+  const GM_ONLY_STORAGE_KEY = "gaileia-compendium-preview-gm-only-v2";
+  const CATALOGUE_SCROLL_KEY = "gaileia-compendium-catalogue-scroll-v1";
+  const VISIBILITY_API = String(window.GAILEIA_VISIBILITY_API || "").replace(/\/$/, "");
 
   const state = {
-    category: "All",
+    categories: new Set(),
     query: "",
     mode: "pc",
-    gmOnlyIds: loadGmOnlyIds()
+    gmOnlyIds: loadGmOnlyIds(),
+    gmPasscode: ""
   };
 
   const catalogueView = document.getElementById("catalogue-view");
@@ -42,13 +45,14 @@
   const categorySymbols = {
     Animist: "◎",
     "Fauna/Flora": "⬟",
+    Formulae: "◫",
     "House Rules": "⬢",
     Items: "◇",
     Language: "◈",
     Maps: "▱",
     Oziza: "◐",
     Ritsa: "⬥",
-    Sara: "△",
+    Saraik: "△",
     Spells: "✦",
     Subsystems: "⬡",
     WE4LAND: "▣"
@@ -65,6 +69,38 @@
 
   function saveGmOnlyIds() {
     window.localStorage.setItem(GM_ONLY_STORAGE_KEY, JSON.stringify([...state.gmOnlyIds]));
+  }
+
+  async function loadSharedGmOnlyIds() {
+    if (!VISIBILITY_API) return;
+    try {
+      const response = await fetch(`${VISIBILITY_API}/visibility`, {
+        headers: { Accept: "application/json" },
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error(`Visibility service returned ${response.status}`);
+      const payload = await response.json();
+      state.gmOnlyIds = new Set(Array.isArray(payload.ids) ? payload.ids : []);
+      saveGmOnlyIds();
+      renderCatalogue();
+    } catch (error) {
+      console.warn("Shared GM visibility could not be loaded; using the last local copy.", error);
+    }
+  }
+
+  async function saveSharedGmOnlyIds() {
+    saveGmOnlyIds();
+    if (!VISIBILITY_API) return { shared: false };
+    const response = await fetch(`${VISIBILITY_API}/visibility`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${state.gmPasscode}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ids: [...state.gmOnlyIds] })
+    });
+    if (!response.ok) throw new Error(`Visibility service returned ${response.status}`);
+    return { shared: true };
   }
 
   function escapeHtml(value) {
@@ -136,17 +172,48 @@
 
   function traitMarkup(traits) {
     return traits
-      .map(
-        (trait) =>
-          `<li class="trait" data-trait="${escapeHtml(normalize(trait))}">${escapeHtml(trait)}</li>`
-      )
+      .map((trait) => {
+        const normalized = normalize(trait);
+        const baseTrait = normalized
+          .replace(/^capacity\s+\d+$/, "capacity")
+          .replace(/^fatal\s+d\d+$/, "fatal")
+          .replace(/^versatile\s+.+$/, "versatile")
+          .replace(/^volley\s+.+$/, "volley");
+        const url = window.GAILEIA_TRAIT_URLS && window.GAILEIA_TRAIT_URLS[baseTrait];
+        const label = escapeHtml(trait);
+        const contents = url
+          ? `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">${label}</a>`
+          : label;
+        return `<li class="trait" data-trait="${escapeHtml(normalized)}">${contents}</li>`;
+      })
       .join("");
+  }
+
+  function linkRenderedTraits(container) {
+    container.querySelectorAll(".trait").forEach((traitElement) => {
+      if (traitElement.querySelector("a")) return;
+      const normalized = normalize(traitElement.textContent.trim());
+      const baseTrait = normalized
+        .replace(/^capacity\s+\d+$/, "capacity")
+        .replace(/^fatal\s+d\d+$/, "fatal")
+        .replace(/^versatile\s+.+$/, "versatile")
+        .replace(/^volley\s+.+$/, "volley");
+      const url = window.GAILEIA_TRAIT_URLS && window.GAILEIA_TRAIT_URLS[baseTrait];
+      if (!url) return;
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.target = "_blank";
+      anchor.rel = "noreferrer";
+      anchor.textContent = traitElement.textContent.trim();
+      traitElement.replaceChildren(anchor);
+    });
   }
 
   function filteredEntries() {
     const query = normalize(state.query.trim());
     return entries
-      .filter((entry) => state.category === "All" || entry.category === state.category)
+      .filter((entry) => state.mode === "gm" || !isGmOnly(entry))
+      .filter((entry) => state.categories.size === 0 || state.categories.has(entry.category))
       .filter((entry) => {
         if (!query) return true;
         const searchText = state.mode === "gm" ? entry._gmSearchText : entry._pcSearchText;
@@ -162,10 +229,6 @@
   function cardActionMarkup(entry) {
     if (entry.externalUrl) {
       return `<a class="card-link" href="${escapeHtml(entry.externalUrl)}" target="_blank" rel="noreferrer">${escapeHtml(entry.externalLabel || "Open site")}</a>`;
-    }
-
-    if (!canOpenInCurrentMode(entry)) {
-      return `<span class="card-link card-link-disabled" aria-disabled="true">${isGmOnly(entry) ? "GM only" : "PC preview"}</span>`;
     }
 
     return `<a class="card-link" href="#entry/${encodeURIComponent(entry.id)}" aria-label="Read ${escapeHtml(entry.title)}">Read entry</a>`;
@@ -216,7 +279,7 @@
             class="filter-button"
             type="button"
             data-category="${escapeHtml(category)}"
-            aria-pressed="${state.category === category}"
+            aria-pressed="${category === "All" ? state.categories.size === 0 : state.categories.has(category)}"
           >${escapeHtml(category)} (${count})</button>
         `;
       })
@@ -224,7 +287,14 @@
 
     filterList.querySelectorAll("button").forEach((button) => {
       button.addEventListener("click", () => {
-        state.category = button.dataset.category || "All";
+        const category = button.dataset.category || "All";
+        if (category === "All") {
+          state.categories.clear();
+        } else if (state.categories.has(category)) {
+          state.categories.delete(category);
+        } else {
+          state.categories.add(category);
+        }
         renderFilters();
         renderCatalogue();
       });
@@ -237,12 +307,12 @@
     emptyState.hidden = visibleEntries.length > 0;
     catalogueGrid.hidden = visibleEntries.length === 0;
 
-    const label = state.category === "All" ? "All entries" : state.category;
+    const label = state.categories.size === 0 ? "All entries" : [...state.categories].join(" + ");
     resultsTitle.textContent = label;
     resultsCount.textContent = `${visibleEntries.length} ${visibleEntries.length === 1 ? "entry" : "entries"}`;
   }
 
-  function showCatalogue({ focus = false } = {}) {
+  function showCatalogue({ focus = false, restoreScroll = false } = {}) {
     document.title = "Gaileia Compendium";
     catalogueView.hidden = false;
     detailView.hidden = true;
@@ -252,6 +322,10 @@
       title.setAttribute("tabindex", "-1");
       title.focus({ preventScroll: true });
       title.addEventListener("blur", () => title.removeAttribute("tabindex"), { once: true });
+    }
+    if (restoreScroll) {
+      const storedScroll = Number(window.sessionStorage.getItem(CATALOGUE_SCROLL_KEY) || 0);
+      window.requestAnimationFrame(() => window.scrollTo({ top: storedScroll, behavior: "auto" }));
     }
   }
 
@@ -316,9 +390,9 @@
           ${gmHeading}
         </div>
         ${gmTraits}
-        <p class="detail-intro">${escapeHtml(entry.intro)}</p>
+        <p class="detail-intro">${entry.introHtml || escapeHtml(entry.intro)}</p>
         <div class="detail-body">${entry.contentHtml}</div>
-        <p class="source-note"><strong>Imported from:</strong> ${escapeHtml(entry.source)}. Mechanical wording was preserved; punctuation, obvious spelling, and presentation were normalized for web reading.</p>
+        ${state.mode === "gm" ? `<p class="source-note"><strong>Imported from:</strong> ${escapeHtml(entry.source)}. Mechanical wording was preserved; punctuation, obvious spelling, and presentation were normalized for web reading.</p>` : ""}
       </article>
     `;
   }
@@ -344,6 +418,7 @@
     catalogueView.hidden = true;
     detailView.hidden = false;
     detailView.innerHTML = detailMarkup(entry);
+    linkRenderedTraits(detailView);
 
     const heading = document.getElementById("entry-title");
     heading.focus({ preventScroll: true });
@@ -364,39 +439,50 @@
 
     const gmOnlyToggle = document.getElementById("gm-only-toggle");
     if (gmOnlyToggle) {
-      gmOnlyToggle.addEventListener("click", () => {
+      gmOnlyToggle.addEventListener("click", async () => {
         if (state.gmOnlyIds.has(entry.id)) {
           state.gmOnlyIds.delete(entry.id);
         } else {
           state.gmOnlyIds.add(entry.id);
         }
-        saveGmOnlyIds();
         const marked = isGmOnly(entry);
         gmOnlyToggle.textContent = marked ? "Remove GM Only" : "GM Only";
         gmOnlyToggle.setAttribute("aria-pressed", String(marked));
         const status = document.getElementById("gm-only-status");
         status.hidden = false;
-        status.textContent = marked
-          ? "Marked GM-only in this preview browser. Publish the visibility list to apply this choice for players on other devices."
-          : "Removed from the GM-only preview list on this browser.";
+        status.textContent = "Saving visibility…";
+        try {
+          const result = await saveSharedGmOnlyIds();
+          status.textContent = result.shared
+            ? marked
+              ? "Marked GM-only for all PC viewers."
+              : "Restored this entry for all PC viewers."
+            : marked
+              ? "Marked GM-only in this preview browser. The shared visibility service is ready to connect."
+              : "Removed from the GM-only list in this preview browser.";
+        } catch (_error) {
+          status.textContent = "The shared visibility update failed. Your local preview choice is preserved.";
+        }
+        renderCatalogue();
       });
     }
   }
 
   function route() {
     const hash = window.location.hash.replace(/^#/, "");
-    window.scrollTo({ top: 0, behavior: "auto" });
 
     if (!hash || hash === "catalogue") {
-      showCatalogue({ focus: Boolean(hash) });
+      showCatalogue({ focus: Boolean(hash), restoreScroll: hash === "catalogue" });
       return;
     }
 
     if (hash.startsWith("entry/")) {
+      window.scrollTo({ top: 0, behavior: "auto" });
       showEntry(decodeURIComponent(hash.slice("entry/".length)));
       return;
     }
 
+    window.scrollTo({ top: 0, behavior: "auto" });
     showNotFound();
   }
 
@@ -429,7 +515,7 @@
   });
 
   clearSearch.addEventListener("click", () => {
-    state.category = "All";
+    state.categories.clear();
     state.query = "";
     searchInput.value = "";
     renderFilters();
@@ -445,18 +531,36 @@
 
   accessForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const submittedHash = await sha256(passcodeInput.value);
-    if (submittedHash !== GM_PASSCODE_SHA256) {
+    let authorized = false;
+    if (VISIBILITY_API) {
+      try {
+        const response = await fetch(`${VISIBILITY_API}/session`, {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${passcodeInput.value}` }
+        });
+        authorized = response.ok;
+      } catch (_error) {
+        authorized = false;
+      }
+    } else {
+      authorized = (await sha256(passcodeInput.value)) === GM_PASSCODE_SHA256;
+    }
+    if (!authorized) {
       accessError.hidden = false;
       passcodeInput.select();
       return;
     }
+    state.gmPasscode = passcodeInput.value;
     accessDialog.close();
     setMode("gm");
   });
 
   cancelGmAccess.addEventListener("click", () => accessDialog.close());
   window.addEventListener("hashchange", route);
+  catalogueGrid.addEventListener("click", (event) => {
+    const entryLink = event.target.closest('a[href^="#entry/"]');
+    if (entryLink) window.sessionStorage.setItem(CATALOGUE_SCROLL_KEY, String(window.scrollY));
+  });
 
   entryTotal.textContent = String(entries.length);
   collectionTotal.textContent = String(categories.filter((category) => category !== "All").length);
@@ -464,4 +568,5 @@
   renderFilters();
   renderCatalogue();
   route();
+  loadSharedGmOnlyIds();
 })();
