@@ -9,6 +9,7 @@
   const GM_PASSCODE_SHA256 = "dc44b22d590f2f351d8fa792f7dfc7f6bffb01c00c2bdc020d4489d2c306b03b";
   const GM_ONLY_STORAGE_KEY = "gaileia-compendium-preview-gm-only-v2";
   const CATALOGUE_SCROLL_KEY = "gaileia-compendium-catalogue-scroll-v1";
+  const WE4LAND_LEVEL_STORAGE_KEY = "gaileia-we4land-level-v1";
   const VISIBILITY_API = String(window.GAILEIA_VISIBILITY_API || "").replace(/\/$/, "");
 
   const state = {
@@ -16,7 +17,8 @@
     query: "",
     mode: "pc",
     gmOnlyIds: loadGmOnlyIds(),
-    gmPasscode: ""
+    gmPasscode: "",
+    we4landLevel: loadWe4landLevel()
   };
 
   const catalogueView = document.getElementById("catalogue-view");
@@ -69,6 +71,34 @@
 
   function saveGmOnlyIds() {
     window.localStorage.setItem(GM_ONLY_STORAGE_KEY, JSON.stringify([...state.gmOnlyIds]));
+  }
+
+  function normalizeCharacterLevel(value) {
+    if (value === null || String(value).trim() === "") return null;
+    const numericLevel = Math.round(Number(value));
+    if (!Number.isFinite(numericLevel)) return null;
+    return Math.min(20, Math.max(1, numericLevel));
+  }
+
+  function advancedAlchemySlots(level) {
+    const calculator = window.GAILEIA_ADVANCED_ALCHEMY;
+    return calculator && typeof calculator.slotsForLevel === "function"
+      ? calculator.slotsForLevel(level)
+      : 4 + Math.ceil(level / 2);
+  }
+
+  function loadWe4landLevel() {
+    try {
+      return normalizeCharacterLevel(window.localStorage.getItem(WE4LAND_LEVEL_STORAGE_KEY)) ||
+        window.GAILEIA_ADVANCED_ALCHEMY?.defaultLevel ||
+        3;
+    } catch (_error) {
+      return 3;
+    }
+  }
+
+  function saveWe4landLevel() {
+    window.localStorage.setItem(WE4LAND_LEVEL_STORAGE_KEY, String(state.we4landLevel));
   }
 
   async function loadSharedGmOnlyIds() {
@@ -245,6 +275,11 @@
         ? `<ul class="trait-list" aria-label="${escapeHtml(entry.title)} traits">${traitMarkup(entry.traits.slice(0, 6))}</ul>`
         : "";
     const gmBadge = state.mode === "gm" && gmOnly ? `<span class="gm-only-badge">GM only</span>` : "";
+    const cardBadges = Array.isArray(entry.cardBadges)
+      ? `<ul class="card-badges" aria-label="${escapeHtml(entry.title)} formula types">${entry.cardBadges
+          .map((badge) => `<li>${escapeHtml(badge)}</li>`)
+          .join("")}</ul>`
+      : "";
 
     return `
       <article
@@ -257,6 +292,7 @@
           ${gmMeta}
         </div>
         ${gmBadge}
+        ${cardBadges}
         <h3>${escapeHtml(entry.title)}</h3>
         <div>
           <p class="entry-summary">${escapeHtml(entry.summary)}</p>
@@ -397,6 +433,33 @@
     `;
   }
 
+  function hydrateAdvancedAlchemyCalculator(container) {
+    const panel = container.querySelector("[data-advanced-alchemy]");
+    if (!panel) return;
+
+    const input = panel.querySelector("[data-we4land-level]");
+    const slotCount = panel.querySelector("[data-alchemy-slot-count]");
+    if (!input || !slotCount) return;
+
+    function render(level) {
+      input.value = String(level);
+      slotCount.textContent = String(advancedAlchemySlots(level));
+    }
+
+    render(state.we4landLevel);
+    input.addEventListener("input", () => {
+      const level = normalizeCharacterLevel(input.value);
+      if (level === null) {
+        slotCount.textContent = "—";
+        return;
+      }
+      state.we4landLevel = level;
+      saveWe4landLevel();
+      slotCount.textContent = String(advancedAlchemySlots(level));
+    });
+    input.addEventListener("blur", () => render(state.we4landLevel));
+  }
+
   function showEntry(id) {
     const entry = entries.find((candidate) => candidate.id === id);
     if (!entry) {
@@ -419,6 +482,7 @@
     detailView.hidden = false;
     detailView.innerHTML = detailMarkup(entry);
     linkRenderedTraits(detailView);
+    hydrateAdvancedAlchemyCalculator(detailView);
 
     const heading = document.getElementById("entry-title");
     heading.focus({ preventScroll: true });
