@@ -9,7 +9,8 @@ for (const file of [
   "preview/assets/js/content.js",
   "preview/assets/js/catalogue-updates.js",
   "preview/assets/js/feedback3-data.js",
-  "preview/assets/js/feedback4-data.js"
+  "preview/assets/js/feedback4-data.js",
+  "preview/assets/js/feedback5-data.js"
 ]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
@@ -17,10 +18,11 @@ for (const file of [
 const entries = context.window.HOMEBREW_ENTRIES;
 const categories = context.window.HOMEBREW_CATEGORIES;
 const advancedAlchemy = context.window.GAILEIA_ADVANCED_ALCHEMY;
+const formulaFilters = context.window.GAILEIA_FORMULA_FILTERS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 56, "expected 56 catalogue entries");
+assert.equal(entries.length, 58, "expected 58 catalogue entries after Feedback 5");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 13, "expected 13 collections");
 assert.equal(advancedAlchemy.defaultLevel, 3);
@@ -70,9 +72,9 @@ const formulae = entries.filter((entry) => entry.category === "Formulae");
 const advancedFormulae = formulae.filter((entry) => entry.advancedAlchemy);
 const regularFormulae = formulae.filter((entry) => entry.regularCrafting);
 
-assert.equal(formulae.length, 10, "expected the ten formulae specified in Feedback 4");
+assert.equal(formulae.length, 11, "expected eleven formulae after Feedback 5");
 assert.equal(advancedFormulae.length, 4, "expected four Advanced Alchemy formulae");
-assert.equal(regularFormulae.length, 6, "expected six regular crafting formulae");
+assert.equal(regularFormulae.length, 7, "expected seven regular crafting formulae");
 assert.equal(entries.filter((entry) => entry.typeLabel === "Character").length, 4);
 assert.equal(byId["translate-chip"].headingLabel, "Focus 2");
 assert.equal(byId["universal-directive"].headingLabel, "Focus 1");
@@ -86,6 +88,7 @@ assert.match(byId["we4land-venting-and-submersion"].contentHtml, /Conditions\.as
 
 for (const entry of advancedFormulae) {
   assert.deepEqual(Array.from(entry.cardBadges), ["Advanced Alchemy"]);
+  assert.deepEqual(Array.from(entry.formulaOwners), ["WE4LAND"]);
   assert.match(entry.contentHtml, /Equipment\.aspx\?ID=1897/);
   assert.match(entry.contentHtml, /4 ammunition rounds/);
   assert.match(entry.contentHtml, /expires after 24 hours/);
@@ -106,7 +109,8 @@ const expectedCrafting = {
   "formula-glue-bomb-lesser": [13, 1.5, 1.5, 0.15],
   "formula-smoke-ball-lesser": [13, 1.5, 1.5, 0.15],
   "formula-non-lethal-ammunition": [13, 1.5, 1.5, 0.15],
-  "formula-antler-ammunition": [16, 3.5, 3.5, 0.35]
+  "formula-antler-ammunition": [16, 3.5, 3.5, 0.35],
+  "formula-creepy-crawly-crock": [13, 5, 5, 1]
 };
 
 for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCrafting)) {
@@ -119,6 +123,74 @@ for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCraf
 assert.match(byId["formula-antler-ammunition"].contentHtml, /#entry\/antler-ammunition/);
 assert.match(byId["formula-non-lethal-ammunition"].contentHtml, /#entry\/non-lethal-ammunition/);
 
+const formulaArchiveLinks = {
+  "formula-dread-ampoule-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3292",
+  "formula-glue-bomb-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3295",
+  "formula-quicksilver-mutagen-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3319",
+  "formula-smoke-ball-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3360"
+};
+
+for (const [id, url] of Object.entries(formulaArchiveLinks)) {
+  assert.match(byId[id].contentHtml, new RegExp(url.replace(/[.?]/g, "\\$&")), `${id} must use its direct Archives of Nethys link`);
+  assert.doesNotMatch(byId[id].contentHtml, /Search\.aspx/, `${id} must not use a search link`);
+}
+
+const crock = byId["creepy-crawly-crock"];
+assert.equal(crock.category, "Items");
+assert.equal(crock.typeLabel, "Alchemy");
+assert.equal(crock.levelLabel, "Item 1");
+assert.deepEqual(Array.from(crock.traits), ["Alchemical", "Unique"]);
+assert.match(crock.contentHtml, /<dt>Price<\/dt><dd>10 gp<\/dd>/);
+assert.match(crock.contentHtml, /<dt>Bulk<\/dt><dd>L<\/dd>/);
+assert.match(crock.contentHtml, /Held in 1 hand/);
+assert.match(crock.contentHtml, /Feed the Culture/);
+assert.match(crock.contentHtml, /one harmless Tiny insect/);
+assert.match(crock.contentHtml, /dies harmlessly at the beginning of your next daily preparations/);
+
+const crockFormula = byId["formula-creepy-crawly-crock"];
+assert.deepEqual(Array.from(crockFormula.formulaOwners), ["Ritsa"]);
+assert.match(crockFormula.contentHtml, /<dt>Known By<\/dt><dd>Ritsa<\/dd>/);
+assert.match(crockFormula.contentHtml, /#entry\/creepy-crawly-crock/);
+
+assert.equal(typeof formulaFilters.matches, "function");
+const expectedFormulaFilterCounts = {
+  all: 11,
+  advanced: 4,
+  regular: 7,
+  ritsa: 1,
+  we4land: 10
+};
+for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
+  assert.equal(
+    formulae.filter((entry) => formulaFilters.matches(entry, filter)).length,
+    count,
+    `${filter} Formulae filter has the wrong count`
+  );
+}
+
+const expectedCharacterFeatCounts = {
+  "oziza-character": 6,
+  "ritsa-character": 9,
+  "saraik-character": 10,
+  "we4land-character": 8
+};
+let featTotal = 0;
+for (const [id, count] of Object.entries(expectedCharacterFeatCounts)) {
+  const character = byId[id];
+  assert.equal(character.featSummaries.length, count, `${id} has the wrong number of feat summaries`);
+  assert.match(character.contentHtml, /class="feat-summary-list"/);
+  for (const feat of character.featSummaries) {
+    assert.match(feat.url, /^https:\/\/2e\.aonprd\.com\/(Feats|Heritages)\.aspx\?ID=\d+$/);
+    assert.ok(feat.description.length >= 25, `${id}: ${feat.name} needs a useful description`);
+    assert.match(character.contentHtml, new RegExp(`>${feat.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/a>`));
+  }
+  featTotal += character.featSummaries.length;
+}
+assert.equal(featTotal, 33, "expected 33 linked feat summaries across the four characters");
+
+assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 10);
+assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("Ritsa")).length, 1);
+
 for (const retiredFormulaId of [
   "formula-alchemists-toolkit",
   "formula-black-powder-dose-or-round",
@@ -128,4 +200,14 @@ for (const retiredFormulaId of [
   assert.ok(!byId[retiredFormulaId], `${retiredFormulaId} should not remain in the current formula list`);
 }
 
-console.log("Preview catalogue validation passed: 56 entries, 13 collections, and all Feedback 3–4 data invariants intact.");
+const appSource = fs.readFileSync("preview/assets/js/app.js", "utf8");
+const htmlSource = fs.readFileSync("preview/index.html", "utf8");
+assert.match(appSource, /showAll:\s*false/, "catalogue must start with All deselected");
+assert.match(appSource, /if \(!state\.showAll && state\.categories\.size === 0\) return \[\]/, "zero-selection state must show no entries");
+assert.match(appSource, /resultsHeading\.hidden = !hasCollectionSelection/, "results heading must hide with no collection selected");
+assert.match(appSource, /state\.formulaFilter = "all"/, "Formulae filters must reset to All");
+assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
+assert.match(htmlSource, /id="entry-total">58</);
+assert.match(htmlSource, /id="formula-filters"/);
+
+console.log("Preview catalogue validation passed: 58 entries, 13 collections, and all Feedback 3–5 data invariants intact.");

@@ -14,6 +14,8 @@
 
   const state = {
     categories: new Set(),
+    showAll: false,
+    formulaFilter: "all",
     query: "",
     mode: "pc",
     gmOnlyIds: loadGmOnlyIds(),
@@ -28,9 +30,13 @@
   const searchInput = document.getElementById("search-input");
   const resultsTitle = document.getElementById("results-title");
   const resultsCount = document.getElementById("results-count");
+  const resultsHeading = document.querySelector(".results-heading");
+  const formulaFilterList = document.getElementById("formula-filters");
   const entryTotal = document.getElementById("entry-total");
   const collectionTotal = document.getElementById("collection-total");
   const emptyState = document.getElementById("empty-state");
+  const emptyStateTitle = document.getElementById("empty-state-title");
+  const emptyStateMessage = document.getElementById("empty-state-message");
   const clearSearch = document.getElementById("clear-search");
   const pcMode = document.getElementById("pc-mode");
   const gmMode = document.getElementById("gm-mode");
@@ -240,10 +246,15 @@
   }
 
   function filteredEntries() {
+    if (!state.showAll && state.categories.size === 0) return [];
     const query = normalize(state.query.trim());
     return entries
       .filter((entry) => state.mode === "gm" || !isGmOnly(entry))
-      .filter((entry) => state.categories.size === 0 || state.categories.has(entry.category))
+      .filter((entry) => state.showAll || state.categories.has(entry.category))
+      .filter((entry) => {
+        const formulaFilters = window.GAILEIA_FORMULA_FILTERS;
+        return !formulaFilters || formulaFilters.matches(entry, state.formulaFilter);
+      })
       .filter((entry) => {
         if (!query) return true;
         const searchText = state.mode === "gm" ? entry._gmSearchText : entry._pcSearchText;
@@ -275,10 +286,18 @@
         ? `<ul class="trait-list" aria-label="${escapeHtml(entry.title)} traits">${traitMarkup(entry.traits.slice(0, 6))}</ul>`
         : "";
     const gmBadge = state.mode === "gm" && gmOnly ? `<span class="gm-only-badge">GM only</span>` : "";
-    const cardBadges = Array.isArray(entry.cardBadges)
-      ? `<ul class="card-badges" aria-label="${escapeHtml(entry.title)} formula types">${entry.cardBadges
-          .map((badge) => `<li>${escapeHtml(badge)}</li>`)
-          .join("")}</ul>`
+    const methodBadges = Array.isArray(entry.cardBadges) ? entry.cardBadges : [];
+    const ownerBadges = Array.isArray(entry.formulaOwners) ? entry.formulaOwners : [];
+    const cardBadges = methodBadges.length || ownerBadges.length
+      ? `<ul class="card-badges" aria-label="${escapeHtml(entry.title)} formula method and owners">
+          ${methodBadges.map((badge) => `<li>${escapeHtml(badge)}</li>`).join("")}
+          ${ownerBadges
+            .map(
+              (owner) =>
+                `<li class="owner-badge" data-owner="${escapeHtml(categorySlug(owner))}">${escapeHtml(owner)}</li>`
+            )
+            .join("")}
+        </ul>`
       : "";
 
     return `
@@ -315,7 +334,7 @@
             class="filter-button"
             type="button"
             data-category="${escapeHtml(category)}"
-            aria-pressed="${category === "All" ? state.categories.size === 0 : state.categories.has(category)}"
+            aria-pressed="${category === "All" ? state.showAll : state.categories.has(category)}"
           >${escapeHtml(category)} (${count})</button>
         `;
       })
@@ -325,11 +344,17 @@
       button.addEventListener("click", () => {
         const category = button.dataset.category || "All";
         if (category === "All") {
+          state.showAll = !state.showAll;
           state.categories.clear();
+          state.formulaFilter = "all";
         } else if (state.categories.has(category)) {
+          state.showAll = false;
           state.categories.delete(category);
+          if (category === "Formulae") state.formulaFilter = "all";
         } else {
+          state.showAll = false;
           state.categories.add(category);
+          if (category === "Formulae") state.formulaFilter = "all";
         }
         renderFilters();
         renderCatalogue();
@@ -337,15 +362,59 @@
     });
   }
 
+  function renderFormulaFilters() {
+    const formulaFilters = window.GAILEIA_FORMULA_FILTERS;
+    const formulaeSelected = !state.showAll && state.categories.has("Formulae");
+    formulaFilterList.hidden = !formulaeSelected;
+    if (!formulaeSelected || !formulaFilters) {
+      formulaFilterList.innerHTML = "";
+      return;
+    }
+
+    formulaFilterList.innerHTML = formulaFilters.options
+      .map(
+        ({ id, label }) => `
+          <button
+            class="formula-filter-button"
+            type="button"
+            data-formula-filter="${escapeHtml(id)}"
+            aria-pressed="${state.formulaFilter === id}"
+          >${escapeHtml(label)}</button>
+        `
+      )
+      .join("");
+
+    formulaFilterList.querySelectorAll("button").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.formulaFilter = button.dataset.formulaFilter || "all";
+        renderFormulaFilters();
+        renderCatalogue();
+      });
+    });
+  }
+
   function renderCatalogue() {
     const visibleEntries = filteredEntries();
+    const hasCollectionSelection = state.showAll || state.categories.size > 0;
     catalogueGrid.innerHTML = visibleEntries.map(cardMarkup).join("");
     emptyState.hidden = visibleEntries.length > 0;
     catalogueGrid.hidden = visibleEntries.length === 0;
+    resultsHeading.hidden = !hasCollectionSelection;
 
-    const label = state.categories.size === 0 ? "All entries" : [...state.categories].join(" + ");
+    if (!hasCollectionSelection) {
+      emptyStateTitle.textContent = "Choose a collection";
+      emptyStateMessage.textContent = "Select All or one or more collections to browse the compendium.";
+      clearSearch.hidden = true;
+    } else {
+      emptyStateTitle.textContent = "No matching entries";
+      emptyStateMessage.textContent = "Try a different search term, Formulae filter, or collection.";
+      clearSearch.hidden = visibleEntries.length > 0;
+    }
+
+    const label = state.showAll ? "All entries" : [...state.categories].join(" + ");
     resultsTitle.textContent = label;
     resultsCount.textContent = `${visibleEntries.length} ${visibleEntries.length === 1 ? "entry" : "entries"}`;
+    renderFormulaFilters();
   }
 
   function showCatalogue({ focus = false, restoreScroll = false } = {}) {
@@ -580,6 +649,8 @@
 
   clearSearch.addEventListener("click", () => {
     state.categories.clear();
+    state.showAll = false;
+    state.formulaFilter = "all";
     state.query = "";
     searchInput.value = "";
     renderFilters();
