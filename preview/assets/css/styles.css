@@ -639,6 +639,27 @@ h1 {
   text-transform: uppercase;
 }
 
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-badges li {
+  width: fit-content;
+  padding: 0.3rem 0.5rem;
+  color: #fff;
+  border: 1px solid color-mix(in srgb, var(--collection-color), #000 24%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--collection-color), #20272c 30%);
+  font: 800 0.58rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+
 .empty-state {
   padding: 4rem 1.5rem;
   border: 1px dashed #9e9478;
@@ -841,6 +862,83 @@ h1 {
 
 .rules-subcard > :last-child {
   margin-bottom: 0;
+}
+
+.formula-kicker {
+  color: #286373;
+  font: 800 0.68rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.advanced-alchemy-panel {
+  border-left-color: #286373;
+  background: #edf6f7;
+}
+
+.alchemy-calculator {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(220px, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.alchemy-calculator label {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.9rem;
+  border: 1px solid #8db0b6;
+  background: #fff;
+  font-weight: 700;
+}
+
+.alchemy-calculator input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.65rem;
+  color: var(--ink);
+  border: 1px solid #718e93;
+  border-radius: 3px;
+  background: #fff;
+  font: 700 1rem/1 Arial, sans-serif;
+}
+
+.alchemy-calculator input:focus {
+  border-color: #286373;
+  outline: 3px solid rgb(40 99 115 / 18%);
+}
+
+.alchemy-slot-display {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  color: #fff;
+  background: #286373;
+}
+
+.alchemy-slot-display strong {
+  font: 800 2.2rem/1 "Arial Narrow", Arial, sans-serif;
+}
+
+.alchemy-slot-display span {
+  font-weight: 700;
+}
+
+.calculation-note {
+  color: var(--muted-ink);
+  font-size: 0.86rem;
+}
+
+.crafting-panel {
+  border-left-color: #86591b;
+}
+
+.crafting-costs {
+  margin-top: 1rem;
 }
 
 .flavour-quote {
@@ -1056,6 +1154,10 @@ tbody tr:nth-child(even) {
 
   .rules-heading {
     white-space: normal;
+  }
+
+  .alchemy-calculator {
+    grid-template-columns: 1fr;
   }
 }
 
