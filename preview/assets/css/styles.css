@@ -390,12 +390,17 @@ h1 {
 
 .results-heading {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 1rem;
   margin: 2.5rem 0 1rem;
   padding-bottom: 0.6rem;
   border-bottom: 2px solid var(--ink);
+}
+
+.results-heading[hidden],
+.formula-filter-list[hidden] {
+  display: none;
 }
 
 .results-heading h2 {
@@ -405,8 +410,42 @@ h1 {
 }
 
 .results-heading p {
-  margin: 0;
+  margin: 0 0 0 auto;
   color: var(--muted-ink);
+}
+
+.formula-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.formula-filter-button {
+  min-height: 34px;
+  padding: 0.42rem 0.62rem;
+  color: #17414b;
+  border: 1px solid #6d929a;
+  border-radius: 999px;
+  background: #edf6f7;
+  cursor: pointer;
+  font: 800 0.6rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.formula-filter-button:hover,
+.formula-filter-button:focus-visible {
+  color: #fff;
+  border-color: #286373;
+  outline: none;
+  background: #286373;
+}
+
+.formula-filter-button[aria-pressed="true"] {
+  color: #fff;
+  border-color: #17414b;
+  background: #286373;
+  box-shadow: inset 0 -2px 0 #17414b;
 }
 
 .catalogue-grid {
@@ -658,6 +697,65 @@ h1 {
   font: 800 0.58rem/1 "Arial Narrow", Arial, sans-serif;
   letter-spacing: 0.065em;
   text-transform: uppercase;
+}
+
+.card-badges .owner-badge {
+  color: #172026;
+  border-color: #777;
+  background: #b3b3b3;
+}
+
+.card-badges .owner-badge[data-owner="ritsa"] {
+  color: #102713;
+  border-color: #35723a;
+  background: #5bba61;
+}
+
+.feat-summary-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feat-summary {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 5px solid #286373;
+  background: #fbf4e4;
+}
+
+.feat-summary-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dotted #b9ac8c;
+}
+
+.detail-body .feat-summary-heading h3,
+.feat-summary-heading p,
+.feat-summary > p {
+  margin: 0;
+}
+
+.detail-body .feat-summary-heading h3 {
+  padding: 0;
+  border: 0;
+}
+
+.feat-summary-heading p {
+  color: var(--muted-ink);
+  font: 800 0.65rem/1.2 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.feat-summary > p {
+  padding-top: 0.55rem;
 }
 
 .empty-state {
@@ -1215,6 +1313,14 @@ tbody tr:nth-child(even) {
     flex-direction: column;
   }
 
+  .results-heading p {
+    margin-left: 0;
+  }
+
+  .formula-filter-list {
+    width: 100%;
+  }
+
   .detail-nav .button {
     width: 100%;
   }
@@ -1299,6 +1405,7 @@ tbody tr:nth-child(even) {
   }
 
   .rules-subcard,
+  .feat-summary,
   table,
   tr,
   .stat-block {

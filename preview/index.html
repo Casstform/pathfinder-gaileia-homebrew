@@ -14,6 +14,7 @@
     <script defer src="assets/js/catalogue-updates.js"></script>
     <script defer src="assets/js/feedback3-data.js"></script>
     <script defer src="assets/js/feedback4-data.js"></script>
+    <script defer src="assets/js/feedback5-data.js"></script>
     <script defer src="assets/js/visibility-config.js"></script>
     <script defer src="assets/js/app.js"></script>
   </head>
@@ -47,7 +48,7 @@
         <div class="hero">
           <h1 id="catalogue-title">Browse the Compendium</h1>
           <dl class="catalogue-stats" aria-label="Catalogue summary">
-            <div><dt id="entry-total">56</dt><dd>Entries</dd></div>
+            <div><dt id="entry-total">58</dt><dd>Entries</dd></div>
             <div><dt id="collection-total">13</dt><dd>Collections</dd></div>
             <div><dt>PF2e</dt><dd>Ruleset</dd></div>
           </dl>
@@ -69,15 +70,16 @@
           </div>
         </section>
 
-        <div class="results-heading">
-          <h2 id="results-title">All entries</h2>
+        <div class="results-heading" hidden>
+          <h2 id="results-title"></h2>
+          <div id="formula-filters" class="formula-filter-list" role="group" aria-label="Filter Formulae entries" hidden></div>
           <p id="results-count" aria-live="polite"></p>
         </div>
         <div id="catalogue-grid" class="catalogue-grid"></div>
-        <div id="empty-state" class="empty-state" hidden>
-          <h2>No matching entries</h2>
-          <p>Try a different search term or return to all collections.</p>
-          <button id="clear-search" class="button button-secondary" type="button">Clear filters</button>
+        <div id="empty-state" class="empty-state">
+          <h2 id="empty-state-title">Choose a collection</h2>
+          <p id="empty-state-message">Select All or one or more collections to browse the compendium.</p>
+          <button id="clear-search" class="button button-secondary" type="button" hidden>Clear filters</button>
         </div>
       </section>
 
