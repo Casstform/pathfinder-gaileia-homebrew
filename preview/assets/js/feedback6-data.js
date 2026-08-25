@@ -90,7 +90,7 @@
       <li data-house-rule><h3>Repairing Magic Items</h3><p>${link("Mending", aon.mending)} can affect a magic item when the caster has ${link("Magical Crafting", aon.magicalCrafting)} and succeeds at that item's ${link("Crafting", aon.crafting)} DC.</p></li>
     </ol>
 
-    <h2>Automatic Bonus Progression</h2>
+    <h2 data-no-rule-link>Automatic Bonus Progression</h2>
     <ol class="house-rule-list" start="7">
       <li data-house-rule><h3>Campaign ABP</h3><p>The campaign uses ${link("Automatic Bonus Progression", aon.automaticBonusProgression)}. Fundamental potency, striking, and resilient runes—and equivalent permanent numerical bonuses from magical items—are replaced by character progression.</p></li>
       <li data-house-rule><h3>Temporary Item Bonuses</h3><p>Temporary item bonuses still apply normally.</p></li>
