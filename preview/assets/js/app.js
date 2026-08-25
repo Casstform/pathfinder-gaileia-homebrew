@@ -15,7 +15,7 @@
   const state = {
     categories: new Set(),
     showAll: false,
-    formulaFilter: "all",
+    formulaFilters: new Set(),
     query: "",
     mode: "pc",
     gmOnlyIds: loadGmOnlyIds(),
@@ -52,6 +52,7 @@
 
   const categorySymbols = {
     Animist: "◎",
+    Calendar: "▦",
     "Fauna/Flora": "⬟",
     Formulae: "◫",
     "House Rules": "⬢",
@@ -245,6 +246,50 @@
     });
   }
 
+  function linkRulesTerms(container) {
+    const links = window.GAILEIA_RULE_LINKS;
+    if (!links || typeof links !== "object") return;
+    const lookup = new Map(Object.entries(links).map(([term, url]) => [normalize(term), url]));
+    const terms = [...lookup.keys()].sort((left, right) => right.length - left.length);
+    if (terms.length === 0) return;
+    const matcher = new RegExp(`(${terms.map(escapeRegExp).join("|")})`, "giu");
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!node.nodeValue.trim()) continue;
+      if (node.parentElement.closest("a, code, script, style, .source-note")) continue;
+      nodes.push(node);
+    }
+
+    nodes.forEach((node) => {
+      const text = node.nodeValue;
+      const fragment = document.createDocumentFragment();
+      let cursor = 0;
+      let changed = false;
+      matcher.lastIndex = 0;
+      let match;
+      while ((match = matcher.exec(text))) {
+        const before = text[match.index - 1] || "";
+        const after = text[match.index + match[0].length] || "";
+        if (/[\p{L}\p{N}]/u.test(before) || /[\p{L}\p{N}]/u.test(after)) continue;
+        fragment.append(text.slice(cursor, match.index));
+        const anchor = document.createElement("a");
+        anchor.href = lookup.get(normalize(match[0]));
+        anchor.target = "_blank";
+        anchor.rel = "noreferrer";
+        anchor.textContent = match[0];
+        fragment.append(anchor);
+        cursor = match.index + match[0].length;
+        changed = true;
+      }
+      if (!changed) return;
+      fragment.append(text.slice(cursor));
+      node.replaceWith(fragment);
+    });
+  }
+
   function filteredEntries() {
     if (!state.showAll && state.categories.size === 0) return [];
     const query = normalize(state.query.trim());
@@ -253,7 +298,7 @@
       .filter((entry) => state.showAll || state.categories.has(entry.category))
       .filter((entry) => {
         const formulaFilters = window.GAILEIA_FORMULA_FILTERS;
-        return !formulaFilters || formulaFilters.matches(entry, state.formulaFilter);
+        return !formulaFilters || formulaFilters.matches(entry, state.formulaFilters);
       })
       .filter((entry) => {
         if (!query) return true;
@@ -346,15 +391,15 @@
         if (category === "All") {
           state.showAll = !state.showAll;
           state.categories.clear();
-          state.formulaFilter = "all";
+          state.formulaFilters.clear();
         } else if (state.categories.has(category)) {
           state.showAll = false;
           state.categories.delete(category);
-          if (category === "Formulae") state.formulaFilter = "all";
+          if (category === "Formulae") state.formulaFilters.clear();
         } else {
           state.showAll = false;
           state.categories.add(category);
-          if (category === "Formulae") state.formulaFilter = "all";
+          if (category === "Formulae") state.formulaFilters.clear();
         }
         renderFilters();
         renderCatalogue();
@@ -378,7 +423,7 @@
             class="formula-filter-button"
             type="button"
             data-formula-filter="${escapeHtml(id)}"
-            aria-pressed="${state.formulaFilter === id}"
+            aria-pressed="${id === "all" ? state.formulaFilters.size === 0 : state.formulaFilters.has(id)}"
           >${escapeHtml(label)}</button>
         `
       )
@@ -386,7 +431,14 @@
 
     formulaFilterList.querySelectorAll("button").forEach((button) => {
       button.addEventListener("click", () => {
-        state.formulaFilter = button.dataset.formulaFilter || "all";
+        const filter = button.dataset.formulaFilter || "all";
+        if (filter === "all") {
+          state.formulaFilters.clear();
+        } else if (state.formulaFilters.has(filter)) {
+          state.formulaFilters.delete(filter);
+        } else {
+          state.formulaFilters.add(filter);
+        }
         renderFormulaFilters();
         renderCatalogue();
       });
@@ -476,7 +528,9 @@
         : "";
     const gmOnlyButton =
       state.mode === "gm"
-        ? `<button class="button button-gm" id="gm-only-toggle" type="button" aria-pressed="${gmOnly}">${gmOnly ? "Remove GM Only" : "GM Only"}</button>`
+        ? entry.gmOnly
+          ? `<span class="gm-only-lock">GM Only by design</span>`
+          : `<button class="button button-gm" id="gm-only-toggle" type="button" aria-pressed="${gmOnly}">${gmOnly ? "Remove GM Only" : "GM Only"}</button>`
         : "";
 
     return `
@@ -551,6 +605,7 @@
     detailView.hidden = false;
     detailView.innerHTML = detailMarkup(entry);
     linkRenderedTraits(detailView);
+    linkRulesTerms(detailView);
     hydrateAdvancedAlchemyCalculator(detailView);
 
     const heading = document.getElementById("entry-title");
@@ -650,7 +705,7 @@
   clearSearch.addEventListener("click", () => {
     state.categories.clear();
     state.showAll = false;
-    state.formulaFilter = "all";
+    state.formulaFilters.clear();
     state.query = "";
     searchInput.value = "";
     renderFilters();
