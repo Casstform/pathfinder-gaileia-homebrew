@@ -1,43 +1,59 @@
 # Release Checkpoint
 
-Checkpoint date: August 20, 2026
+Checkpoint date: August 25, 2026
 
 ## Current state
 
-The dependency-free GitHub Pages project is complete and published to
-`Casstform/pathfinder-gaileia-homebrew` on the `main` branch. It contains 33 distinct catalogue entries:
+The dependency-free Gaileia Compendium is published from
+`Casstform/pathfinder-gaileia-homebrew` on the `main` branch. The current
+`/preview/` catalogue contains 69 distinct entries in 14 collections:
 
-- 1 apparition
-- 19 items
-- 8 creatures
-- 1 spell
-- 4 rules pages
+| Collection | Entries |
+| --- | ---: |
+| Animist | 1 |
+| Calendar | 1 |
+| Fauna/Flora | 8 |
+| Formulae | 11 |
+| House Rules | 2 |
+| Items | 28 |
+| Language | 1 |
+| Maps | 1 |
+| Oziza | 3 |
+| Ritsa | 3 |
+| Saraik | 3 |
+| Spells | 2 |
+| Subsystems | 2 |
+| WE4LAND | 3 |
 
-`Echoes of a Signal` is locked to `forbidding ward` as its cantrip and `save point` as its 8th-rank spell.
+`Echoes of a Signal` remains locked to `forbidding ward` as its cantrip and
+`save point` as its 8th-rank spell.
 
-## Verified
+## Completed quality phases
 
-- JavaScript syntax passes for `assets/js/content.js` and `assets/js/app.js`.
-- All 33 entry IDs are unique and every required data field is populated.
-- Category counts are 1 apparition, 19 items, 8 creatures, 1 spell, and 4 rules pages.
-- Short search terms use word-aware matching; `oil` returns the four oil entries instead of also matching words such as `roiling`, `spoils`, and `coil`.
-- Search checks resolve the WE4LAND corrosion rule and Walking Cauldron investment text.
-- Every entry fragment and both HTML pages have balanced markup.
-- All external links opened in a new tab include `rel="noreferrer"`.
-- A local HTTP server returned status 200 for the two HTML pages and every CSS/JavaScript asset.
-- A Playwright test script was prepared, but this workspace has no Chromium executable. The same scenarios should be run against the final GitHub Pages URL as the post-deployment smoke test.
+1. **Layout review:** mobile, desktop, keyboard accessibility, and printing were reviewed; the user approved the layouts.
+2. **Automated validation:** `.github/workflows/validate-compendium.yml` runs JavaScript syntax checks and `scripts/validate-preview.mjs` for every push and pull request to `main`.
+3. **Mechanics review:** the user reviewed the incomplete-mechanics recommendations in `Phase 3 responses.xlsx`; the accepted corrections are encoded in `preview/assets/js/phase3-data.js` and protected by automated assertions.
 
-## Source decisions
+## Phase 3 decisions
 
-- The newer of two Forge JSON records is published; the older draft is superseded.
-- The broken Rebel's Revolver JSON was merged into the existing damaged-revolver entry.
-- Clearly official Paizo reference cards and unfinished idea documents are not presented as original homebrew.
-- Source omissions are visible on the affected pages rather than filled with guessed mechanics: Amala's Kickback, the two wands, Healing Potion, and the three magical bullets.
+- Citrine Bullet remains an intentionally nonfunctional dud for reference.
+- BULL-et and Seam-Coil Bullet remain unchanged as NPC-only reference items.
+- Amala's Kickback remains unchanged as the intended toned-down counterpart to Digly's Oil of Sympathy.
+- Antler Ammunition now lists its 7 gp price, ammunition type, and Bulk.
+- Cryomister now lists its 3 gp price.
+- Demortification Oil now lists its 25 gp price.
+- Galvanic Derringer now lists its 30-foot range increment.
+- Life-Boosting Oil now lists its corrected 12 gp price and remains Alchemical rather than Magical to fit Gaileia's setting.
+- Runesmith property-rune capacity now equals the wielder's ABP attack-potency value; Runesmith runes remain separate and consume no property-rune slots.
 
-See `SOURCE_INVENTORY.md` for the complete entry-by-entry provenance record.
+## Verification baseline
 
-## Only remaining account-level action
+- All JavaScript and module files pass syntax validation.
+- All 69 entry IDs are unique and use one of the 14 declared collections.
+- Internal entry links resolve to existing entries.
+- External entry links use HTTPS.
+- Formula ownership, crafting costs, filters, and character-feature summaries are checked automatically.
+- House-rule counts, links, and GM visibility are checked automatically.
+- The three reference bullets have explicit regression assertions preventing accidental removal or mechanical rewriting.
 
-In the repository's **Settings → Pages** panel, select **Deploy from a branch**, choose `main` and `/(root)`, and save. After GitHub finishes its deployment, run the post-deployment smoke test against the public Pages URL.
-
-The repository upload is verified file-for-file. No further Google Drive search is required for this release checkpoint.
+See `SOURCE_INVENTORY.md` for the original source inventory and subsequent review decisions.
