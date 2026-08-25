@@ -252,6 +252,8 @@ assert.deepEqual(
 assert.equal(byId["house-rules-gms"].gmOnly, true, "the GM rules must be GM-only by default");
 assert.equal((byId["house-rules-players"].contentHtml.match(/data-house-rule/g) || []).length, 21);
 assert.equal((byId["house-rules-gms"].contentHtml.match(/data-house-rule/g) || []).length, 21);
+assert.match(byId["house-rules-players"].contentHtml, /<h2 data-no-rule-link>Automatic Bonus Progression<\/h2>/);
+assert.match(byId["house-rules-gms"].contentHtml, /<h2 data-no-rule-link>Automatic Bonus Progression<\/h2>/);
 assert.match(byId["house-rules-gms"].contentHtml, /Four Aspects of a Soul/);
 assert.match(byId["house-rules-gms"].contentHtml, /Revitalize/);
 assert.match(byId["house-rules-gms"].contentHtml, /Rituals\.aspx\?ID=20/);
@@ -339,6 +341,7 @@ assert.match(appSource, /formulaFilters:\s*new Set\(\)/, "Formulae filters must 
 assert.match(appSource, /state\.formulaFilters\.clear\(\)/, "Formulae filters must reset to All");
 assert.match(appSource, /function linkRulesTerms\(container\)/, "rules terms need automatic Archives of Nethys links");
 assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must run on entry pages");
+assert.match(appSource, /\[data-no-rule-link\]/, "marked headings must opt out of automatic rules links");
 assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback7-data\.js/);
