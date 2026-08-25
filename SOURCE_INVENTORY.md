@@ -5,24 +5,24 @@ Source inventory frozen on August 20, 2026. Each listed source was read from the
 | Collection | Published entry | Source file | Import status |
 | --- | --- | --- | --- |
 | Apparitions | Echoes of a Signal | Echoes of a Signal HTML | Complete; final spell choices verified as `forbidding ward` and `save point` |
-| Items | Life-Boosting Oil | Life Boosting Oil.pdf | Complete; PDF rendered and visually checked |
-| Items | Demortification Oil | Demortification Oil.pdf | Complete; PDF rendered and visually checked |
-| Items | Antler Ammunition | Antler Ammunition.pdf | Complete; PDF rendered and visually checked |
+| Items | Life-Boosting Oil | Life Boosting Oil.pdf | Complete; PDF rendered and visually checked; Phase 3 set its price to 12 gp while retaining the campaign's Alchemical trait |
+| Items | Demortification Oil | Demortification Oil.pdf | Complete; PDF rendered and visually checked; Phase 3 set its price to 25 gp |
+| Items | Antler Ammunition | Antler Ammunition.pdf | Complete; PDF rendered and visually checked; Phase 3 added its 7 gp price, ammunition type, and Bulk |
 | Items | Non-Lethal Ammunition | Non-Lethal Ammunition Pathbuilder.png | Complete; image visually checked |
 | Items | Tiger Stance Razor Claws | Tigerstance Razor Claws Pathbuilder.png | Complete; image visually checked |
 | Items | Rebel's Revolver; Damaged | Damaged Rebel's Revolver Pathbuilder.png; RebelsRevolverBroken-1749871686.json | Complete; image and JSON merged into one entry |
 | Items | Rebel's Revolver | Rebel's Revolver Pathbuilder.png | Complete; image visually checked |
 | Items | Vitae Petal Tea Leaves | Vitae Petal Leaves.png | Complete; image visually checked |
-| Items | Cryomister | Cryomister-1749879414.json | Complete |
-| Items | Amala's Kickback | AmalasKickback-1749875183.json; matching stat card | Complete as supplied; missing healing value is explicitly flagged |
+| Items | Cryomister | Cryomister-1749879414.json | Complete; Phase 3 set its price to 3 gp |
+| Items | Amala's Kickback | AmalasKickback-1749875183.json; matching stat card | Complete as supplied; retained unchanged in Phase 3 as the intended toned-down counterpart to Digly's Oil of Sympathy |
 | Items | Wand of Allfood | WandofAllfood-1749873249.json; matching stat card | Complete as supplied; omitted spell rank/text is explicitly flagged |
 | Items | Wand of Shielded Arm | WandofShieldedArm-1749873118.json; matching stat card | Complete as supplied; omitted spell rank/text is explicitly flagged |
 | Items | Healing Potion | HealingPotion-1749872849.json; matching stat card | Complete as supplied; omitted healing effect is explicitly flagged |
 | Items | Merciful Balm | MercifulBalm-1749872695.json | Complete |
 | Items | Itchy Scale | ItchyScale-1749872602.json | Complete |
-| Items | BULL-et | BULL-et-1749872282.json; matching stat card | Complete as supplied; no mechanical effect was present |
-| Items | Yellow Bullet | YellowBullet-1749872134.json; matching stat card | Complete as supplied; no mechanical effect was present |
-| Items | Seam-Coil Bullet | Seam-CoilBullet-1749872014.json; matching stat card | Complete as supplied; no mechanical effect was present |
+| Items | BULL-et | BULL-et-1749872282.json; matching stat card | Retained unchanged as an NPC-only reference; no additional mechanics were invented |
+| Items | Citrine Bullet | YellowBullet-1749872134.json; matching stat card | Retained unchanged as an intentionally nonfunctional unfinished dud |
+| Items | Seam-Coil Bullet | Seam-CoilBullet-1749872014.json; matching stat card | Retained unchanged as an NPC-only reference; no additional mechanics were invented |
 | Items | Walking Cauldron | WalkingCauldron-1762715401.json | Complete |
 | Creatures | Sibyl | _MConverter.eu_Sibyl - actor-creature.json | Complete; actor-export syntax normalized |
 | Creatures | Mixer | Mixer1749858809.json | Complete |
