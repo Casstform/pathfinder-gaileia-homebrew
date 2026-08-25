@@ -26,7 +26,7 @@ const traitLinks = context.window.GAILEIA_TRAIT_URLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 70, "expected 70 catalogue entries after Feedback 7");
+assert.equal(entries.length, 69, "expected 69 catalogue entries after removing Rebel's Revolver");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(advancedAlchemy.defaultLevel, 3);
@@ -59,6 +59,7 @@ for (const removedId of [
   "healing-potion-custom",
   "mystery-scale",
   "mystery-white-balm",
+  "rebels-revolver",
   "wand-of-allfood",
   "wand-of-shielded-arm"
 ]) {
@@ -279,7 +280,6 @@ assert.equal(
 assert.equal(byId["gaileian-calendar"].pcAccessible, true);
 
 const feedback7NewEntries = [
-  "rebels-revolver",
   "tiger-stance-claws",
   "enregalia-vetericus-encyclopedia-volume-mccxxxiv",
   "enregalia-vetericus-encyclopedia-volume-mmmmcccxxi",
@@ -290,7 +290,7 @@ for (const id of feedback7NewEntries) {
   assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
   assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
 }
-assert.equal(entries.filter((entry) => entry.category === "Items").length, 29);
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 28);
 assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
 assert.equal(byId["tiger-stance-claws"].category, "Saraik");
 assert.equal(byId["walking-cauldron"].title, "Stu the Walking Cauldron");
@@ -342,8 +342,8 @@ assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must
 assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback7-data\.js/);
-assert.match(htmlSource, /id="entry-total">70</);
+assert.match(htmlSource, /id="entry-total">69</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 70 entries, 14 collections, and all Feedback 3–7 data invariants intact.");
+console.log("Preview catalogue validation passed: 69 entries, 14 collections, and all Feedback 3–7 data invariants intact.");
