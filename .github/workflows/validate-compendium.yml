@@ -1,0 +1,40 @@
+name: Validate compendium
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-compendium-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Catalogue integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find preview/assets/js scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+
+      - name: Validate catalogue data
+        run: node scripts/validate-preview.mjs
