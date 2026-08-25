@@ -10,7 +10,8 @@ for (const file of [
   "preview/assets/js/catalogue-updates.js",
   "preview/assets/js/feedback3-data.js",
   "preview/assets/js/feedback4-data.js",
-  "preview/assets/js/feedback5-data.js"
+  "preview/assets/js/feedback5-data.js",
+  "preview/assets/js/feedback6-data.js"
 ]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
@@ -19,12 +20,13 @@ const entries = context.window.HOMEBREW_ENTRIES;
 const categories = context.window.HOMEBREW_CATEGORIES;
 const advancedAlchemy = context.window.GAILEIA_ADVANCED_ALCHEMY;
 const formulaFilters = context.window.GAILEIA_FORMULA_FILTERS;
+const rulesLinks = context.window.GAILEIA_RULE_LINKS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 58, "expected 58 catalogue entries after Feedback 5");
+assert.equal(entries.length, 64, "expected 64 catalogue entries after Feedback 6");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
-assert.equal(categories.length - 1, 13, "expected 13 collections");
+assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(advancedAlchemy.defaultLevel, 3);
 assert.equal(advancedAlchemy.slotsForLevel(1), 5);
 assert.equal(advancedAlchemy.slotsForLevel(3), 6);
@@ -34,6 +36,7 @@ assert.deepEqual(
   [
     "All",
     "Animist",
+    "Calendar",
     "Fauna/Flora",
     "Formulae",
     "House Rules",
@@ -66,6 +69,16 @@ for (const entry of entries) {
   assert.ok(categories.includes(entry.category), `${entry.id} uses unknown collection ${entry.category}`);
   assert.ok(!entry.traits.includes("3rd Party"), `${entry.id} still has the 3rd Party trait`);
   assert.ok(!entry.traits.includes("House Rule"), `${entry.id} still has the House Rule trait`);
+  for (const match of entry.contentHtml.matchAll(/href="#entry\/([^"]+)"/g)) {
+    assert.ok(byId[match[1]], `${entry.id} links to missing entry ${match[1]}`);
+  }
+  if (entry.externalUrl) assert.match(entry.externalUrl, /^https:\/\//, `${entry.id} needs an HTTPS external URL`);
+}
+
+assert.ok(rulesLinks && typeof rulesLinks === "object", "rules-term link map must be present");
+for (const [term, url] of Object.entries(rulesLinks)) {
+  assert.ok(term.length > 2, "rules-term link labels must be useful");
+  assert.match(url, /^https:\/\/2e\.aonprd\.com\//, `${term} must use Archives of Nethys`);
 }
 
 const formulae = entries.filter((entry) => entry.category === "Formulae");
@@ -168,8 +181,21 @@ for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
   );
 }
 
+const expectedCombinedFormulaFilterCounts = [
+  [["ritsa", "we4land"], 11],
+  [["ritsa", "advanced"], 5],
+  [["ritsa", "regular", "advanced"], 11]
+];
+for (const [filters, count] of expectedCombinedFormulaFilterCounts) {
+  assert.equal(
+    formulae.filter((entry) => formulaFilters.matches(entry, filters)).length,
+    count,
+    `${filters.join(" + ")} Formulae filters must combine as a union`
+  );
+}
+
 const expectedCharacterFeatCounts = {
-  "oziza-character": 6,
+  "oziza-character": 7,
   "ritsa-character": 9,
   "saraik-character": 10,
   "we4land-character": 8
@@ -178,7 +204,7 @@ let featTotal = 0;
 for (const [id, count] of Object.entries(expectedCharacterFeatCounts)) {
   const character = byId[id];
   assert.equal(character.featSummaries.length, count, `${id} has the wrong number of feat summaries`);
-  assert.match(character.contentHtml, /class="feat-summary-list"/);
+  assert.match(character.contentHtml, /class="feat-summary-list/);
   for (const feat of character.featSummaries) {
     assert.match(feat.url, /^https:\/\/2e\.aonprd\.com\/(Feats|Heritages)\.aspx\?ID=\d+$/);
     assert.ok(feat.description.length >= 25, `${id}: ${feat.name} needs a useful description`);
@@ -186,7 +212,65 @@ for (const [id, count] of Object.entries(expectedCharacterFeatCounts)) {
   }
   featTotal += character.featSummaries.length;
 }
-assert.equal(featTotal, 33, "expected 33 linked feat summaries across the four characters");
+assert.equal(featTotal, 34, "expected 34 linked feat summaries across the four characters");
+
+const expectedCharacterFeatures = {
+  "oziza-character": ["Oziza Features", 8],
+  "ritsa-character": ["Ritsa Features", 9],
+  "saraik-character": ["Saraik Features", 8],
+  "we4land-character": ["WE4LAND Features", 8]
+};
+for (const [id, [title, count]] of Object.entries(expectedCharacterFeatures)) {
+  const character = byId[id];
+  assert.equal(character.title, title);
+  assert.equal(character.featureSummaries.length, count, `${id} has the wrong feature count`);
+  assert.match(character.contentHtml, /<h2>Current Features<\/h2>/);
+  assert.match(character.contentHtml, /<h2>Current Feats<\/h2>/);
+  for (const feature of character.featureSummaries) {
+    assert.match(feature.url, /^https:\/\/2e\.aonprd\.com\/(Ancestries|Classes|Mysteries|Practices|Ways)\.aspx\?ID=\d+$/);
+    assert.ok(feature.description.length >= 25, `${id}: ${feature.name} needs a useful description`);
+  }
+}
+
+assert.ok(byId["oziza-character"].featSummaries.some((feat) => feat.name === "Rehydration"));
+assert.match(byId["oziza-character"].contentHtml, /Feats\.aspx\?ID=2312/);
+
+assert.ok(!byId["campaign-house-rules"], "the retired Campaign House entry must be removed");
+const houseRules = entries.filter((entry) => entry.category === "House Rules");
+assert.equal(houseRules.length, 2, "House Rules must contain only the Player and GM entries");
+assert.deepEqual(
+  Array.from(houseRules, (entry) => entry.id).sort(),
+  ["house-rules-gms", "house-rules-players"]
+);
+assert.equal(byId["house-rules-gms"].gmOnly, true, "the GM rules must be GM-only by default");
+assert.equal((byId["house-rules-players"].contentHtml.match(/data-house-rule/g) || []).length, 21);
+assert.equal((byId["house-rules-gms"].contentHtml.match(/data-house-rule/g) || []).length, 21);
+assert.match(byId["house-rules-gms"].contentHtml, /Four Aspects of a Soul/);
+assert.match(byId["house-rules-gms"].contentHtml, /Revitalize/);
+assert.match(byId["house-rules-gms"].contentHtml, /Rituals\.aspx\?ID=20/);
+assert.match(byId["house-rules-players"].contentHtml, /Rules\.aspx\?ID=2741/);
+assert.match(byId["house-rules-players"].contentHtml, /Skills\.aspx\?ID=49/);
+assert.match(byId["house-rules-players"].contentHtml, /Skills\.aspx\?ID=37/);
+
+assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Skills\.aspx\?ID=42/);
+assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Feats\.aspx\?ID=760/);
+assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Feats\.aspx\?ID=5234/);
+assert.match(byId["ritsa-familiars"].contentHtml, /Familiars\.aspx\?ID=129/);
+
+const ozizaSpells = byId["oziza-spells"].contentHtml;
+for (const spellId of [2075, 1498, 1554, 1585, 2345, 1493]) {
+  assert.match(ozizaSpells, new RegExp(`Spells\\.aspx\\?ID=${spellId}`));
+}
+assert.match(ozizaSpells, /<td>Fire<\/td><td>Electricity<\/td>/);
+assert.match(ozizaSpells, /<td>Spirit<\/td><td>Cold<\/td>/);
+assert.match(byId["oziza-rehydration"].contentHtml, /Feats\.aspx\?ID=2312/);
+
+assert.equal(byId["gaileian-calendar"].category, "Calendar");
+assert.equal(
+  byId["gaileian-calendar"].externalUrl,
+  "https://app.fantasy-calendar.com/calendars/efd86919d920668ad5ca0f40f70c3031"
+);
+assert.equal(byId["gaileian-calendar"].pcAccessible, true);
 
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 10);
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("Ritsa")).length, 1);
@@ -205,9 +289,14 @@ const htmlSource = fs.readFileSync("preview/index.html", "utf8");
 assert.match(appSource, /showAll:\s*false/, "catalogue must start with All deselected");
 assert.match(appSource, /if \(!state\.showAll && state\.categories\.size === 0\) return \[\]/, "zero-selection state must show no entries");
 assert.match(appSource, /resultsHeading\.hidden = !hasCollectionSelection/, "results heading must hide with no collection selected");
-assert.match(appSource, /state\.formulaFilter = "all"/, "Formulae filters must reset to All");
+assert.match(appSource, /formulaFilters:\s*new Set\(\)/, "Formulae filters must allow multiple selections");
+assert.match(appSource, /state\.formulaFilters\.clear\(\)/, "Formulae filters must reset to All");
+assert.match(appSource, /function linkRulesTerms\(container\)/, "rules terms need automatic Archives of Nethys links");
+assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must run on entry pages");
 assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
-assert.match(htmlSource, /id="entry-total">58</);
+assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
+assert.match(htmlSource, /id="entry-total">64</);
+assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 58 entries, 13 collections, and all Feedback 3–5 data invariants intact.");
+console.log("Preview catalogue validation passed: 64 entries, 14 collections, and all Feedback 3–6 data invariants intact.");
