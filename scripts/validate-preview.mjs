@@ -12,7 +12,8 @@ for (const file of [
   "preview/assets/js/feedback4-data.js",
   "preview/assets/js/feedback5-data.js",
   "preview/assets/js/feedback6-data.js",
-  "preview/assets/js/feedback7-data.js"
+  "preview/assets/js/feedback7-data.js",
+  "preview/assets/js/phase3-data.js"
 ]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
@@ -26,7 +27,7 @@ const traitLinks = context.window.GAILEIA_TRAIT_URLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 69, "expected 69 catalogue entries after removing Rebel's Revolver");
+assert.equal(entries.length, 69, "expected 69 catalogue entries after Phase 3");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(advancedAlchemy.defaultLevel, 3);
@@ -95,11 +96,31 @@ assert.equal(byId["translate-chip"].headingLabel, "Focus 2");
 assert.equal(byId["universal-directive"].headingLabel, "Focus 1");
 assert.equal(byId["tiger-stance-razor-claws"].category, "Saraik");
 assert.equal(byId["yellow-bullet"].title, "Citrine Bullet");
+assert.match(byId["yellow-bullet"].contentHtml, /<dt>Price<\/dt><dd>3 gp<\/dd>/);
+assert.match(byId["bull-et"].contentHtml, /transformed the projectile into a life-sized bison/);
+assert.match(byId["seam-coil-bullet"].contentHtml, /split into two, with an arc of electricity/);
 assert.match(byId["echoes-of-a-signal"].contentHtml, /href="#save-point-spell">save point<\/a>/);
 assert.doesNotMatch(byId["echoes-of-a-signal"].contentHtml, /final selected version/i);
 assert.match(byId["seeker-rifle"].contentHtml, /1d8 bludgeoning/);
 assert.match(byId["rebels-revolver-restored"].contentHtml, /Martial Weapons/);
 assert.match(byId["we4land-venting-and-submersion"].contentHtml, /Conditions\.aspx\?ID=92/);
+
+assert.match(byId["antler-ammunition"].contentHtml, /<dt>Price<\/dt><dd>7 gp<\/dd>/);
+assert.match(byId["antler-ammunition"].contentHtml, /<dt>Ammunition<\/dt><dd>Arrows and bolts<\/dd>/);
+assert.match(byId["antler-ammunition"].contentHtml, /<dt>Bulk<\/dt><dd>—<\/dd>/);
+assert.match(byId.cryomister.contentHtml, /<dt>Price<\/dt><dd>3 gp<\/dd>/);
+assert.match(byId["demortification-oil"].contentHtml, /<dt>Price<\/dt><dd>25 gp<\/dd>/);
+assert.match(byId["galvanic-derringer"].contentHtml, /<dt>Range<\/dt><dd>30 feet<\/dd>/);
+assert.match(byId["life-boosting-oil"].contentHtml, /<dt>Price<\/dt><dd>12 gp<\/dd>/);
+assert.ok(byId["life-boosting-oil"].traits.includes("Alchemical"));
+assert.ok(!byId["life-boosting-oil"].traits.includes("Magical"));
+assert.match(
+  byId["house-rules-players"].contentHtml,
+  /property-rune capacity equals the wielder’s current ABP attack-potency value/
+);
+assert.match(byId["house-rules-players"].contentHtml, /consume no property-rune slots/);
+assert.match(byId["house-rules-gms"].contentHtml, /consume no property-rune slots/);
+assert.doesNotMatch(byId["house-rules-players"].contentHtml, /Until a final campaign conversion is adopted/);
 
 for (const entry of advancedFormulae) {
   assert.deepEqual(Array.from(entry.cardBadges), ["Advanced Alchemy"]);
@@ -345,8 +366,9 @@ assert.match(appSource, /\[data-no-rule-link\]/, "marked headings must opt out o
 assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback7-data\.js/);
+assert.match(htmlSource, /assets\/js\/phase3-data\.js/);
 assert.match(htmlSource, /id="entry-total">69</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 69 entries, 14 collections, and all Feedback 3–7 data invariants intact.");
+console.log("Preview catalogue validation passed: 69 entries, 14 collections, Feedback 3–7, and Phase 3 mechanics intact.");
