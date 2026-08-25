@@ -11,7 +11,8 @@ for (const file of [
   "preview/assets/js/feedback3-data.js",
   "preview/assets/js/feedback4-data.js",
   "preview/assets/js/feedback5-data.js",
-  "preview/assets/js/feedback6-data.js"
+  "preview/assets/js/feedback6-data.js",
+  "preview/assets/js/feedback7-data.js"
 ]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
@@ -21,10 +22,11 @@ const categories = context.window.HOMEBREW_CATEGORIES;
 const advancedAlchemy = context.window.GAILEIA_ADVANCED_ALCHEMY;
 const formulaFilters = context.window.GAILEIA_FORMULA_FILTERS;
 const rulesLinks = context.window.GAILEIA_RULE_LINKS;
+const traitLinks = context.window.GAILEIA_TRAIT_URLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 64, "expected 64 catalogue entries after Feedback 6");
+assert.equal(entries.length, 70, "expected 70 catalogue entries after Feedback 7");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(advancedAlchemy.defaultLevel, 3);
@@ -57,7 +59,6 @@ for (const removedId of [
   "healing-potion-custom",
   "mystery-scale",
   "mystery-white-balm",
-  "rebels-revolver",
   "wand-of-allfood",
   "wand-of-shielded-arm"
 ]) {
@@ -183,8 +184,13 @@ for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
 
 const expectedCombinedFormulaFilterCounts = [
   [["ritsa", "we4land"], 11],
-  [["ritsa", "advanced"], 5],
-  [["ritsa", "regular", "advanced"], 11]
+  [["regular", "advanced"], 11],
+  [["ritsa", "advanced"], 0],
+  [["ritsa", "regular"], 1],
+  [["we4land", "advanced"], 4],
+  [["we4land", "regular"], 6],
+  [["ritsa", "we4land", "advanced"], 4],
+  [["ritsa", "we4land", "regular"], 7]
 ];
 for (const [filters, count] of expectedCombinedFormulaFilterCounts) {
   assert.equal(
@@ -255,7 +261,7 @@ assert.match(byId["house-rules-players"].contentHtml, /Skills\.aspx\?ID=37/);
 assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Skills\.aspx\?ID=42/);
 assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Feats\.aspx\?ID=760/);
 assert.match(byId["ritsa-nature-for-medicine"].contentHtml, /Feats\.aspx\?ID=5234/);
-assert.match(byId["ritsa-familiars"].contentHtml, /Familiars\.aspx\?ID=129/);
+assert.match(byId["ritsa-familiars"].contentHtml, /Familiars\.aspx\?ID=72&Abilities=true/);
 
 const ozizaSpells = byId["oziza-spells"].contentHtml;
 for (const spellId of [2075, 1498, 1554, 1585, 2345, 1493]) {
@@ -271,6 +277,46 @@ assert.equal(
   "https://app.fantasy-calendar.com/calendars/efd86919d920668ad5ca0f40f70c3031"
 );
 assert.equal(byId["gaileian-calendar"].pcAccessible, true);
+
+const feedback7NewEntries = [
+  "rebels-revolver",
+  "tiger-stance-claws",
+  "enregalia-vetericus-encyclopedia-volume-mccxxxiv",
+  "enregalia-vetericus-encyclopedia-volume-mmmmcccxxi",
+  "necklace-of-knives",
+  "pompous-mask"
+];
+for (const id of feedback7NewEntries) {
+  assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
+  assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
+}
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 29);
+assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
+assert.equal(byId["tiger-stance-claws"].category, "Saraik");
+assert.equal(byId["walking-cauldron"].title, "Stu the Walking Cauldron");
+assert.match(byId["walking-cauldron"].contentHtml, /<dt>Bulk<\/dt><dd>4<\/dd>/);
+assert.match(byId["walking-cauldron"].contentHtml, /<dt>Price<\/dt><dd>12 gp<\/dd>/);
+assert.match(byId["flare-pistol"].contentHtml, /DC 15 Fortitude save/);
+assert.match(byId["flare-pistol"].contentHtml, /Critical Failure/);
+assert.match(byId["enregalia-vetericus-encyclopedia-volume-mdccxiii"].contentHtml, /Karen/);
+assert.match(byId["itchy-scale"].contentHtml, /large gills along your neck/);
+
+const finalCatalogueText = entries.map((entry) => [
+  entry.title,
+  entry.summary,
+  entry.intro,
+  entry.contentHtml
+].join("\n")).join("\n");
+assert.doesNotMatch(finalCatalogueText, /Absorb Familiar/);
+assert.equal(rulesLinks["Absorb Familiar"], undefined);
+assert.equal(
+  rulesLinks["Tattoo Transformation"],
+  "https://2e.aonprd.com/Familiars.aspx?ID=72&Abilities=true"
+);
+assert.match(byId["ritsa-familiars"].contentHtml, /Tattoo Transformation/);
+assert.match(byId["ritsa-familiars"].contentHtml, /Familiars\.aspx\?ID=72&Abilities=true/);
+assert.equal(traitLinks.conjuration, "https://2e.aonprd.com/Traits.aspx?ID=33");
+assert.equal(traitLinks.transmutation, "https://2e.aonprd.com/Traits.aspx?ID=157");
 
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 10);
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("Ritsa")).length, 1);
@@ -295,8 +341,9 @@ assert.match(appSource, /function linkRulesTerms\(container\)/, "rules terms nee
 assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must run on entry pages");
 assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
 assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
-assert.match(htmlSource, /id="entry-total">64</);
+assert.match(htmlSource, /assets\/js\/feedback7-data\.js/);
+assert.match(htmlSource, /id="entry-total">70</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 64 entries, 14 collections, and all Feedback 3–6 data invariants intact.");
+console.log("Preview catalogue validation passed: 70 entries, 14 collections, and all Feedback 3–7 data invariants intact.");
