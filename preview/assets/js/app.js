@@ -259,7 +259,7 @@
     while (walker.nextNode()) {
       const node = walker.currentNode;
       if (!node.nodeValue.trim()) continue;
-      if (node.parentElement.closest("a, code, script, style, .source-note")) continue;
+      if (node.parentElement.closest("a, code, script, style, .source-note, [data-no-rule-link]")) continue;
       nodes.push(node);
     }
 
