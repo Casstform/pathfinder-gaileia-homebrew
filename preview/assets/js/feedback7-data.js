@@ -110,31 +110,6 @@
 
   entries.push(
     {
-      id: "rebels-revolver",
-      title: "Rebel's Revolver",
-      category: "Items",
-      typeLabel: "Firearm",
-      levelLabel: "Item 2",
-      headingLabel: "1d6 P",
-      traits: ["Concealable", "Fatal d10", "Capacity 5", "Rare", "Concussive"],
-      summary: "A concealable five-chambered revolver with an 80-foot range and a lethal critical profile.",
-      intro: "The standard five-chamber configuration of the rare Rebel's Revolver.",
-      source,
-      contentHtml: `
-        <dl class="stat-block">
-          <div class="stat-line"><dt>Damage</dt><dd>1d6 piercing</dd></div>
-          <div class="stat-line"><dt>Ammunition</dt><dd>Revolver Cartridge</dd></div>
-          <div class="stat-line"><dt>Proficiency</dt><dd>Martial Weapons</dd></div>
-          <div class="stat-line"><dt>Group</dt><dd>Firearm</dd></div>
-          <div class="stat-line"><dt>Price</dt><dd>15 gp</dd></div>
-          <div class="stat-line"><dt>Bulk</dt><dd>Light</dd></div>
-          <div class="stat-line"><dt>Hands</dt><dd>1</dd></div>
-          <div class="stat-line"><dt>Range</dt><dd>80 feet</dd></div>
-          <div class="stat-line"><dt>Reload</dt><dd>1</dd></div>
-        </dl>
-      `
-    },
-    {
       id: "tiger-stance-claws",
       title: "Tiger Stance Claws",
       category: "Saraik",
