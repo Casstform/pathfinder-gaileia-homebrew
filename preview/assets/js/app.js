@@ -21,7 +21,14 @@
     mode: "pc",
     gmOnlyIds: loadGmOnlyIds(),
     gmPasscode: "",
-    we4landLevel: loadWe4landLevel()
+    we4landLevel: loadWe4landLevel(),
+    visibilityReady: !VISIBILITY_API,
+    visibilityCacheAvailable: hasGmOnlyCache(),
+    visibilityManagerQuery: "",
+    visibilityManagerFilter: "all",
+    visibilityMessage: "",
+    visibilityMessageType: "",
+    visibilitySavingId: ""
   };
 
   const catalogueView = document.getElementById("catalogue-view");
@@ -46,6 +53,13 @@
   const passcodeInput = document.getElementById("gm-passcode");
   const accessError = document.getElementById("gm-access-error");
   const cancelGmAccess = document.getElementById("cancel-gm-access");
+  const manageVisibility = document.getElementById("manage-visibility");
+  const visibilityDialog = document.getElementById("visibility-dialog");
+  const closeVisibility = document.getElementById("close-visibility");
+  const visibilitySearch = document.getElementById("visibility-search");
+  const visibilityManagerList = document.getElementById("visibility-manager-list");
+  const visibilitySummary = document.getElementById("visibility-summary");
+  const visibilityManagerStatus = document.getElementById("visibility-manager-status");
 
   const categoryOrder = Object.fromEntries(
     categories.filter((category) => category !== "All").map((category, index) => [category, index])
@@ -59,6 +73,14 @@
       return new Set(Array.isArray(stored) ? stored : []);
     } catch (_error) {
       return new Set();
+    }
+  }
+
+  function hasGmOnlyCache() {
+    try {
+      return window.localStorage.getItem(GM_ONLY_STORAGE_KEY) !== null;
+    } catch (_error) {
+      return false;
     }
   }
 
@@ -95,7 +117,10 @@
   }
 
   async function loadSharedGmOnlyIds() {
-    if (!VISIBILITY_API) return;
+    if (!VISIBILITY_API) {
+      state.visibilityReady = true;
+      return;
+    }
     try {
       const response = await fetch(`${VISIBILITY_API}/visibility`, {
         headers: { Accept: "application/json" },
@@ -103,11 +128,26 @@
       });
       if (!response.ok) throw new Error(`Visibility service returned ${response.status}`);
       const payload = await response.json();
-      state.gmOnlyIds = new Set(Array.isArray(payload.ids) ? payload.ids : []);
+      const knownIds = new Set(entries.map((entry) => entry.id));
+      state.gmOnlyIds = new Set(
+        (Array.isArray(payload.ids) ? payload.ids : []).filter((id) => knownIds.has(id))
+      );
+      state.visibilityReady = true;
+      state.visibilityCacheAvailable = true;
+      state.visibilityMessage = "";
+      state.visibilityMessageType = "";
       saveGmOnlyIds();
       renderCatalogue();
+      route();
     } catch (error) {
-      console.warn("Shared GM visibility could not be loaded; using the last local copy.", error);
+      state.visibilityReady = state.visibilityCacheAvailable;
+      state.visibilityMessage = state.visibilityCacheAvailable
+        ? "Shared visibility is temporarily unavailable. Showing the last synchronized PC view on this device."
+        : "Player visibility could not be loaded. Entries remain hidden until the shared service reconnects.";
+      state.visibilityMessageType = "error";
+      renderCatalogue();
+      route();
+      console.warn("Shared GM visibility could not be loaded.", error);
     }
   }
 
@@ -123,6 +163,10 @@
       body: JSON.stringify({ ids: [...state.gmOnlyIds] })
     });
     if (!response.ok) throw new Error(`Visibility service returned ${response.status}`);
+    const payload = await response.json();
+    state.gmOnlyIds = new Set(Array.isArray(payload.ids) ? payload.ids : [...state.gmOnlyIds]);
+    state.visibilityCacheAvailable = true;
+    saveGmOnlyIds();
     return { shared: true };
   }
 
@@ -189,7 +233,7 @@
   }
 
   function canOpenInCurrentMode(entry) {
-    if (entry.externalUrl || state.mode === "gm") return true;
+    if (state.mode === "gm") return true;
     return !isGmOnly(entry);
   }
 
@@ -277,6 +321,7 @@
   }
 
   function filteredEntries() {
+    if (!state.visibilityReady && state.mode === "pc") return [];
     if (!state.showAll && state.categories.size === 0) return [];
     const query = normalize(state.query.trim());
     return entries
@@ -304,6 +349,65 @@
     }
 
     return `<a class="card-link" href="#entry/${encodeURIComponent(entry.id)}" aria-label="Read ${escapeHtml(entry.title)}">Read entry</a>`;
+  }
+
+  function visibilityControlMarkup(entry, className = "card-visibility-toggle") {
+    if (state.mode !== "gm") return "";
+    if (entry.gmOnly) {
+      return `<span class="${className} is-locked" title="This entry is permanently GM-only">GM Only by design</span>`;
+    }
+
+    const marked = isGmOnly(entry);
+    const saving = state.visibilitySavingId === entry.id;
+    return `
+      <button
+        class="${className}"
+        type="button"
+        data-visibility-id="${escapeHtml(entry.id)}"
+        aria-pressed="${marked}"
+        aria-label="${marked ? "Make" : "Remove"} ${escapeHtml(entry.title)} ${marked ? "visible to PCs" : "from PC view"}"
+        ${saving ? "disabled" : ""}
+      >${saving ? "Saving…" : marked ? "GM Only" : "PC Visible"}</button>
+    `;
+  }
+
+  async function setEntryGmOnly(entry, marked) {
+    if (!entry || entry.gmOnly || state.visibilitySavingId) return null;
+
+    const previousIds = new Set(state.gmOnlyIds);
+    state.visibilitySavingId = entry.id;
+    state.visibilityMessage = `Saving ${entry.title}…`;
+    state.visibilityMessageType = "pending";
+    if (marked) {
+      state.gmOnlyIds.add(entry.id);
+    } else {
+      state.gmOnlyIds.delete(entry.id);
+    }
+    renderCatalogue();
+    renderVisibilityManager();
+
+    try {
+      const result = await saveSharedGmOnlyIds();
+      state.visibilityMessage = result.shared
+        ? marked
+          ? `${entry.title} is now GM-only for all PC viewers.`
+          : `${entry.title} is now visible to all PC viewers.`
+        : marked
+          ? `${entry.title} is GM-only on this device. Shared visibility still needs to be connected.`
+          : `${entry.title} is PC-visible on this device. Shared visibility still needs to be connected.`;
+      state.visibilityMessageType = result.shared ? "success" : "warning";
+      return { success: true, shared: result.shared, marked, message: state.visibilityMessage };
+    } catch (_error) {
+      state.gmOnlyIds = previousIds;
+      saveGmOnlyIds();
+      state.visibilityMessage = `${entry.title} was not changed because the shared visibility update failed.`;
+      state.visibilityMessageType = "error";
+      return { success: false, shared: false, marked: isGmOnly(entry), message: state.visibilityMessage };
+    } finally {
+      state.visibilitySavingId = "";
+      renderCatalogue();
+      renderVisibilityManager();
+    }
   }
 
   function cardMarkup(entry) {
@@ -348,7 +452,10 @@
           <p class="entry-summary">${escapeHtml(entry.summary)}</p>
           ${gmTraits}
         </div>
-        ${cardActionMarkup(entry)}
+        <div class="card-actions">
+          ${cardActionMarkup(entry)}
+          ${visibilityControlMarkup(entry)}
+        </div>
       </article>
     `;
   }
@@ -431,6 +538,71 @@
     });
   }
 
+  function renderVisibilityManager() {
+    if (!visibilityDialog || !visibilityDialog.open) return;
+
+    const query = normalize(state.visibilityManagerQuery.trim());
+    const filtered = entries
+      .filter((entry) => {
+        const marked = isGmOnly(entry);
+        if (state.visibilityManagerFilter === "pc" && marked) return false;
+        if (state.visibilityManagerFilter === "gm" && !marked) return false;
+        if (!query) return true;
+        return matchesQuery(
+          normalize([entry.title, entry.category, entry.typeLabel, entry.summary].join(" ")),
+          query
+        );
+      })
+      .sort((left, right) => {
+        const categoryDifference =
+          (categoryOrder[left.category] ?? 99) - (categoryOrder[right.category] ?? 99);
+        return categoryDifference || left.title.localeCompare(right.title);
+      });
+
+    const gmOnlyCount = entries.filter(isGmOnly).length;
+    visibilitySummary.textContent = `${entries.length - gmOnlyCount} PC visible · ${gmOnlyCount} GM only`;
+    visibilityDialog.querySelectorAll("[data-visibility-filter]").forEach((button) => {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.visibilityFilter === state.visibilityManagerFilter)
+      );
+    });
+
+    visibilityManagerStatus.hidden = !state.visibilityMessage;
+    visibilityManagerStatus.textContent = state.visibilityMessage;
+    visibilityManagerStatus.dataset.status = state.visibilityMessageType;
+
+    visibilityManagerList.innerHTML = filtered.length
+      ? filtered
+          .map(
+            (entry) => `
+              <div class="visibility-manager-row${isGmOnly(entry) ? " is-gm-only" : ""}">
+                <div class="visibility-manager-entry">
+                  <p>${escapeHtml(entry.category)} · ${escapeHtml(entry.typeLabel)}</p>
+                  <h3>${escapeHtml(entry.title)}</h3>
+                </div>
+                ${visibilityControlMarkup(entry, "visibility-row-toggle")}
+              </div>
+            `
+          )
+          .join("")
+      : `<div class="visibility-manager-empty"><p>No entries match this visibility filter.</p></div>`;
+  }
+
+  function openVisibilityManager() {
+    if (state.mode !== "gm") return;
+    state.visibilityManagerQuery = "";
+    state.visibilityManagerFilter = "all";
+    state.visibilityMessage = VISIBILITY_API
+      ? "Changes here are shared with every PC viewer."
+      : "Shared visibility is not connected yet; changes currently affect only this device.";
+    state.visibilityMessageType = VISIBILITY_API ? "success" : "warning";
+    visibilitySearch.value = "";
+    visibilityDialog.showModal();
+    renderVisibilityManager();
+    window.setTimeout(() => visibilitySearch.focus(), 0);
+  }
+
   function renderCatalogue() {
     const visibleEntries = filteredEntries();
     const hasCollectionSelection = state.showAll || state.categories.size > 0;
@@ -439,7 +611,14 @@
     catalogueGrid.hidden = visibleEntries.length === 0;
     resultsHeading.hidden = !hasCollectionSelection;
 
-    if (!hasCollectionSelection) {
+    if (!state.visibilityReady && state.mode === "pc") {
+      emptyState.hidden = false;
+      catalogueGrid.hidden = true;
+      resultsHeading.hidden = true;
+      emptyStateTitle.textContent = VISIBILITY_API ? "Loading player visibility" : "Player visibility unavailable";
+      emptyStateMessage.textContent = state.visibilityMessage || "Connecting to the shared visibility service…";
+      clearSearch.hidden = true;
+    } else if (!hasCollectionSelection) {
       emptyStateTitle.textContent = "Choose a collection";
       emptyStateMessage.textContent = "Select All or one or more collections to browse the compendium.";
       clearSearch.hidden = true;
@@ -614,35 +793,29 @@
     const gmOnlyToggle = document.getElementById("gm-only-toggle");
     if (gmOnlyToggle) {
       gmOnlyToggle.addEventListener("click", async () => {
-        if (state.gmOnlyIds.has(entry.id)) {
-          state.gmOnlyIds.delete(entry.id);
-        } else {
-          state.gmOnlyIds.add(entry.id);
-        }
-        const marked = isGmOnly(entry);
-        gmOnlyToggle.textContent = marked ? "Remove GM Only" : "GM Only";
-        gmOnlyToggle.setAttribute("aria-pressed", String(marked));
         const status = document.getElementById("gm-only-status");
         status.hidden = false;
         status.textContent = "Saving visibility…";
-        try {
-          const result = await saveSharedGmOnlyIds();
-          status.textContent = result.shared
-            ? marked
-              ? "Marked GM-only for all PC viewers."
-              : "Restored this entry for all PC viewers."
-            : marked
-              ? "Marked GM-only in this preview browser. The shared visibility service is ready to connect."
-              : "Removed from the GM-only list in this preview browser.";
-        } catch (_error) {
-          status.textContent = "The shared visibility update failed. Your local preview choice is preserved.";
+        gmOnlyToggle.disabled = true;
+        const result = await setEntryGmOnly(entry, !isGmOnly(entry));
+        if (!result) {
+          gmOnlyToggle.disabled = false;
+          return;
         }
-        renderCatalogue();
+        gmOnlyToggle.disabled = false;
+        gmOnlyToggle.textContent = result.marked ? "Remove GM Only" : "GM Only";
+        gmOnlyToggle.setAttribute("aria-pressed", String(result.marked));
+        status.textContent = result.message;
+        status.dataset.status = result.success ? (result.shared ? "success" : "warning") : "error";
       });
     }
   }
 
   function route() {
+    if (!state.visibilityReady && state.mode === "pc") {
+      showCatalogue();
+      return;
+    }
     const hash = window.location.hash.replace(/^#/, "");
 
     if (!hash || hash === "catalogue") {
@@ -671,6 +844,11 @@
     document.body.dataset.viewerMode = mode;
     pcMode.setAttribute("aria-pressed", String(mode === "pc"));
     gmMode.setAttribute("aria-pressed", String(mode === "gm"));
+    manageVisibility.hidden = mode !== "gm";
+    if (mode === "pc") {
+      state.gmPasscode = "";
+      if (visibilityDialog.open) visibilityDialog.close();
+    }
     renderFilters();
     renderCatalogue();
     route();
@@ -732,8 +910,35 @@
   });
 
   cancelGmAccess.addEventListener("click", () => accessDialog.close());
+  manageVisibility.addEventListener("click", openVisibilityManager);
+  closeVisibility.addEventListener("click", () => visibilityDialog.close());
+  visibilitySearch.addEventListener("input", () => {
+    state.visibilityManagerQuery = visibilitySearch.value;
+    renderVisibilityManager();
+  });
+  visibilityDialog.querySelectorAll("[data-visibility-filter]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.visibilityManagerFilter = button.dataset.visibilityFilter || "all";
+      renderVisibilityManager();
+    });
+  });
+  visibilityManagerList.addEventListener("click", async (event) => {
+    const toggle = event.target.closest("[data-visibility-id]");
+    if (!toggle) return;
+    const entry = entries.find((candidate) => candidate.id === toggle.dataset.visibilityId);
+    if (!entry) return;
+    await setEntryGmOnly(entry, !isGmOnly(entry));
+  });
   window.addEventListener("hashchange", route);
-  catalogueGrid.addEventListener("click", (event) => {
+  catalogueGrid.addEventListener("click", async (event) => {
+    const visibilityToggle = event.target.closest("[data-visibility-id]");
+    if (visibilityToggle) {
+      event.preventDefault();
+      event.stopPropagation();
+      const entry = entries.find((candidate) => candidate.id === visibilityToggle.dataset.visibilityId);
+      if (entry) await setEntryGmOnly(entry, !isGmOnly(entry));
+      return;
+    }
     const entryLink = event.target.closest('a[href^="#entry/"]');
     if (entryLink) window.sessionStorage.setItem(CATALOGUE_SCROLL_KEY, String(window.scrollY));
   });
