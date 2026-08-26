@@ -209,11 +209,12 @@
       entry.typeLabel,
       entry.summary,
       entry.intro,
+      entry.traits.join(" "),
       entry.contentHtml.replace(/<[^>]+>/g, " ")
     ];
 
     if (includeGmFields) {
-      fields.push(entry.levelLabel, entry.headingLabel, entry.traits.join(" "));
+      fields.push(entry.levelLabel, entry.headingLabel);
     }
 
     return normalize(fields.join(" "));
@@ -416,10 +417,7 @@
       state.mode === "gm"
         ? `<p class="entry-level">${escapeHtml(entry.levelLabel)}</p>`
         : "";
-    const gmTraits =
-      state.mode === "gm"
-        ? `<ul class="trait-list" aria-label="${escapeHtml(entry.title)} traits">${traitMarkup(entry.traits.slice(0, 6))}</ul>`
-        : "";
+    const visibleTraits = `<ul class="trait-list" aria-label="${escapeHtml(entry.title)} traits">${traitMarkup(entry.traits.slice(0, 6))}</ul>`;
     const gmBadge = state.mode === "gm" && gmOnly ? `<span class="gm-only-badge">GM only</span>` : "";
     const methodBadges = Array.isArray(entry.cardBadges) ? entry.cardBadges : [];
     const ownerBadges = Array.isArray(entry.formulaOwners) ? entry.formulaOwners : [];
@@ -450,7 +448,7 @@
         <h3>${escapeHtml(entry.title)}</h3>
         <div>
           <p class="entry-summary">${escapeHtml(entry.summary)}</p>
-          ${gmTraits}
+          ${visibleTraits}
         </div>
         <div class="card-actions">
           ${cardActionMarkup(entry)}
@@ -702,10 +700,7 @@
       state.mode === "gm"
         ? `<p class="rules-heading">${escapeHtml(entry.headingLabel)}</p>`
         : "";
-    const gmTraits =
-      state.mode === "gm"
-        ? `<ul class="trait-list detail-traits" aria-label="Entry traits">${traitMarkup(entry.traits)}</ul>`
-        : "";
+    const visibleTraits = `<ul class="trait-list detail-traits" aria-label="Entry traits">${traitMarkup(entry.traits)}</ul>`;
     const gmOnlyButton =
       state.mode === "gm"
         ? entry.gmOnly
@@ -728,7 +723,7 @@
           <h1 id="entry-title" tabindex="-1">${escapeHtml(entry.title)}</h1>
           ${gmHeading}
         </div>
-        ${gmTraits}
+        ${visibleTraits}
         <p class="detail-intro">${entry.introHtml || escapeHtml(entry.intro)}</p>
         <div class="detail-body">${entry.contentHtml}</div>
         ${state.mode === "gm" ? `<p class="source-note"><strong>Imported from:</strong> ${escapeHtml(entry.source)}. Mechanical wording was preserved; punctuation, obvious spelling, and presentation were normalized for web reading.</p>` : ""}

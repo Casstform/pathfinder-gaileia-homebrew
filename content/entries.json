@@ -1738,6 +1738,348 @@
       "intro": "A patchwork leather mask with glassy eye discs and a crude ironwork beak.",
       "source": "Compendium-Items-25-8-26.json (Feedback 7 current source)",
       "contentHtml": "\n        <dl class=\"stat-block\">\n          <div class=\"stat-line\"><dt>Price</dt><dd>5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Bulk</dt><dd>—</dd></div>\n          <div class=\"stat-line\"><dt>Usage</dt><dd>Worn mask</dd></div>\n        </dl>\n        <section class=\"rules-subcard\"><h3>Attunement Requirement</h3><p>You must witness death while wearing the mask.</p></section>\n        <p>If you begin your turn with a dying value of 3 or greater, instead of making your recovery check, you lose the dying condition but remain unconscious at 0 Hit Points.</p>\n        <p>This ruins the mask, and you're immune to this particular effect for 1 year.</p>\n      "
+    },
+    {
+      "id": "inubrix-ammunition",
+      "title": "Inubrix Ammunition",
+      "category": "Items",
+      "typeLabel": "Ammunition",
+      "levelLabel": "Item",
+      "headingLabel": "Item",
+      "traits": [
+        "Consumable",
+        "Precious",
+        "Rare"
+      ],
+      "summary": "Pale, malleable precious-metal ammunition that faintly blurs and passes through other metal.",
+      "intro": "This pale, malleable metal seems to faintly vibrate against metal, vaguely blurring and passing through to a miniscule extent. Fragile and easy to deform, it is difficult to work into any object or shape.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Price</dt><dd>50 gp</dd></div>\n        <div class=\"stat-line\"><dt>Bulk</dt><dd>—</dd></div>\n      </dl>\n      <p>This pale, malleable metal seems to faintly vibrate against metal, vaguely blurring and passing through to a miniscule extent. Fragile and easy to deform, it is difficult to work into any object or shape.</p>\n    "
+    },
+    {
+      "id": "oziza-albatrabbit-tattoo",
+      "title": "Albatrabbit Tattoo",
+      "category": "Oziza",
+      "typeLabel": "Magical Tattoo",
+      "levelLabel": "Tattoo",
+      "headingLabel": "Tattoo",
+      "traits": [
+        "Invested",
+        "Magical",
+        "Tattoo"
+      ],
+      "summary": "An invested tattoo that lets Oziza cast Tailwind once per day.",
+      "intro": "This tattoo, skillfully etched into Oziza’s scales, depicts the enduring Albatrabbit soaring on the sea’s winds.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Price</dt><dd>60 gp</dd></div>\n        <div class=\"stat-line\"><dt>Usage</dt><dd>Etched onto Oziza’s scales</dd></div>\n      </dl>\n      <p>This tattoo, skillfully etched into Oziza’s scales, depicts the enduring Albatrabbit soaring on the sea’s winds.</p>\n      <section class=\"rules-subcard\">\n        <h3>Activate <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3>\n        <dl class=\"stat-block\">\n          <div class=\"stat-line\"><dt>Frequency</dt><dd>Once per day</dd></div>\n          <div class=\"stat-line\"><dt>Effect</dt><dd>Oziza casts <a href=\"https://2e.aonprd.com/Spells.aspx?ID=1711\" target=\"_blank\" rel=\"noreferrer\">Tailwind</a>.</dd></div>\n        </dl>\n      </section>\n      <section class=\"rules-subcard\">\n        <h3>Tailwind <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3>\n        <p><strong>Spell 1</strong></p>\n        <ul class=\"trait-list inline-traits\" aria-label=\"Tailwind traits\">\n          <li class=\"trait\"><a href=\"https://2e.aonprd.com/Traits.aspx?ID=527\" target=\"_blank\" rel=\"noreferrer\">Air</a></li>\n          <li class=\"trait\"><a href=\"https://2e.aonprd.com/Traits.aspx?ID=561\" target=\"_blank\" rel=\"noreferrer\">Concentrate</a></li>\n          <li class=\"trait\"><a href=\"https://2e.aonprd.com/Traits.aspx?ID=104\" target=\"_blank\" rel=\"noreferrer\">Manipulate</a></li>\n        </ul>\n        <dl class=\"stat-block\">\n          <div class=\"stat-line\"><dt>Traditions</dt><dd>Arcane, Primal</dd></div>\n          <div class=\"stat-line\"><dt>Duration</dt><dd>1 hour</dd></div>\n        </dl>\n        <p>A sudden, unexpected wind pushes you forward. You gain a +10-foot status bonus to your speed.</p>\n      </section>\n    "
+    },
+    {
+      "id": "formula-flamethrower",
+      "title": "Flamethrower",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 23",
+      "headingLabel": "Crafting DC 23",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 23 and a 18 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Flamethrower</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/automatons-flamethrower\">Automaton's Flamethrower</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>23</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>18 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>18 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>3.5 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 23,
+        "initial": 18,
+        "final": 18,
+        "tenPercent": 3.5
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-flare-cartridge",
+      "title": "Flare Cartridge",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 20",
+      "headingLabel": "Crafting DC 20",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 20 and a 2 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Flare Cartridge</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/flare-cartridge\">Flare Cartridge</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>20</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>2 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>2 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.4 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 20,
+        "initial": 2,
+        "final": 2,
+        "tenPercent": 0.4
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-flare-pistol",
+      "title": "Flare Pistol",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 20",
+      "headingLabel": "Crafting DC 20",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 20 and a 1.5 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Flare Pistol</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/flare-pistol\">Flare Pistol</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>20</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.3 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 20,
+        "initial": 1.5,
+        "final": 1.5,
+        "tenPercent": 0.3
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-galvanic-derringer",
+      "title": "Galvanic Derringer",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 21",
+      "headingLabel": "Crafting DC 21",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 21 and a 12.5 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Galvanic Derringer</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/galvanic-derringer\">Galvanic Derringer</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>21</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>12.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>12.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>2.5 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 21,
+        "initial": 12.5,
+        "final": 12.5,
+        "tenPercent": 2.5
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-rebels-revolver",
+      "title": "Rebel's Revolver",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 21",
+      "headingLabel": "Crafting DC 21",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 21 and a 10 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Rebel's Revolver</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/rebels-revolver-restored\">Rebel's Revolver, Restored</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>21</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>10 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>10 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>2 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 21,
+        "initial": 10,
+        "final": 10,
+        "tenPercent": 2
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-seeker-rifle",
+      "title": "Seeker Rifle",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 21",
+      "headingLabel": "Crafting DC 21",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 21 and a 4 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Seeker Rifle</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/seeker-rifle\">Seeker Rifle</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>21</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>4 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>4 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.8 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 21,
+        "initial": 4,
+        "final": 4,
+        "tenPercent": 0.8
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-inubrix-ammunition",
+      "title": "Inubrix Ammunition",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 29",
+      "headingLabel": "Crafting DC 29",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 29 and a 25 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Inubrix Ammunition</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        <div class=\"stat-line\"><dt>Item Entry</dt><dd><a href=\"#entry/inubrix-ammunition\">Inubrix Ammunition</a></dd></div>\n      </dl>\n      \n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>29</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>25 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>25 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>5 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 29,
+        "initial": 25,
+        "final": 25,
+        "tenPercent": 5
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-alchemists-fire-lesser",
+      "title": "Alchemist's Fire (Lesser)",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 15",
+      "headingLabel": "Crafting DC 15",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 15 and a 1.5 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Alchemist's Fire (Lesser)</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        \n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=3287\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>15</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.3 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 15,
+        "initial": 1.5,
+        "final": 1.5,
+        "tenPercent": 0.3
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-bottled-lightning-lesser",
+      "title": "Bottled Lightning (Lesser)",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 15",
+      "headingLabel": "Crafting DC 15",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 15 and a 1.5 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Bottled Lightning (Lesser)</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        \n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=3290\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>15</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>1.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.3 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 15,
+        "initial": 1.5,
+        "final": 1.5,
+        "tenPercent": 0.3
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-silencer",
+      "title": "Silencer",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 16",
+      "headingLabel": "Crafting DC 16",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 16 and a 0.05 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Silencer</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        \n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=1206\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>16</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.01 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 16,
+        "initial": 0.05,
+        "final": 0.05,
+        "tenPercent": 0.01
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-earplugs",
+      "title": "Earplugs",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 14",
+      "headingLabel": "Crafting DC 14",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 14 and a 0.05 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 8",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Earplugs</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n        \n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=1203\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>14</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.01 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 14,
+        "initial": 0.05,
+        "final": 0.05,
+        "tenPercent": 0.01
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
     }
   ]
 }

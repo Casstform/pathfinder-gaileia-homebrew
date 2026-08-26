@@ -37,6 +37,9 @@ Source inventory frozen on August 20, 2026. Each listed source was read from the
 | Rules | Campaign House Rules | Homebrew Rules \| PF2; Mechanics Codex | Complete; aspect-based return-from-death rules and DCs consolidated |
 | Rules | Camp Meal & Cooking Rules | Camp Meal & Cooking Rules \| PF2; Mechanics Codex | Complete; loose table cells and additional expiry guidance reconstructed into labelled HTML tables |
 | Rules | WE4LAND: Venting & Submersion | WE4LAND and Venting | Complete; exact linked document imported as a character-specific rule |
+| Items | Inubrix Ammunition | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8 | Complete; the supplied traits, price, Bulk, and description were preserved |
+| Oziza | Albatrabbit Tattoo | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8 | Complete; includes the supplied once-per-day Tailwind activation and quick-reference spell note |
+| Formulae | Feedback 8 crafting batch | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8; linked Archives of Nethys entries | Complete; seven homebrew-item and four Archives formulae added with supplied DCs and costs calculated from current item prices |
 
 ## Deliberately excluded
 
