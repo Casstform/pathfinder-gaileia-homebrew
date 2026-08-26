@@ -36,5 +36,8 @@ jobs:
             node --check "$file"
           done < <(find preview/assets/js scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
 
+      - name: Check generated catalogue data
+        run: node scripts/build-preview-data.mjs --check
+
       - name: Validate catalogue data
         run: node scripts/validate-preview.mjs
