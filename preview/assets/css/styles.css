@@ -622,6 +622,7 @@ h1 {
 .trait {
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
   min-height: 23px;
   padding: 0.25rem 0.46rem;
   color: #fff;
@@ -634,8 +635,9 @@ h1 {
 .trait a {
   display: inline-flex;
   align-items: center;
-  min-height: inherit;
+  min-height: 0;
   color: inherit;
+  line-height: inherit;
   text-decoration-color: rgb(255 255 255 / 70%);
   text-underline-offset: 0.15em;
 }

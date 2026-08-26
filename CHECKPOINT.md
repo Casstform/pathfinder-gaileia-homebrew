@@ -6,19 +6,19 @@ Checkpoint date: August 26, 2026
 
 The dependency-free Gaileia Compendium is published from
 `Casstform/pathfinder-gaileia-homebrew` on the `main` branch. The current
-`/preview/` catalogue contains 69 distinct entries in 14 collections:
+`/preview/` catalogue contains 82 distinct entries in 14 collections:
 
 | Collection | Entries |
 | --- | ---: |
 | Animist | 1 |
 | Calendar | 1 |
 | Fauna/Flora | 8 |
-| Formulae | 11 |
+| Formulae | 22 |
 | House Rules | 2 |
-| Items | 28 |
+| Items | 29 |
 | Language | 1 |
 | Maps | 1 |
-| Oziza | 3 |
+| Oziza | 4 |
 | Ritsa | 3 |
 | Saraik | 3 |
 | Spells | 2 |
@@ -69,7 +69,7 @@ The earlier undeployed Cloudflare Worker placeholder was removed from this repos
 ## Verification baseline
 
 - All JavaScript and module files pass syntax validation.
-- All 69 entry IDs are unique and use one of the 14 declared collections.
+- All 82 entry IDs are unique and use one of the 14 declared collections.
 - Internal entry links resolve to existing entries.
 - External entry links use HTTPS.
 - Formula ownership, crafting costs, filters, and character-feature summaries are checked automatically.

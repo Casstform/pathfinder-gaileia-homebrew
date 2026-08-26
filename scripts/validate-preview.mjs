@@ -26,7 +26,7 @@ const categorySymbols = context.window.GAILEIA_CATEGORY_SYMBOLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 69, "expected 69 catalogue entries after Phase 3");
+assert.equal(entries.length, 82, "expected 82 catalogue entries after Feedback 8");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(collectionsConfig.schemaVersion, 1);
@@ -89,9 +89,9 @@ const formulae = entries.filter((entry) => entry.category === "Formulae");
 const advancedFormulae = formulae.filter((entry) => entry.advancedAlchemy);
 const regularFormulae = formulae.filter((entry) => entry.regularCrafting);
 
-assert.equal(formulae.length, 11, "expected eleven formulae after Feedback 5");
+assert.equal(formulae.length, 22, "expected twenty-two formulae after Feedback 8");
 assert.equal(advancedFormulae.length, 4, "expected four Advanced Alchemy formulae");
-assert.equal(regularFormulae.length, 7, "expected seven regular crafting formulae");
+assert.equal(regularFormulae.length, 18, "expected eighteen regular crafting formulae");
 assert.equal(entries.filter((entry) => entry.typeLabel === "Character").length, 4);
 assert.equal(byId["translate-chip"].headingLabel, "Focus 2");
 assert.equal(byId["universal-directive"].headingLabel, "Focus 1");
@@ -137,7 +137,7 @@ for (const entry of regularFormulae) {
   assert.match(entry.contentHtml, /requires <strong>1 day<\/strong>, a workshop/);
   assert.match(entry.contentHtml, /Critical Failure/);
   assert.match(entry.contentHtml, /Critical Success/);
-  assert.match(entry.contentHtml, /10% of Initial Cost/);
+  assert.match(entry.contentHtml, /10% of (?:Initial|Item) Cost/);
 }
 
 const expectedCrafting = {
@@ -147,7 +147,18 @@ const expectedCrafting = {
   "formula-smoke-ball-lesser": [13, 1.5, 1.5, 0.15],
   "formula-non-lethal-ammunition": [13, 1.5, 1.5, 0.15],
   "formula-antler-ammunition": [16, 3.5, 3.5, 0.35],
-  "formula-creepy-crawly-crock": [13, 5, 5, 1]
+  "formula-creepy-crawly-crock": [13, 5, 5, 1],
+  "formula-flamethrower": [23, 18, 18, 3.5],
+  "formula-flare-cartridge": [20, 2, 2, 0.4],
+  "formula-flare-pistol": [20, 1.5, 1.5, 0.3],
+  "formula-galvanic-derringer": [21, 12.5, 12.5, 2.5],
+  "formula-rebels-revolver": [21, 10, 10, 2],
+  "formula-seeker-rifle": [21, 4, 4, 0.8],
+  "formula-inubrix-ammunition": [29, 25, 25, 5],
+  "formula-alchemists-fire-lesser": [15, 1.5, 1.5, 0.3],
+  "formula-bottled-lightning-lesser": [15, 1.5, 1.5, 0.3],
+  "formula-silencer": [16, 0.05, 0.05, 0.01],
+  "formula-earplugs": [14, 0.05, 0.05, 0.01]
 };
 
 for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCrafting)) {
@@ -164,7 +175,11 @@ const formulaArchiveLinks = {
   "formula-dread-ampoule-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3292",
   "formula-glue-bomb-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3295",
   "formula-quicksilver-mutagen-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3319",
-  "formula-smoke-ball-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3360"
+  "formula-smoke-ball-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3360",
+  "formula-alchemists-fire-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3287",
+  "formula-bottled-lightning-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3290",
+  "formula-silencer": "https://2e.aonprd.com/Equipment.aspx?ID=1206",
+  "formula-earplugs": "https://2e.aonprd.com/Equipment.aspx?ID=1203"
 };
 
 for (const [id, url] of Object.entries(formulaArchiveLinks)) {
@@ -191,11 +206,11 @@ assert.match(crockFormula.contentHtml, /#entry\/creepy-crawly-crock/);
 
 assert.equal(typeof formulaFilters.matches, "function");
 const expectedFormulaFilterCounts = {
-  all: 11,
+  all: 22,
   advanced: 4,
-  regular: 7,
+  regular: 18,
   ritsa: 1,
-  we4land: 10
+  we4land: 21
 };
 for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
   assert.equal(
@@ -206,14 +221,14 @@ for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
 }
 
 const expectedCombinedFormulaFilterCounts = [
-  [["ritsa", "we4land"], 11],
-  [["regular", "advanced"], 11],
+  [["ritsa", "we4land"], 22],
+  [["regular", "advanced"], 22],
   [["ritsa", "advanced"], 0],
   [["ritsa", "regular"], 1],
   [["we4land", "advanced"], 4],
-  [["we4land", "regular"], 6],
+  [["we4land", "regular"], 17],
   [["ritsa", "we4land", "advanced"], 4],
-  [["ritsa", "we4land", "regular"], 7]
+  [["ritsa", "we4land", "regular"], 18]
 ];
 for (const [filters, count] of expectedCombinedFormulaFilterCounts) {
   assert.equal(
@@ -314,7 +329,8 @@ for (const id of feedback7NewEntries) {
   assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
   assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
 }
-assert.equal(entries.filter((entry) => entry.category === "Items").length, 28);
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 29);
+assert.equal(entries.filter((entry) => entry.category === "Oziza").length, 4);
 assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
 assert.equal(byId["tiger-stance-claws"].category, "Saraik");
 assert.equal(byId["walking-cauldron"].title, "Stu the Walking Cauldron");
@@ -342,19 +358,53 @@ assert.match(byId["ritsa-familiars"].contentHtml, /Familiars\.aspx\?ID=72&Abilit
 assert.equal(traitLinks.conjuration, "https://2e.aonprd.com/Traits.aspx?ID=33");
 assert.equal(traitLinks.transmutation, "https://2e.aonprd.com/Traits.aspx?ID=157");
 
-assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 10);
+const inubrix = byId["inubrix-ammunition"];
+assert.equal(inubrix.category, "Items");
+assert.deepEqual(Array.from(inubrix.traits), ["Consumable", "Precious", "Rare"]);
+assert.match(inubrix.contentHtml, /<dt>Price<\/dt><dd>50 gp<\/dd>/);
+assert.match(inubrix.contentHtml, /<dt>Bulk<\/dt><dd>—<\/dd>/);
+assert.match(inubrix.contentHtml, /vaguely blurring and passing through to a miniscule extent/);
+
+const albatrabbitTattoo = byId["oziza-albatrabbit-tattoo"];
+assert.equal(albatrabbitTattoo.category, "Oziza");
+assert.deepEqual(Array.from(albatrabbitTattoo.traits), ["Invested", "Magical", "Tattoo"]);
+assert.match(albatrabbitTattoo.contentHtml, /<dt>Price<\/dt><dd>60 gp<\/dd>/);
+assert.match(albatrabbitTattoo.contentHtml, /<dt>Frequency<\/dt><dd>Once per day<\/dd>/);
+assert.match(albatrabbitTattoo.contentHtml, /Spells\.aspx\?ID=1711/);
+assert.match(albatrabbitTattoo.contentHtml, /A sudden, unexpected wind pushes you forward/);
+
+for (const id of [
+  "formula-flamethrower",
+  "formula-flare-cartridge",
+  "formula-flare-pistol",
+  "formula-galvanic-derringer",
+  "formula-rebels-revolver",
+  "formula-seeker-rifle",
+  "formula-inubrix-ammunition",
+  "formula-alchemists-fire-lesser",
+  "formula-bottled-lightning-lesser",
+  "formula-silencer",
+  "formula-earplugs"
+]) {
+  assert.match(byId[id].source, /Feedback 8/);
+  assert.deepEqual(Array.from(byId[id].formulaOwners), ["WE4LAND"]);
+  assert.match(byId[id].contentHtml, /10% of Item Cost/);
+}
+assert.equal(byId["formula-rebels-revolver"].title, "Rebel's Revolver");
+assert.match(byId["formula-rebels-revolver"].contentHtml, /#entry\/rebels-revolver-restored/);
+
+assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 21);
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("Ritsa")).length, 1);
 
 for (const retiredFormulaId of [
   "formula-alchemists-toolkit",
-  "formula-black-powder-dose-or-round",
-  "formula-earplugs",
-  "formula-silencer"
+  "formula-black-powder-dose-or-round"
 ]) {
   assert.ok(!byId[retiredFormulaId], `${retiredFormulaId} should not remain in the current formula list`);
 }
 
 const appSource = fs.readFileSync("preview/assets/js/app.js", "utf8");
+const cssSource = fs.readFileSync("preview/assets/css/styles.css", "utf8");
 const htmlSource = fs.readFileSync("preview/index.html", "utf8");
 const visibilitySource = fs.readFileSync("preview/assets/js/visibility-config.js", "utf8");
 const canonicalEntries = JSON.parse(fs.readFileSync("content/entries.json", "utf8"));
@@ -389,6 +439,9 @@ assert.match(appSource, /function renderVisibilityManager\(\)/);
 assert.match(appSource, /async function setEntryGmOnly\(entry, marked\)/);
 assert.match(appSource, /if \(!state\.visibilityReady && state\.mode === "pc"\) return \[\]/);
 assert.match(appSource, /data-visibility-id/);
+assert.match(appSource, /entry\.traits\.join\(" "\)/, "PC search must include the traits players can now see");
+assert.equal((appSource.match(/const visibleTraits = `<ul class="trait-list/g) || []).length, 2, "traits must render on both catalogue cards and entry pages in PC and GM views");
+assert.match(cssSource, /\.trait a \{[\s\S]*?min-height: 0;/, "linked and unlinked trait chips must use the same height");
 assert.doesNotMatch(
   appSource,
   /if \(entry\.externalUrl \|\| state\.mode === "gm"\) return true/,
@@ -397,8 +450,8 @@ assert.doesNotMatch(
 assert.match(htmlSource, /id="manage-visibility"/);
 assert.match(htmlSource, /id="visibility-dialog"/);
 assert.match(htmlSource, /id="visibility-manager-list"/);
-assert.match(htmlSource, /id="entry-total">69</);
+assert.match(htmlSource, /id="entry-total">82</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 69 entries, 14 collections, and canonical data is current.");
+console.log("Preview catalogue validation passed: 82 entries, 14 collections, and canonical data is current.");
