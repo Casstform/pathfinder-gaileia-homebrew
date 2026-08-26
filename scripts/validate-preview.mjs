@@ -1,20 +1,17 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
+import { spawnSync } from "node:child_process";
+
+const buildCheck = spawnSync(process.execPath, ["scripts/build-preview-data.mjs", "--check"], {
+  encoding: "utf8"
+});
+assert.equal(buildCheck.status, 0, buildCheck.stderr || buildCheck.stdout);
 
 const context = { window: {}, console };
 vm.createContext(context);
 
-for (const file of [
-  "preview/assets/js/content.js",
-  "preview/assets/js/catalogue-updates.js",
-  "preview/assets/js/feedback3-data.js",
-  "preview/assets/js/feedback4-data.js",
-  "preview/assets/js/feedback5-data.js",
-  "preview/assets/js/feedback6-data.js",
-  "preview/assets/js/feedback7-data.js",
-  "preview/assets/js/phase3-data.js"
-]) {
+for (const file of ["preview/assets/js/catalogue-data.js"]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
 
@@ -24,12 +21,16 @@ const advancedAlchemy = context.window.GAILEIA_ADVANCED_ALCHEMY;
 const formulaFilters = context.window.GAILEIA_FORMULA_FILTERS;
 const rulesLinks = context.window.GAILEIA_RULE_LINKS;
 const traitLinks = context.window.GAILEIA_TRAIT_URLS;
+const collectionsConfig = context.window.GAILEIA_COLLECTIONS_CONFIG;
+const categorySymbols = context.window.GAILEIA_CATEGORY_SYMBOLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
 assert.equal(entries.length, 69, "expected 69 catalogue entries after Phase 3");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
+assert.equal(collectionsConfig.schemaVersion, 1);
+assert.equal(Object.keys(categorySymbols).length, 14);
 assert.equal(advancedAlchemy.defaultLevel, 3);
 assert.equal(advancedAlchemy.slotsForLevel(1), 5);
 assert.equal(advancedAlchemy.slotsForLevel(3), 6);
@@ -355,6 +356,14 @@ for (const retiredFormulaId of [
 
 const appSource = fs.readFileSync("preview/assets/js/app.js", "utf8");
 const htmlSource = fs.readFileSync("preview/index.html", "utf8");
+const visibilitySource = fs.readFileSync("preview/assets/js/visibility-config.js", "utf8");
+const canonicalEntries = JSON.parse(fs.readFileSync("content/entries.json", "utf8"));
+const canonicalCollections = JSON.parse(fs.readFileSync("content/collections.json", "utf8"));
+assert.equal(canonicalEntries.entries.length, entries.length);
+assert.deepEqual(
+  Array.from(canonicalCollections.collections, (collection) => collection.name),
+  Array.from(categories)
+);
 assert.match(appSource, /showAll:\s*false/, "catalogue must start with All deselected");
 assert.match(appSource, /if \(!state\.showAll && state\.categories\.size === 0\) return \[\]/, "zero-selection state must show no entries");
 assert.match(appSource, /resultsHeading\.hidden = !hasCollectionSelection/, "results heading must hide with no collection selected");
@@ -363,12 +372,13 @@ assert.match(appSource, /state\.formulaFilters\.clear\(\)/, "Formulae filters mu
 assert.match(appSource, /function linkRulesTerms\(container\)/, "rules terms need automatic Archives of Nethys links");
 assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must run on entry pages");
 assert.match(appSource, /\[data-no-rule-link\]/, "marked headings must opt out of automatic rules links");
-assert.match(htmlSource, /assets\/js\/feedback5-data\.js/);
-assert.match(htmlSource, /assets\/js\/feedback6-data\.js/);
-assert.match(htmlSource, /assets\/js\/feedback7-data\.js/);
-assert.match(htmlSource, /assets\/js\/phase3-data\.js/);
+assert.match(appSource, /window\.GAILEIA_CATEGORY_SYMBOLS/);
+assert.match(htmlSource, /assets\/js\/catalogue-data\.js/);
+assert.doesNotMatch(htmlSource, /feedback\d-data|phase3-data|catalogue-updates|assets\/js\/content\.js/);
+assert.match(visibilitySource, /window\.GAILEIA_VISIBILITY_CONFIG/);
+assert.match(visibilitySource, /gmPasscodeSha256/);
 assert.match(htmlSource, /id="entry-total">69</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 69 entries, 14 collections, Feedback 3–7, and Phase 3 mechanics intact.");
+console.log("Preview catalogue validation passed: 69 entries, 14 collections, and canonical data is current.");

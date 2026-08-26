@@ -6,11 +6,12 @@
     ? window.HOMEBREW_CATEGORIES
     : ["All"];
 
-  const GM_PASSCODE_SHA256 = "dc44b22d590f2f351d8fa792f7dfc7f6bffb01c00c2bdc020d4489d2c306b03b";
-  const GM_ONLY_STORAGE_KEY = "gaileia-compendium-preview-gm-only-v2";
-  const CATALOGUE_SCROLL_KEY = "gaileia-compendium-catalogue-scroll-v1";
-  const WE4LAND_LEVEL_STORAGE_KEY = "gaileia-we4land-level-v1";
-  const VISIBILITY_API = String(window.GAILEIA_VISIBILITY_API || "").replace(/\/$/, "");
+  const visibilityConfig = window.GAILEIA_VISIBILITY_CONFIG || {};
+  const GM_PASSCODE_SHA256 = visibilityConfig.gmPasscodeSha256 || "";
+  const GM_ONLY_STORAGE_KEY = visibilityConfig.gmOnlyStorageKey || "gaileia-compendium-gm-only";
+  const CATALOGUE_SCROLL_KEY = visibilityConfig.catalogueScrollStorageKey || "gaileia-compendium-scroll";
+  const WE4LAND_LEVEL_STORAGE_KEY = visibilityConfig.we4landLevelStorageKey || "gaileia-we4land-level";
+  const VISIBILITY_API = String(visibilityConfig.api || "").replace(/\/$/, "");
 
   const state = {
     categories: new Set(),
@@ -50,22 +51,7 @@
     categories.filter((category) => category !== "All").map((category, index) => [category, index])
   );
 
-  const categorySymbols = {
-    Animist: "◎",
-    Calendar: "▦",
-    "Fauna/Flora": "⬟",
-    Formulae: "◫",
-    "House Rules": "⬢",
-    Items: "◇",
-    Language: "◈",
-    Maps: "▱",
-    Oziza: "◐",
-    Ritsa: "⬥",
-    Saraik: "△",
-    Spells: "✦",
-    Subsystems: "⬡",
-    WE4LAND: "▣"
-  };
+  const categorySymbols = window.GAILEIA_CATEGORY_SYMBOLS || {};
 
   function loadGmOnlyIds() {
     try {

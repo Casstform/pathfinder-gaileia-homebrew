@@ -32,7 +32,19 @@ The dependency-free Gaileia Compendium is published from
 
 1. **Layout review:** mobile, desktop, keyboard accessibility, and printing were reviewed; the user approved the layouts.
 2. **Automated validation:** `.github/workflows/validate-compendium.yml` runs JavaScript syntax checks and `scripts/validate-preview.mjs` for every push and pull request to `main`.
-3. **Mechanics review:** the user reviewed the incomplete-mechanics recommendations in `Phase 3 responses.xlsx`; the accepted corrections are encoded in `preview/assets/js/phase3-data.js` and protected by automated assertions.
+3. **Mechanics review:** the user reviewed the incomplete-mechanics recommendations in `Phase 3 responses.xlsx`; the accepted corrections are preserved in the canonical entry data and protected by automated assertions.
+
+## Preventative maintenance
+
+On August 26, 2026, the successive Feedback 3–7 and Phase 3 runtime layers were consolidated. The canonical source structure is now:
+
+- `content/entries.json` for all catalogue entries;
+- `content/collections.json` for collection order, symbols, Formulae filters, and Advanced Alchemy settings;
+- `content/reference-links.json` for trait and rules-term references;
+- `preview/assets/js/visibility-config.js` for PC/GM visibility settings;
+- `scripts/build-preview-data.mjs` for deterministic generation of `preview/assets/js/catalogue-data.js`.
+
+The automated workflow rejects a pull request when the generated catalogue file is stale.
 
 ## Phase 3 decisions
 

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "collections": [
+    {
+      "name": "All",
+      "symbol": null
+    },
+    {
+      "name": "Animist",
+      "symbol": "◎"
+    },
+    {
+      "name": "Calendar",
+      "symbol": "▦"
+    },
+    {
+      "name": "Fauna/Flora",
+      "symbol": "⬟"
+    },
+    {
+      "name": "Formulae",
+      "symbol": "◫"
+    },
+    {
+      "name": "House Rules",
+      "symbol": "⬢"
+    },
+    {
+      "name": "Items",
+      "symbol": "◇"
+    },
+    {
+      "name": "Language",
+      "symbol": "◈"
+    },
+    {
+      "name": "Maps",
+      "symbol": "▱"
+    },
+    {
+      "name": "Oziza",
+      "symbol": "◐"
+    },
+    {
+      "name": "Ritsa",
+      "symbol": "⬥"
+    },
+    {
+      "name": "Saraik",
+      "symbol": "△"
+    },
+    {
+      "name": "Spells",
+      "symbol": "✦"
+    },
+    {
+      "name": "Subsystems",
+      "symbol": "⬡"
+    },
+    {
+      "name": "WE4LAND",
+      "symbol": "▣"
+    }
+  ],
+  "advancedAlchemy": {
+    "defaultLevel": 3,
+    "baseSlots": 4,
+    "levelDivisor": 2
+  },
+  "formulaFilters": {
+    "options": [
+      {
+        "id": "all",
+        "label": "All",
+        "group": "all"
+      },
+      {
+        "id": "advanced",
+        "label": "Advanced Alchemy",
+        "group": "method"
+      },
+      {
+        "id": "regular",
+        "label": "Regular Crafting",
+        "group": "method"
+      },
+      {
+        "id": "ritsa",
+        "label": "Ritsa",
+        "group": "owner"
+      },
+      {
+        "id": "we4land",
+        "label": "WE4LAND",
+        "group": "owner"
+      }
+    ],
+    "methodFields": {
+      "advanced": "advancedAlchemy",
+      "regular": "regularCrafting"
+    }
+  }
+}

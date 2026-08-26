@@ -1,62 +1,87 @@
-# PF2e Homebrew Compendium
+# Gaileia Compendium
 
-A dependency-free, searchable, print-friendly static site for Pathfinder Second Edition homebrew. It is designed to work directly on GitHub Pages: there is no package installation, site generator, database, or build command.
+A dependency-free, searchable, print-friendly Pathfinder Second Edition compendium for Gaileia. GitHub Pages serves the site directly; no package installation, framework, database, or external build service is required.
 
-## Included material
+- Live compendium: <https://casstform.github.io/pathfinder-gaileia-homebrew/preview/>
+- Repository: <https://github.com/Casstform/pathfinder-gaileia-homebrew>
+- Current catalogue: 69 entries in 14 collections
 
-- 1 Animist apparition: **Echoes of a Signal**
-- 19 items and formulae
-- 8 creature stat blocks
-- 1 custom spell
-- 4 campaign rules pages
-- Search, category filters, accessible keyboard navigation, responsive layouts, stable hash links, and print styling
+## Canonical content
 
-The final Echoes spell progression uses **forbidding ward** as its cantrip and **save point** as its 8th-rank spell.
+Future changes should update the canonical files instead of adding another feedback overlay:
 
-## Preview locally
+| File | Purpose |
+| --- | --- |
+| `content/entries.json` | All catalogue entries and their final rendered rules content |
+| `content/collections.json` | Collection order, names, symbols, Formulae filters, and Advanced Alchemy settings |
+| `content/reference-links.json` | Trait links and automatically linked rules terms |
+| `preview/assets/js/visibility-config.js` | Client-side PC/GM visibility configuration |
+| `preview/assets/js/catalogue-data.js` | Generated browser data; never edit directly |
 
-Open `index.html` in a browser. Because the project uses ordinary deferred scripts rather than JavaScript modules, search, filters, and entry pages work even when the file is opened directly.
+The former `content.js`, catalogue update, Feedback 3–7, and Phase 3 layers have been consolidated into this structure. Their history remains available in Git.
 
-## Publish with GitHub Pages
+## Add or change an entry
 
-1. Create a repository and place all files from this folder at the repository root.
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and the `/(root)` folder, then save.
-5. GitHub will show the public address in the same Pages settings panel after deployment.
+1. Edit `content/entries.json`. Keep the existing schema and use a unique, stable, lower-case `id`.
+2. If a collection, symbol, Formulae filter, trait link, or rules-term link changes, update the corresponding canonical configuration file.
+3. Regenerate the browser data:
 
-The `.nojekyll` file tells GitHub Pages to publish the static files as-is. GitHub's current instructions are available in [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+   ```bash
+   node scripts/build-preview-data.mjs
+   ```
 
-## Add or edit homebrew
+4. Run the same checks used by GitHub Actions:
 
-All catalogue text lives in `assets/js/content.js`. Each entry is one object in `window.HOMEBREW_ENTRIES` with these fields:
+   ```bash
+   node scripts/build-preview-data.mjs --check
+   node scripts/validate-preview.mjs
+   ```
 
-- `id`: unique lower-case URL name
-- `title`: display name
-- `category`: `Apparitions`, `Items`, `Creatures`, `Spells`, or `Rules`
-- `typeLabel`, `levelLabel`, `headingLabel`: card and rules-header labels
-- `traits`: filterable/searchable trait names
-- `summary`: short catalogue description
-- `intro`: italic opening text on the entry page
-- `source`: private source-file title for provenance
-- `contentHtml`: the formatted rules text
+5. Publish through a branch and pull request. Merge only after **Validate compendium** succeeds, then verify the deployed GitHub Pages files.
 
-To add an entry, duplicate the nearest similar object, change every field, and ensure its `id` is unique. The catalogue count, category counts, search index, entry page, and shareable hash link update automatically.
+Important content decisions should receive a targeted assertion in `scripts/validate-preview.mjs`. Generic checks already enforce unique IDs, declared collections, required metadata, valid internal entry links, HTTPS external links, Formulae behavior, House Rules structure, character summaries, and the current catalogue totals.
+
+## Change-request handoff
+
+The preferred user workflow is:
+
+1. Fill one row per request in the **Gaileia Compendium Change Queue** workbook.
+2. Mark complete requests **Ready to Publish**.
+3. Attach that workbook, the **Gaileia Compendium Update Workflow** document, and every exact source file or direct source link.
+4. Ask ChatGPT: `See the attachments. Apply every row marked Ready to Publish to the Gaileia Compendium.`
+
+Do not make a broad Google Drive search a prerequisite. A missing or unreadable source becomes a named gap while every complete request proceeds independently.
+
+## Local preview
+
+Open `preview/index.html` in a browser. Ordinary deferred scripts are used, so catalogue browsing works without a local server.
 
 ## Project layout
 
 ```text
-index.html
-404.html
-assets/
-  css/styles.css
-  js/app.js
-  js/content.js
+content/
+  entries.json
+  collections.json
+  reference-links.json
+preview/
+  index.html
+  assets/
+    css/styles.css
+    js/
+      app.js
+      catalogue-data.js
+      visibility-config.js
+scripts/
+  build-preview-data.mjs
+  validate-preview.mjs
+.github/workflows/
+  validate-compendium.yml
+CHECKPOINT.md
 SOURCE_INVENTORY.md
 ```
 
-## Content note
+## Publishing and legal note
 
-This repository contains only the web-ready transcriptions. The private Google Drive source files are not bundled or exposed. Official spell names link to Archives of Nethys where a current page was available; the selected `save point` text is preserved inside the Echoes entry because no current Archives of Nethys page was found for that version.
+GitHub Pages deploys from `main` and the repository root. `.nojekyll` ensures the files are published unchanged.
 
-This is unofficial fan-made game material. Pathfinder and Starfinder are trademarks of Paizo Inc.; this project is not affiliated with or endorsed by Paizo.
+The repository contains web-ready transcriptions, not private source files. This is unofficial fan-made material for personal campaign use. Pathfinder and Starfinder are trademarks of Paizo Inc.; this project is not affiliated with or endorsed by Paizo.
