@@ -367,6 +367,8 @@ assert.deepEqual(
 assert.match(appSource, /showAll:\s*false/, "catalogue must start with All deselected");
 assert.match(appSource, /if \(!state\.showAll && state\.categories\.size === 0\) return \[\]/, "zero-selection state must show no entries");
 assert.match(appSource, /resultsHeading\.hidden = !hasCollectionSelection/, "results heading must hide with no collection selected");
+assert.match(appSource, /category === "All" \? \["All", "None"\]/, "collection controls must place None after All");
+assert.match(appSource, /if \(category === "None"\) \{\s*state\.showAll = false;\s*state\.categories\.clear\(\);\s*state\.formulaFilters\.clear\(\);/s, "None must clear every collection selection");
 assert.match(appSource, /formulaFilters:\s*new Set\(\)/, "Formulae filters must allow multiple selections");
 assert.match(appSource, /state\.formulaFilters\.clear\(\)/, "Formulae filters must reset to All");
 assert.match(appSource, /function linkRulesTerms\(container\)/, "rules terms need automatic Archives of Nethys links");
