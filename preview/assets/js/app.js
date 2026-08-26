@@ -461,19 +461,30 @@
   }
 
   function renderFilters() {
-    filterList.innerHTML = categories
+    const collectionControls = categories.flatMap((category) =>
+      category === "All" ? ["All", "None"] : [category]
+    );
+
+    filterList.innerHTML = collectionControls
       .map((category) => {
         const count =
           category === "All"
             ? entries.length
             : entries.filter((entry) => entry.category === category).length;
+        const isNone = category === "None";
         return `
           <button
             class="filter-button"
             type="button"
             data-category="${escapeHtml(category)}"
-            aria-pressed="${category === "All" ? state.showAll : state.categories.has(category)}"
-          >${escapeHtml(category)} (${count})</button>
+            aria-pressed="${
+              category === "All"
+                ? state.showAll
+                : isNone
+                  ? !state.showAll && state.categories.size === 0
+                  : state.categories.has(category)
+            }"
+          >${escapeHtml(category)}${isNone ? "" : ` (${count})`}</button>
         `;
       })
       .join("");
@@ -481,7 +492,11 @@
     filterList.querySelectorAll("button").forEach((button) => {
       button.addEventListener("click", () => {
         const category = button.dataset.category || "All";
-        if (category === "All") {
+        if (category === "None") {
+          state.showAll = false;
+          state.categories.clear();
+          state.formulaFilters.clear();
+        } else if (category === "All") {
           state.showAll = !state.showAll;
           state.categories.clear();
           state.formulaFilters.clear();
