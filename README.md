@@ -1,6 +1,6 @@
 # Gaileia Compendium
 
-A dependency-free, searchable, print-friendly Pathfinder Second Edition compendium for Gaileia. GitHub Pages serves the site directly; no package installation, framework, database, or external build service is required.
+A dependency-free, searchable, print-friendly Pathfinder Second Edition compendium for Gaileia. GitHub Pages serves the catalogue directly. A small companion service stores shared PC/GM visibility choices so the GM can manage player access entirely inside the site.
 
 - Live compendium: <https://casstform.github.io/pathfinder-gaileia-homebrew/preview/>
 - Repository: <https://github.com/Casstform/pathfinder-gaileia-homebrew>
@@ -19,6 +19,19 @@ Future changes should update the canonical files instead of adding another feedb
 | `preview/assets/js/catalogue-data.js` | Generated browser data; never edit directly |
 
 The former `content.js`, catalogue update, Feedback 3–7, and Phase 3 layers have been consolidated into this structure. Their history remains available in Git.
+
+## PC and GM visibility
+
+GM view provides two synchronized ways to change an entry's visibility:
+
+- Every catalogue card has a **PC Visible / GM Only** control. This includes external-link cards such as Gaileia, Goblish Translator, and Gaileian Calendar.
+- **Manage visibility** in the masthead opens a searchable list of all entries with All, PC visible, and GM only filters.
+
+Ordinary entry pages retain their existing GM Only button. Entries with `"gmOnly": true` in canonical data are locked GM-only by design and cannot be exposed from the interface.
+
+The authoritative shared list is stored by the companion service at <https://gaileia-visibility-service.casstform.chatgpt.site>. PC browsers load that list before showing catalogue entries; GM updates require the existing passcode. Browser storage is only a last-synchronized fallback, not the shared source of truth.
+
+The companion service is an OpenAI-hosted Site named `gaileia-visibility-service`. Its passcode hash is protected as a runtime secret, and only `https://casstform.github.io` is permitted as a browser origin. Like the rest of this public GitHub Pages project, visibility is an interface convenience rather than encryption of the published catalogue source.
 
 ## Add or change an entry
 

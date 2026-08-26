@@ -1,6 +1,6 @@
 # Release Checkpoint
 
-Checkpoint date: August 25, 2026
+Checkpoint date: August 26, 2026
 
 ## Current state
 
@@ -46,6 +46,14 @@ On August 26, 2026, the successive Feedback 3–7 and Phase 3 runtime layers wer
 
 The automated workflow rejects a pull request when the generated catalogue file is stale.
 
+## Shared visibility controls
+
+On August 26, 2026, visibility management was extended to every catalogue card, including the Gaileia map, Goblish Translator, and Gaileian Calendar external links. GM view also includes a searchable **Manage visibility** panel for changing any entry without opening its detail page.
+
+Shared visibility is stored by the separately hosted `gaileia-visibility-service` companion Site at <https://gaileia-visibility-service.casstform.chatgpt.site>. Its protected endpoint validates the existing GM passcode before accepting changes. PC browsers read the shared list before rendering entries, while the last synchronized browser copy provides a bounded fallback if the service is temporarily unavailable.
+
+The earlier undeployed Cloudflare Worker placeholder was removed from this repository so future maintenance has only one authoritative shared-visibility service.
+
 ## Phase 3 decisions
 
 - Citrine Bullet remains an intentionally nonfunctional dud for reference.
@@ -66,6 +74,7 @@ The automated workflow rejects a pull request when the generated catalogue file 
 - External entry links use HTTPS.
 - Formula ownership, crafting costs, filters, and character-feature summaries are checked automatically.
 - House-rule counts, links, and GM visibility are checked automatically.
+- Card-level visibility controls, the GM visibility manager, and fail-closed shared-state loading are checked automatically.
 - The three reference bullets have explicit regression assertions preventing accidental removal or mechanical rewriting.
 
 See `SOURCE_INVENTORY.md` for the original source inventory and subsequent review decisions.

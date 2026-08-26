@@ -177,7 +177,9 @@ a:hover {
 
 .viewer-switch {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.65rem;
 }
 
@@ -219,6 +221,30 @@ a:hover {
 .viewer-option:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
+}
+
+.manage-visibility-button {
+  min-height: 36px;
+  padding: 0.55rem 0.75rem;
+  color: #fff;
+  border: 1px solid rgb(234 211 153 / 70%);
+  border-radius: 3px;
+  background: rgb(255 255 255 / 8%);
+  cursor: pointer;
+  font: 800 0.65rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.manage-visibility-button:hover,
+.manage-visibility-button:focus-visible {
+  color: var(--ink);
+  outline: 0;
+  background: var(--gold-light);
+}
+
+.manage-visibility-button[hidden] {
+  display: none;
 }
 
 .gold-rule {
@@ -648,6 +674,61 @@ h1 {
   text-decoration: none;
 }
 
+.card-actions {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.card-visibility-toggle,
+.visibility-row-toggle {
+  position: relative;
+  z-index: 4;
+  min-height: 32px;
+  padding: 0.45rem 0.58rem;
+  color: #fff;
+  border: 1px solid #334838;
+  border-radius: 999px;
+  background: var(--green);
+  cursor: pointer;
+  font: 800 0.58rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card-visibility-toggle[aria-pressed="true"],
+.visibility-row-toggle[aria-pressed="true"] {
+  color: #fff;
+  border-color: #332f28;
+  background: var(--ink);
+}
+
+.card-visibility-toggle:hover,
+.card-visibility-toggle:focus-visible,
+.visibility-row-toggle:hover,
+.visibility-row-toggle:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.card-visibility-toggle:disabled,
+.visibility-row-toggle:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.card-visibility-toggle.is-locked,
+.visibility-row-toggle.is-locked {
+  color: #fff;
+  border-color: var(--red-dark);
+  background: var(--red);
+  cursor: default;
+}
+
 .card-link::after {
   content: "  →";
 }
@@ -850,6 +931,18 @@ h1 {
   padding: 0.7rem 0.9rem;
   border-left: 4px solid var(--gold);
   background: var(--paper-light);
+}
+
+.gm-only-status[data-status="success"] {
+  border-left-color: var(--green);
+}
+
+.gm-only-status[data-status="warning"] {
+  border-left-color: var(--gold);
+}
+
+.gm-only-status[data-status="error"] {
+  border-left-color: var(--red);
 }
 
 .gm-only-lock {
@@ -1197,6 +1290,188 @@ tbody tr:nth-child(even) {
   box-shadow: 0 24px 70px rgb(0 0 0 / 42%);
 }
 
+.visibility-dialog {
+  width: min(calc(100% - 2rem), 900px);
+  max-height: min(88vh, 820px);
+  padding: 0;
+  overflow: hidden;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 6px solid var(--gold);
+  border-radius: var(--radius);
+  background: var(--paper-light);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 42%);
+}
+
+.visibility-dialog::backdrop {
+  background: rgb(15 18 20 / 72%);
+  backdrop-filter: blur(3px);
+}
+
+.visibility-dialog-shell {
+  display: grid;
+  max-height: calc(min(88vh, 820px) - 6px);
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.visibility-dialog-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(120deg, rgb(255 255 255 / 10%), transparent 45%),
+    var(--ink);
+}
+
+.visibility-dialog-header h2,
+.visibility-dialog-header p {
+  margin: 0;
+}
+
+.visibility-dialog-header h2 {
+  color: #fff;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  text-transform: uppercase;
+}
+
+.visibility-dialog-header .kicker {
+  color: var(--gold-light);
+}
+
+.visibility-dialog-header #visibility-summary {
+  margin-top: 0.45rem;
+  color: #d8dce0;
+}
+
+.dialog-close {
+  display: grid;
+  width: 42px;
+  min-width: 42px;
+  aspect-ratio: 1;
+  padding: 0;
+  place-items: center;
+  color: #fff;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  font: 400 1.8rem/1 Arial, sans-serif;
+}
+
+.dialog-close:hover,
+.dialog-close:focus-visible {
+  color: var(--ink);
+  outline: 0;
+  background: var(--gold-light);
+}
+
+.visibility-manager-tools {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  background: #f5ecd8;
+}
+
+.visibility-search {
+  display: grid;
+  gap: 0.35rem;
+  font: 800 0.66rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.visibility-search input {
+  min-height: 42px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #9e9478;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.visibility-search input:focus {
+  border-color: var(--red);
+  outline: 3px solid rgb(125 33 28 / 15%);
+}
+
+.visibility-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.visibility-filter-list button {
+  min-height: 42px;
+  padding: 0.55rem 0.7rem;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-light);
+  cursor: pointer;
+  font: 800 0.61rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.visibility-filter-list button[aria-pressed="true"] {
+  color: #fff;
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.visibility-dialog .gm-only-status {
+  margin: 0;
+}
+
+.visibility-manager-list {
+  min-height: 180px;
+  padding: 0.35rem 1.5rem 1.2rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.visibility-manager-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #d7ccb1;
+}
+
+.visibility-manager-row.is-gm-only {
+  background: linear-gradient(90deg, rgb(125 33 28 / 7%), transparent 68%);
+}
+
+.visibility-manager-entry p,
+.visibility-manager-entry h3 {
+  margin: 0;
+}
+
+.visibility-manager-entry p {
+  color: var(--muted-ink);
+  font: 800 0.58rem/1 "Arial Narrow", Arial, sans-serif;
+  letter-spacing: 0.065em;
+  text-transform: uppercase;
+}
+
+.visibility-manager-entry h3 {
+  margin-top: 0.22rem;
+  font-size: 1rem;
+}
+
+.visibility-manager-empty {
+  padding: 2.5rem 1rem;
+  color: var(--muted-ink);
+  text-align: center;
+}
+
 .access-dialog::backdrop {
   background: rgb(15 18 20 / 72%);
   backdrop-filter: blur(3px);
@@ -1304,6 +1579,14 @@ tbody tr:nth-child(even) {
   .alchemy-calculator {
     grid-template-columns: 1fr;
   }
+
+  .visibility-manager-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .visibility-filter-list {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 540px) {
@@ -1324,7 +1607,9 @@ tbody tr:nth-child(even) {
   }
 
   .viewer-switch {
-    gap: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
   }
 
   .viewer-label {
@@ -1339,6 +1624,12 @@ tbody tr:nth-child(even) {
     min-width: 43px;
     min-height: 34px;
     padding-inline: 0.55rem;
+  }
+
+  .manage-visibility-button {
+    min-height: 32px;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.58rem;
   }
 
   .catalogue-grid {
@@ -1377,6 +1668,30 @@ tbody tr:nth-child(even) {
     flex-direction: column-reverse;
   }
 
+  .visibility-dialog {
+    width: min(calc(100% - 0.75rem), 900px);
+    max-height: 94vh;
+  }
+
+  .visibility-dialog-shell {
+    max-height: calc(94vh - 6px);
+  }
+
+  .visibility-dialog-header,
+  .visibility-manager-tools,
+  .visibility-manager-list {
+    padding-inline: 0.9rem;
+  }
+
+  .visibility-manager-row {
+    gap: 0.55rem;
+  }
+
+  .visibility-row-toggle {
+    min-width: 92px;
+    white-space: normal;
+  }
+
   .stat-line {
     grid-template-columns: 1fr;
     gap: 0.1rem;
@@ -1411,7 +1726,9 @@ tbody tr:nth-child(even) {
   .site-header,
   .site-footer,
   #catalogue-view,
-  .detail-nav {
+  .detail-nav,
+  .access-dialog,
+  .visibility-dialog {
     display: none !important;
   }
 

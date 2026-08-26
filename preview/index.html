@@ -34,6 +34,9 @@
             <button id="pc-mode" class="viewer-option" type="button" aria-pressed="true">PC</button>
             <button id="gm-mode" class="viewer-option" type="button" aria-pressed="false">GM</button>
           </div>
+          <button id="manage-visibility" class="manage-visibility-button" type="button" hidden>
+            Manage visibility
+          </button>
         </div>
       </div>
       <div class="gold-rule" aria-hidden="true"></div>
@@ -111,6 +114,34 @@
           <button class="button button-primary" type="submit">Unlock GM mode</button>
         </div>
       </form>
+    </dialog>
+
+    <dialog id="visibility-dialog" class="visibility-dialog" aria-labelledby="visibility-title">
+      <div class="visibility-dialog-shell">
+        <header class="visibility-dialog-header">
+          <div>
+            <p class="kicker">GM controls</p>
+            <h2 id="visibility-title">Manage player visibility</h2>
+            <p id="visibility-summary">Choose which entries appear in PC view.</p>
+          </div>
+          <button id="close-visibility" class="dialog-close" type="button" aria-label="Close visibility manager">×</button>
+        </header>
+
+        <div class="visibility-manager-tools">
+          <label class="visibility-search" for="visibility-search">
+            <span>Find an entry</span>
+            <input id="visibility-search" type="search" placeholder="Name or collection" autocomplete="off">
+          </label>
+          <div class="visibility-filter-list" role="group" aria-label="Filter entries by visibility">
+            <button type="button" data-visibility-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-visibility-filter="pc" aria-pressed="false">PC visible</button>
+            <button type="button" data-visibility-filter="gm" aria-pressed="false">GM only</button>
+          </div>
+        </div>
+
+        <p id="visibility-manager-status" class="gm-only-status" role="status" hidden></p>
+        <div id="visibility-manager-list" class="visibility-manager-list"></div>
+      </div>
     </dialog>
   </body>
 </html>

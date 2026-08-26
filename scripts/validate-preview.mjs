@@ -377,6 +377,24 @@ assert.match(htmlSource, /assets\/js\/catalogue-data\.js/);
 assert.doesNotMatch(htmlSource, /feedback\d-data|phase3-data|catalogue-updates|assets\/js\/content\.js/);
 assert.match(visibilitySource, /window\.GAILEIA_VISIBILITY_CONFIG/);
 assert.match(visibilitySource, /gmPasscodeSha256/);
+assert.match(
+  visibilitySource,
+  /https:\/\/gaileia-visibility-service\.casstform\.chatgpt\.site/,
+  "shared visibility service must stay connected"
+);
+assert.match(appSource, /function visibilityControlMarkup\(entry,/);
+assert.match(appSource, /function renderVisibilityManager\(\)/);
+assert.match(appSource, /async function setEntryGmOnly\(entry, marked\)/);
+assert.match(appSource, /if \(!state\.visibilityReady && state\.mode === "pc"\) return \[\]/);
+assert.match(appSource, /data-visibility-id/);
+assert.doesNotMatch(
+  appSource,
+  /if \(entry\.externalUrl \|\| state\.mode === "gm"\) return true/,
+  "external links must not bypass GM-only restrictions"
+);
+assert.match(htmlSource, /id="manage-visibility"/);
+assert.match(htmlSource, /id="visibility-dialog"/);
+assert.match(htmlSource, /id="visibility-manager-list"/);
 assert.match(htmlSource, /id="entry-total">69</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
