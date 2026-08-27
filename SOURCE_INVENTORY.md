@@ -32,14 +32,14 @@ Source inventory frozen on August 20, 2026. Each listed source was read from the
 | Creatures | Forge | Forge1749855980.json | Complete; newer of two supplied Forge records selected |
 | Creatures | Lumberjack | Lumberjack1749855895.json | Complete |
 | Creatures | Anvil | Anvil1749854826.json | Complete; source's degree-of-success wording preserved and clarified |
-| Spells | Buzzing Servants | Buzzing Servants.pdf | Complete; PDF rendered and visually checked |
+| Spells | Chitinous Servants | Buzzing Servants.pdf; Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9 | Complete; ocean-themed revision applied with explicit Rank and Actions fields |
 | Rules | Alternate Chase Rules | Alternate Chase Rules for PF2 | Complete; target-noun slips and obvious spelling normalized |
 | Rules | Campaign House Rules | Homebrew Rules \| PF2; Mechanics Codex | Complete; aspect-based return-from-death rules and DCs consolidated |
 | Rules | Camp Meal & Cooking Rules | Camp Meal & Cooking Rules \| PF2; Mechanics Codex | Complete; loose table cells and additional expiry guidance reconstructed into labelled HTML tables |
 | Rules | WE4LAND: Venting & Submersion | WE4LAND and Venting | Complete; exact linked document imported as a character-specific rule |
-| Items | Inubrix Ammunition | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8 | Complete; the supplied traits, price, Bulk, and description were preserved |
-| Oziza | Albatrabbit Tattoo | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8 | Complete; includes the supplied once-per-day Tailwind activation and quick-reference spell note |
-| Formulae | Feedback 8 crafting batch | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 8; linked Archives of Nethys entries | Complete; seven homebrew-item and four Archives formulae added with supplied DCs and costs calculated from current item prices |
+| Items | Inubrix Ammunition | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9 | Complete; Item 11 rules text and supplied metal-armor and shield interactions preserved |
+| Oziza | Albatrabbit Tattoo | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9 | Complete; includes Bulk, the supplied once-per-day Tailwind activation, and explicit Rank and Actions fields |
+| Formulae | Feedback 9 crafting batch | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9; linked Archives of Nethys entries | Complete; all eighteen regular formulae show the supplied Crafting DC breakdowns |
 
 ## Deliberately excluded
 

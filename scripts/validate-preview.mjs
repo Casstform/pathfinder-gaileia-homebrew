@@ -89,7 +89,7 @@ const formulae = entries.filter((entry) => entry.category === "Formulae");
 const advancedFormulae = formulae.filter((entry) => entry.advancedAlchemy);
 const regularFormulae = formulae.filter((entry) => entry.regularCrafting);
 
-assert.equal(formulae.length, 22, "expected twenty-two formulae after Feedback 8");
+assert.equal(formulae.length, 22, "expected twenty-two formulae after Feedback 9");
 assert.equal(advancedFormulae.length, 4, "expected four Advanced Alchemy formulae");
 assert.equal(regularFormulae.length, 18, "expected eighteen regular crafting formulae");
 assert.equal(entries.filter((entry) => entry.typeLabel === "Character").length, 4);
@@ -152,13 +152,13 @@ const expectedCrafting = {
   "formula-flare-cartridge": [20, 2, 2, 0.4],
   "formula-flare-pistol": [20, 1.5, 1.5, 0.3],
   "formula-galvanic-derringer": [21, 12.5, 12.5, 2.5],
-  "formula-rebels-revolver": [21, 10, 10, 2],
+  "formula-rebels-revolver": [19, 10, 10, 2],
   "formula-seeker-rifle": [21, 4, 4, 0.8],
-  "formula-inubrix-ammunition": [29, 25, 25, 5],
+  "formula-inubrix-ammunition": [33, 25, 25, 5],
   "formula-alchemists-fire-lesser": [15, 1.5, 1.5, 0.3],
   "formula-bottled-lightning-lesser": [15, 1.5, 1.5, 0.3],
-  "formula-silencer": [16, 0.05, 0.05, 0.01],
-  "formula-earplugs": [14, 0.05, 0.05, 0.01]
+  "formula-silencer": [14, 0.05, 0.05, 0.01],
+  "formula-earplugs": [12, 0.05, 0.05, 0.01]
 };
 
 for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCrafting)) {
@@ -166,6 +166,34 @@ for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCraf
   assert.equal(byId[id].crafting.initial, initial, `${id} has the wrong initial cost`);
   assert.equal(byId[id].crafting.final, final, `${id} has the wrong final cost`);
   assert.equal(byId[id].crafting.tenPercent, tenPercent, `${id} has the wrong 10% cost`);
+}
+
+const expectedCraftingBreakdowns = {
+  "formula-alchemists-fire-lesser": "15 (15 from item level)",
+  "formula-antler-ammunition": "16 (16 from item level)",
+  "formula-bottled-lightning-lesser": "15 (15 from item level)",
+  "formula-creepy-crawly-crock": "13 (13 from item level)",
+  "formula-dread-ampoule-lesser": "13 (13 from item level)",
+  "formula-earplugs": "12 (14 from item level, -2 from previous crafting)",
+  "formula-flamethrower": "23 (18 from item level, +5 from rare)",
+  "formula-flare-cartridge": "20 (15 from item level, +5 from rare)",
+  "formula-flare-pistol": "20 (15 from item level, +5 from rare)",
+  "formula-galvanic-derringer": "21 (16 from item level, +5 from rare)",
+  "formula-glue-bomb-lesser": "13 (15 from item level, -2 from previous crafting)",
+  "formula-inubrix-ammunition": "33 (28 from item level, +5 from rare)",
+  "formula-non-lethal-ammunition": "13 (15 from item level, -2 from previous crafting)",
+  "formula-quicksilver-mutagen-lesser": "13 (15 from item level, -2 from previous crafting)",
+  "formula-rebels-revolver": "19 (16 from item level, +5 from rare, -2 from previous crafting)",
+  "formula-seeker-rifle": "21 (16 from item level, +5 from rare)",
+  "formula-silencer": "14 (14 from item level, +2 from uncommon, -2 from previous crafting)",
+  "formula-smoke-ball-lesser": "13 (15 from item level, -2 from previous crafting)"
+};
+
+for (const [id, dcText] of Object.entries(expectedCraftingBreakdowns)) {
+  assert.ok(
+    byId[id].contentHtml.includes(`<dt>Crafting DC</dt><dd>${dcText}</dd>`),
+    `${id} is missing its Crafting DC breakdown`
+  );
 }
 
 assert.match(byId["formula-antler-ammunition"].contentHtml, /#entry\/antler-ammunition/);
@@ -365,15 +393,36 @@ assert.equal(inubrix.headingLabel, "Item 11");
 assert.deepEqual(Array.from(inubrix.traits), ["Consumable", "Precious", "Rare"]);
 assert.match(inubrix.contentHtml, /<dt>Price<\/dt><dd>50 gp<\/dd>/);
 assert.match(inubrix.contentHtml, /<dt>Bulk<\/dt><dd>—<\/dd>/);
-assert.match(inubrix.contentHtml, /vaguely blurring and passing through to a miniscule extent/);
+assert.match(inubrix.contentHtml, /reduces the weapon's damage die by 1 size/);
+assert.match(inubrix.contentHtml, /don't trigger the Shield Block reaction from a metal shield/);
+assert.match(inubrix.contentHtml, /normally deal 1d4 damage can't be crafted from inubrix/);
+
+const chitinousServants = byId["buzzing-servants"];
+assert.equal(chitinousServants.title, "Chitinous Servants");
+assert.deepEqual(Array.from(chitinousServants.traits), ["Rare", "Concentrate", "Manipulate"]);
+assert.match(chitinousServants.intro, /chitinous swarm or calcium carbonate growth/);
+assert.match(chitinousServants.contentHtml, /<dt>Rank<\/dt><dd>Spell 2<\/dd>/);
+assert.match(chitinousServants.contentHtml, /<dt>Actions<\/dt><dd><span class="action-icon" aria-label="three actions">◆◆◆<\/span><\/dd>/);
+assert.doesNotMatch(chitinousServants.contentHtml, /<dt>Cast<\/dt>/);
+assert.match(chitinousServants.contentHtml, /may grow in, leaving the original swarm or growth as is/);
+
+const universalDirective = byId["universal-directive"];
+assert.match(universalDirective.contentHtml, /<dt>Rank<\/dt><dd>Focus 1<\/dd>/);
+assert.match(universalDirective.contentHtml, /<dt>Actions<\/dt>/);
+assert.doesNotMatch(universalDirective.contentHtml, /<dt>Cast<\/dt>/);
 
 const albatrabbitTattoo = byId["oziza-albatrabbit-tattoo"];
 assert.equal(albatrabbitTattoo.category, "Oziza");
 assert.deepEqual(Array.from(albatrabbitTattoo.traits), ["Invested", "Magical", "Tattoo"]);
 assert.match(albatrabbitTattoo.contentHtml, /<dt>Price<\/dt><dd>60 gp<\/dd>/);
+assert.match(albatrabbitTattoo.contentHtml, /<dt>Bulk<\/dt><dd>-<\/dd>/);
 assert.match(albatrabbitTattoo.contentHtml, /<dt>Frequency<\/dt><dd>Once per day<\/dd>/);
 assert.match(albatrabbitTattoo.contentHtml, /Spells\.aspx\?ID=1711/);
 assert.match(albatrabbitTattoo.contentHtml, /A sudden, unexpected wind pushes you forward/);
+assert.match(albatrabbitTattoo.contentHtml, /<dt>Rank<\/dt><dd>Spell 1<\/dd>/);
+assert.match(albatrabbitTattoo.contentHtml, /<dt>Actions<\/dt><dd><span class="action-icon" aria-label="two actions">◆◆<\/span><\/dd>/);
+assert.doesNotMatch(albatrabbitTattoo.contentHtml, /<p>This tattoo, skillfully etched/);
+assert.doesNotMatch(albatrabbitTattoo.contentHtml, /<p><strong>Spell 1<\/strong><\/p>/);
 
 for (const id of [
   "formula-flamethrower",
@@ -388,11 +437,12 @@ for (const id of [
   "formula-silencer",
   "formula-earplugs"
 ]) {
-  assert.match(byId[id].source, /Feedback 8/);
+  assert.match(byId[id].source, /Feedback 9/);
   assert.deepEqual(Array.from(byId[id].formulaOwners), ["WE4LAND"]);
   assert.match(byId[id].contentHtml, /10% of Item Cost/);
 }
 assert.equal(byId["formula-rebels-revolver"].title, "Rebel's Revolver");
+assert.equal(byId["formula-flamethrower"].title, "Automaton's Flamethrower");
 assert.match(byId["formula-rebels-revolver"].contentHtml, /#entry\/rebels-revolver-restored/);
 
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 21);
@@ -443,7 +493,8 @@ assert.match(appSource, /if \(!state\.visibilityReady && state\.mode === "pc"\) 
 assert.match(appSource, /data-visibility-id/);
 assert.match(appSource, /entry\.traits\.join\(" "\)/, "PC search must include the traits players can now see");
 assert.equal((appSource.match(/const visibleTraits = `<ul class="trait-list/g) || []).length, 2, "traits must render on both catalogue cards and entry pages in PC and GM views");
-assert.match(cssSource, /\.trait a \{[\s\S]*?min-height: 0;/, "linked and unlinked trait chips must use the same height");
+assert.match(cssSource, /\.trait \{[\s\S]*?height: 23px;[\s\S]*?min-height: 23px;/, "all trait chips must use one explicit height");
+assert.match(cssSource, /\.trait a \{[\s\S]*?height: 100%;[\s\S]*?min-height: 0;/, "linked trait labels must fill the same chip height");
 assert.doesNotMatch(
   appSource,
   /if \(entry\.externalUrl \|\| state\.mode === "gm"\) return true/,
