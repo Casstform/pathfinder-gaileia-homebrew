@@ -495,6 +495,7 @@ assert.match(appSource, /entry\.traits\.join\(" "\)/, "PC search must include th
 assert.equal((appSource.match(/const visibleTraits = `<ul class="trait-list/g) || []).length, 2, "traits must render on both catalogue cards and entry pages in PC and GM views");
 assert.match(cssSource, /\.trait \{[\s\S]*?height: 23px;[\s\S]*?min-height: 23px;/, "all trait chips must use one explicit height");
 assert.match(cssSource, /\.trait a \{[\s\S]*?height: 100%;[\s\S]*?min-height: 0;/, "linked trait labels must fill the same chip height");
+assert.match(cssSource, /\.detail-body \.trait-list > \.trait \{[\s\S]*?margin-top: 0;/, "generic detail-list spacing must not stagger trait chips");
 assert.doesNotMatch(
   appSource,
   /if \(entry\.externalUrl \|\| state\.mode === "gm"\) return true/,
