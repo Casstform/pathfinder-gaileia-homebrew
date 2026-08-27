@@ -360,6 +360,8 @@ assert.equal(traitLinks.transmutation, "https://2e.aonprd.com/Traits.aspx?ID=157
 
 const inubrix = byId["inubrix-ammunition"];
 assert.equal(inubrix.category, "Items");
+assert.equal(inubrix.levelLabel, "Item 11");
+assert.equal(inubrix.headingLabel, "Item 11");
 assert.deepEqual(Array.from(inubrix.traits), ["Consumable", "Precious", "Rare"]);
 assert.match(inubrix.contentHtml, /<dt>Price<\/dt><dd>50 gp<\/dd>/);
 assert.match(inubrix.contentHtml, /<dt>Bulk<\/dt><dd>—<\/dd>/);

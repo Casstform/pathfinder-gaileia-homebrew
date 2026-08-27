@@ -1745,8 +1745,8 @@
     "title": "Inubrix Ammunition",
     "category": "Items",
     "typeLabel": "Ammunition",
-    "levelLabel": "Item",
-    "headingLabel": "Item",
+    "levelLabel": "Item 11",
+    "headingLabel": "Item 11",
     "traits": [
       "Consumable",
       "Precious",
