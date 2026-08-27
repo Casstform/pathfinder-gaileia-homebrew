@@ -623,6 +623,7 @@ h1 {
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
+  height: 23px;
   min-height: 23px;
   padding: 0.25rem 0.46rem;
   color: #fff;
@@ -635,6 +636,7 @@ h1 {
 .trait a {
   display: inline-flex;
   align-items: center;
+  height: 100%;
   min-height: 0;
   color: inherit;
   line-height: inherit;
