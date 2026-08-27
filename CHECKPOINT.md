@@ -6,7 +6,7 @@ Checkpoint date: August 27, 2026
 
 The dependency-free Gaileia Compendium is published from
 `Casstform/pathfinder-gaileia-homebrew` on the `main` branch. The current
-root production catalogue contains 82 distinct entries in 14 collections. The former
+root production catalogue contains 85 distinct entries in 14 collections. The former
 `/preview/` URL now redirects to this production page while preserving entry hashes:
 
 | Collection | Entries |
@@ -14,7 +14,7 @@ root production catalogue contains 82 distinct entries in 14 collections. The fo
 | Animist | 1 |
 | Calendar | 1 |
 | Fauna/Flora | 8 |
-| Formulae | 22 |
+| Formulae | 25 |
 | House Rules | 2 |
 | Items | 29 |
 | Language | 1 |
@@ -70,7 +70,7 @@ The earlier undeployed Cloudflare Worker placeholder was removed from this repos
 ## Verification baseline
 
 - All JavaScript and module files pass syntax validation.
-- All 82 entry IDs are unique and use one of the 14 declared collections.
+- All 85 entry IDs are unique and use one of the 14 declared collections.
 - Internal entry links resolve to existing entries.
 - External entry links use HTTPS.
 - Formula ownership, crafting costs, filters, and character-feature summaries are checked automatically.

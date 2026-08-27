@@ -26,7 +26,7 @@ const categorySymbols = context.window.GAILEIA_CATEGORY_SYMBOLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 82, "expected 82 catalogue entries after Feedback 8");
+assert.equal(entries.length, 85, "expected 85 catalogue entries after Feedback 10");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(collectionsConfig.schemaVersion, 1);
@@ -89,9 +89,9 @@ const formulae = entries.filter((entry) => entry.category === "Formulae");
 const advancedFormulae = formulae.filter((entry) => entry.advancedAlchemy);
 const regularFormulae = formulae.filter((entry) => entry.regularCrafting);
 
-assert.equal(formulae.length, 22, "expected twenty-two formulae after Feedback 9");
+assert.equal(formulae.length, 25, "expected twenty-five formulae after Feedback 10");
 assert.equal(advancedFormulae.length, 4, "expected four Advanced Alchemy formulae");
-assert.equal(regularFormulae.length, 18, "expected eighteen regular crafting formulae");
+assert.equal(regularFormulae.length, 21, "expected twenty-one regular crafting formulae");
 assert.equal(entries.filter((entry) => entry.typeLabel === "Character").length, 4);
 assert.equal(byId["translate-chip"].headingLabel, "Focus 2");
 assert.equal(byId["universal-directive"].headingLabel, "Focus 1");
@@ -158,7 +158,10 @@ const expectedCrafting = {
   "formula-alchemists-fire-lesser": [15, 1.5, 1.5, 0.3],
   "formula-bottled-lightning-lesser": [15, 1.5, 1.5, 0.3],
   "formula-silencer": [14, 0.05, 0.05, 0.01],
-  "formula-earplugs": [12, 0.05, 0.05, 0.01]
+  "formula-earplugs": [12, 0.05, 0.05, 0.01],
+  "formula-black-powder-dose-or-round": [14, 0.01, "-", 0.01],
+  "formula-black-powder-horn": [16, 2.5, 2.5, 0.5],
+  "formula-generic-firearm-ammunition": [14, 0.05, 0.05, 0.01]
 };
 
 for (const [id, [dc, initial, final, tenPercent]] of Object.entries(expectedCrafting)) {
@@ -172,6 +175,8 @@ const expectedCraftingBreakdowns = {
   "formula-alchemists-fire-lesser": "15 (15 from item level)",
   "formula-antler-ammunition": "16 (16 from item level)",
   "formula-bottled-lightning-lesser": "15 (15 from item level)",
+  "formula-black-powder-dose-or-round": "14 (14 from item level, +2 from uncommon, -2 from previous crafting)",
+  "formula-black-powder-horn": "16 (16 from item level, +2 from uncommon, -2 from previous crafting)",
   "formula-creepy-crawly-crock": "13 (13 from item level)",
   "formula-dread-ampoule-lesser": "13 (13 from item level)",
   "formula-earplugs": "12 (14 from item level, -2 from previous crafting)",
@@ -179,6 +184,7 @@ const expectedCraftingBreakdowns = {
   "formula-flare-cartridge": "20 (15 from item level, +5 from rare)",
   "formula-flare-pistol": "20 (15 from item level, +5 from rare)",
   "formula-galvanic-derringer": "21 (16 from item level, +5 from rare)",
+  "formula-generic-firearm-ammunition": "14 (14 from item level, +2 from uncommon, -2 from previous crafting)",
   "formula-glue-bomb-lesser": "13 (15 from item level, -2 from previous crafting)",
   "formula-inubrix-ammunition": "33 (28 from item level, +5 from rare)",
   "formula-non-lethal-ammunition": "13 (15 from item level, -2 from previous crafting)",
@@ -206,6 +212,9 @@ const formulaArchiveLinks = {
   "formula-smoke-ball-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3360",
   "formula-alchemists-fire-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3287",
   "formula-bottled-lightning-lesser": "https://2e.aonprd.com/Equipment.aspx?ID=3290",
+  "formula-black-powder-dose-or-round": "https://2e.aonprd.com/Equipment.aspx?ID=1190",
+  "formula-black-powder-horn": "https://2e.aonprd.com/Equipment.aspx?ID=1190",
+  "formula-generic-firearm-ammunition": "https://2e.aonprd.com/Weapons.aspx?ID=211",
   "formula-silencer": "https://2e.aonprd.com/Equipment.aspx?ID=1206",
   "formula-earplugs": "https://2e.aonprd.com/Equipment.aspx?ID=1203"
 };
@@ -234,11 +243,11 @@ assert.match(crockFormula.contentHtml, /#entry\/creepy-crawly-crock/);
 
 assert.equal(typeof formulaFilters.matches, "function");
 const expectedFormulaFilterCounts = {
-  all: 22,
+  all: 25,
   advanced: 4,
-  regular: 18,
+  regular: 21,
   ritsa: 1,
-  we4land: 21
+  we4land: 24
 };
 for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
   assert.equal(
@@ -249,14 +258,14 @@ for (const [filter, count] of Object.entries(expectedFormulaFilterCounts)) {
 }
 
 const expectedCombinedFormulaFilterCounts = [
-  [["ritsa", "we4land"], 22],
-  [["regular", "advanced"], 22],
+  [["ritsa", "we4land"], 25],
+  [["regular", "advanced"], 25],
   [["ritsa", "advanced"], 0],
   [["ritsa", "regular"], 1],
   [["we4land", "advanced"], 4],
-  [["we4land", "regular"], 17],
+  [["we4land", "regular"], 20],
   [["ritsa", "we4land", "advanced"], 4],
-  [["ritsa", "we4land", "regular"], 18]
+  [["ritsa", "we4land", "regular"], 21]
 ];
 for (const [filters, count] of expectedCombinedFormulaFilterCounts) {
   assert.equal(
@@ -445,13 +454,21 @@ assert.equal(byId["formula-rebels-revolver"].title, "Rebel's Revolver");
 assert.equal(byId["formula-flamethrower"].title, "Automaton's Flamethrower");
 assert.match(byId["formula-rebels-revolver"].contentHtml, /#entry\/rebels-revolver-restored/);
 
-assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 21);
+for (const id of [
+  "formula-black-powder-dose-or-round",
+  "formula-black-powder-horn",
+  "formula-generic-firearm-ammunition"
+]) {
+  assert.match(byId[id].source, /Feedback 10/);
+  assert.deepEqual(Array.from(byId[id].formulaOwners), ["WE4LAND"]);
+  assert.match(byId[id].contentHtml, /10% of Item Cost/);
+}
+assert.match(byId["formula-black-powder-dose-or-round"].contentHtml, /<dt>Final Cost<\/dt><dd>-<\/dd>/);
+
+assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("WE4LAND")).length, 24);
 assert.equal(formulae.filter((entry) => entry.formulaOwners.includes("Ritsa")).length, 1);
 
-for (const retiredFormulaId of [
-  "formula-alchemists-toolkit",
-  "formula-black-powder-dose-or-round"
-]) {
+for (const retiredFormulaId of ["formula-alchemists-toolkit"]) {
   assert.ok(!byId[retiredFormulaId], `${retiredFormulaId} should not remain in the current formula list`);
 }
 
@@ -511,8 +528,8 @@ assert.doesNotMatch(
 assert.match(htmlSource, /id="manage-visibility"/);
 assert.match(htmlSource, /id="visibility-dialog"/);
 assert.match(htmlSource, /id="visibility-manager-list"/);
-assert.match(htmlSource, /id="entry-total">82</);
+assert.match(htmlSource, /id="entry-total">85</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Production compendium validation passed: 82 entries, 14 collections, and canonical data is current.");
+console.log("Production compendium validation passed: 85 entries, 14 collections, and canonical data is current.");

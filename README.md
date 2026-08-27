@@ -5,7 +5,7 @@ A dependency-free, searchable, print-friendly Pathfinder Second Edition compendi
 - Live compendium: <https://casstform.github.io/pathfinder-gaileia-homebrew/>
 - Legacy `/preview/` links redirect to the live compendium and preserve entry hashes.
 - Repository: <https://github.com/Casstform/pathfinder-gaileia-homebrew>
-- Current catalogue: 82 entries in 14 collections
+- Current catalogue: 85 entries in 14 collections
 
 ## Canonical content
 

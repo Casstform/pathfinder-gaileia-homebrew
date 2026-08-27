@@ -2080,6 +2080,90 @@
       "formulaOwners": [
         "WE4LAND"
       ]
+    },
+    {
+      "id": "formula-black-powder-dose-or-round",
+      "title": "Black Powder (Dose or Round)",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 14",
+      "headingLabel": "Crafting DC 14",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 14 and a 0.01 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 10",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Black Powder (Dose or Round)</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=1190\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>14 (14 from item level, +2 from uncommon, -2 from previous crafting)</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>0.01 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>-</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.01 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Make the item; no final payment is required.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 14,
+        "initial": 0.01,
+        "final": "-",
+        "tenPercent": 0.01
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-black-powder-horn",
+      "title": "Black Powder (Horn)",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 16",
+      "headingLabel": "Crafting DC 16",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 16 and a 2.5 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 10",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Black Powder (Horn)</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Equipment.aspx?ID=1190\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>16 (16 from item level, +2 from uncommon, -2 from previous crafting)</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>2.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>2.5 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.5 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 16,
+        "initial": 2.5,
+        "final": 2.5,
+        "tenPercent": 0.5
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
+    },
+    {
+      "id": "formula-generic-firearm-ammunition",
+      "title": "Generic Firearm Ammunition",
+      "category": "Formulae",
+      "typeLabel": "Formula",
+      "levelLabel": "Crafting DC 14",
+      "headingLabel": "Crafting DC 14",
+      "traits": [
+        "Formula"
+      ],
+      "summary": "A regular crafting formula with DC 14 and a 0.05 gp initial cost.",
+      "intro": "This formula uses WE4LAND’s regular one-day crafting process rather than Advanced Alchemy.",
+      "source": "Feedback for Homebrew GitHub Site | Tabletop Projects – Feedback 10",
+      "contentHtml": "\n      <dl class=\"stat-block\">\n        <div class=\"stat-line\"><dt>Formula</dt><dd>Generic Firearm Ammunition</dd></div>\n        <div class=\"stat-line\"><dt>Known By</dt><dd>WE4LAND – PU373</dd></div>\n      </dl>\n      <p><a href=\"https://2e.aonprd.com/Weapons.aspx?ID=211\" target=\"_blank\" rel=\"noreferrer\">Open the corresponding item on Archives of Nethys</a>.</p>\n      <section class=\"rules-subcard crafting-panel\">\n        <p class=\"formula-kicker\">Regular Crafting Formula</p>\n        <h3>Crafting Requirements</h3>\n        <p>Crafting this item requires <strong>1 day</strong>, a workshop, and the appropriate crafting tools.</p>\n        <dl class=\"stat-block crafting-costs\">\n          <div class=\"stat-line\"><dt>Crafting DC</dt><dd>14 (14 from item level, +2 from uncommon, -2 from previous crafting)</dd></div>\n          <div class=\"stat-line\"><dt>Initial Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>Final Cost</dt><dd>0.05 gp</dd></div>\n          <div class=\"stat-line\"><dt>10% of Item Cost</dt><dd>0.01 gp</dd></div>\n        </dl>\n        <h3>Crafting Results</h3>\n        <div class=\"table-wrap\">\n          <table>\n            <thead><tr><th>Result</th><th>Consequence</th></tr></thead>\n            <tbody>\n              <tr><td>Critical Failure</td><td>Waste the day. Waste 10% of the item's total cost.</td></tr>\n              <tr><td>Failure</td><td>Waste the day. Start over.</td></tr>\n              <tr><td>Success</td><td>Pay the final cost. Make the item.</td></tr>\n              <tr><td>Critical Success</td><td>Reduce the total cost by an amount determined by the GM.</td></tr>\n            </tbody>\n          </table>\n        </div>\n      </section>\n    ",
+      "cardBadges": [
+        "Regular Crafting"
+      ],
+      "regularCrafting": true,
+      "crafting": {
+        "dc": 14,
+        "initial": 0.05,
+        "final": 0.05,
+        "tenPercent": 0.01
+      },
+      "formulaOwners": [
+        "WE4LAND"
+      ]
     }
   ]
 }
