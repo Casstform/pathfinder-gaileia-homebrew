@@ -6,11 +6,13 @@
     <meta name="theme-color" content="#20272c">
     <meta
       name="description"
-      content="A searchable, print-friendly collection of Pathfinder Second Edition homebrew rules, items, spells, and apparitions."
+      content="The searchable Gaileia collection of Pathfinder Second Edition homebrew, campaign material, and language tools."
     >
-    <title>PF2e Homebrew Compendium</title>
+    <title>Gaileia Compendium</title>
+    <link rel="canonical" href="https://casstform.github.io/pathfinder-gaileia-homebrew/">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script defer src="assets/js/content.js"></script>
+    <script defer src="assets/js/catalogue-data.js"></script>
+    <script defer src="assets/js/visibility-config.js"></script>
     <script defer src="assets/js/app.js"></script>
   </head>
   <body>
@@ -18,14 +20,25 @@
 
     <header class="site-header">
       <div class="masthead wrap">
-        <a class="brand" href="#catalogue" aria-label="PF2e Homebrew Compendium home">
-          <span class="brand-mark" aria-hidden="true"><span>H</span></span>
+        <a class="brand" href="#catalogue" aria-label="Gaileia Compendium home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="assets/img/gaileia-globe.webp" alt="">
+          </span>
           <span class="brand-copy">
-            <span class="eyebrow">Second Edition</span>
-            <span class="brand-title">Homebrew Compendium</span>
+            <span class="eyebrow">Pathfinder Homebrew</span>
+            <span class="brand-title">Gaileia Compendium</span>
           </span>
         </a>
-        <p class="masthead-note">Table-ready rules for Pathfinder campaigns</p>
+        <div class="viewer-switch" aria-label="Viewer mode">
+          <span class="viewer-label">View</span>
+          <div class="viewer-options" role="group" aria-label="Choose PC or GM view">
+            <button id="pc-mode" class="viewer-option" type="button" aria-pressed="true">PC</button>
+            <button id="gm-mode" class="viewer-option" type="button" aria-pressed="false">GM</button>
+          </div>
+          <button id="manage-visibility" class="manage-visibility-button" type="button" hidden>
+            Manage visibility
+          </button>
+        </div>
       </div>
       <div class="gold-rule" aria-hidden="true"></div>
     </header>
@@ -33,17 +46,10 @@
     <main id="main-content" class="wrap">
       <section id="catalogue-view" aria-labelledby="catalogue-title">
         <div class="hero">
-          <div>
-            <p class="kicker">Curated campaign material</p>
-            <h1 id="catalogue-title">Browse the compendium</h1>
-            <p class="hero-copy">
-              Search homebrew entries across apparitions, items, creatures, spells, and campaign rules.
-              Every entry is formatted for quick table reference and clean printing.
-            </p>
-          </div>
+          <h1 id="catalogue-title">Browse the Compendium</h1>
           <dl class="catalogue-stats" aria-label="Catalogue summary">
-            <div><dt id="entry-total">33</dt><dd>Entries</dd></div>
-            <div><dt>5</dt><dd>Collections</dd></div>
+            <div><dt id="entry-total">82</dt><dd>Entries</dd></div>
+            <div><dt id="collection-total">14</dt><dd>Collections</dd></div>
             <div><dt>PF2e</dt><dd>Ruleset</dd></div>
           </dl>
         </div>
@@ -55,7 +61,7 @@
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="m21 21-4.35-4.35m2.35-5.15A7.5 7.5 0 1 1 4 11.5a7.5 7.5 0 0 1 15 0Z"></path>
               </svg>
-              <input id="search-input" type="search" placeholder="Name, trait, rule, or keyword" autocomplete="off">
+              <input id="search-input" type="search" placeholder="Name, keyword, collection, etc." autocomplete="off">
             </span>
           </label>
           <div>
@@ -64,15 +70,17 @@
           </div>
         </section>
 
-        <div class="results-heading">
-          <h2 id="results-title">All entries</h2>
+        <div class="results-heading" hidden>
+          <h2 id="results-title"></h2>
+          <p id="formula-filter-help" class="sr-only">Choose one or more Formulae filters. Multiple crafters expand the results, multiple crafting methods expand the results, and selections across those two groups must both match.</p>
+          <div id="formula-filters" class="formula-filter-list" role="group" aria-label="Filter Formulae entries" aria-describedby="formula-filter-help" hidden></div>
           <p id="results-count" aria-live="polite"></p>
         </div>
         <div id="catalogue-grid" class="catalogue-grid"></div>
-        <div id="empty-state" class="empty-state" hidden>
-          <h2>No matching entries</h2>
-          <p>Try a different search term or return to all collections.</p>
-          <button id="clear-search" class="button button-secondary" type="button">Clear filters</button>
+        <div id="empty-state" class="empty-state">
+          <h2 id="empty-state-title">Choose a collection</h2>
+          <p id="empty-state-message">Select All or one or more collections to browse the compendium.</p>
+          <button id="clear-search" class="button button-secondary" type="button" hidden>Clear filters</button>
         </div>
       </section>
 
@@ -82,14 +90,59 @@
     <footer class="site-footer">
       <div class="wrap footer-grid">
         <div>
-          <p class="footer-title">PF2e Homebrew Compendium</p>
+          <p class="footer-title">Gaileia Compendium</p>
           <p>Unofficial fan-made game material for personal campaign use.</p>
         </div>
         <div>
-          <p><strong>Source sync:</strong> August 20, 2026</p>
+          <p><strong>Source sync:</strong> August 27, 2026</p>
           <p>Pathfinder and Starfinder are trademarks of Paizo Inc. This project is not affiliated with or endorsed by Paizo.</p>
         </div>
       </div>
     </footer>
+
+    <dialog id="gm-access-dialog" class="access-dialog" aria-labelledby="gm-access-title">
+      <form id="gm-access-form">
+        <p class="kicker">Restricted view</p>
+        <h2 id="gm-access-title">Unlock GM mode</h2>
+        <p>Enter the GM passcode. PC mode is restored whenever this page is opened afresh.</p>
+        <label class="dialog-field" for="gm-passcode">
+          <span>Passcode</span>
+          <input id="gm-passcode" type="password" autocomplete="current-password" required>
+        </label>
+        <p id="gm-access-error" class="form-error" role="alert" hidden>That passcode did not match.</p>
+        <div class="dialog-actions">
+          <button id="cancel-gm-access" class="button button-secondary" type="button">Cancel</button>
+          <button class="button button-primary" type="submit">Unlock GM mode</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="visibility-dialog" class="visibility-dialog" aria-labelledby="visibility-title">
+      <div class="visibility-dialog-shell">
+        <header class="visibility-dialog-header">
+          <div>
+            <p class="kicker">GM controls</p>
+            <h2 id="visibility-title">Manage player visibility</h2>
+            <p id="visibility-summary">Choose which entries appear in PC view.</p>
+          </div>
+          <button id="close-visibility" class="dialog-close" type="button" aria-label="Close visibility manager">×</button>
+        </header>
+
+        <div class="visibility-manager-tools">
+          <label class="visibility-search" for="visibility-search">
+            <span>Find an entry</span>
+            <input id="visibility-search" type="search" placeholder="Name or collection" autocomplete="off">
+          </label>
+          <div class="visibility-filter-list" role="group" aria-label="Filter entries by visibility">
+            <button type="button" data-visibility-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-visibility-filter="pc" aria-pressed="false">PC visible</button>
+            <button type="button" data-visibility-filter="gm" aria-pressed="false">GM only</button>
+          </div>
+        </div>
+
+        <p id="visibility-manager-status" class="gm-only-status" role="status" hidden></p>
+        <div id="visibility-manager-list" class="visibility-manager-list"></div>
+      </div>
+    </dialog>
   </body>
 </html>

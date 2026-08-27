@@ -3,30 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Entry not found | Gaileia Compendium</title>
-    <style>
-      body { display: grid; min-height: 100vh; margin: 0; place-items: center; color: #20272c; background: #f4eddb; font: 18px/1.5 Georgia, serif; }
-      main { width: min(90%, 620px); padding: 2rem; border-top: 7px solid #7d211c; background: #fffaf0; box-shadow: 0 18px 45px rgb(25 28 30 / 14%); text-align: center; }
-      h1 { margin-top: 0; font-family: Arial, sans-serif; text-transform: uppercase; }
-      a { color: #7d211c; font-weight: 700; }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Entry not found</h1>
-      <p>This address does not match an entry in the Gaileia Compendium preview.</p>
-      <p><a id="home-link" href="./#catalogue">Return to the compendium</a></p>
-    </main>
+    <meta name="robots" content="noindex">
+    <title>Gaileia Compendium</title>
     <script>
       (function () {
-        var parts = window.location.pathname.split("/").filter(Boolean);
-        var onProjectPages = window.location.hostname.endsWith(".github.io") && parts.length > 1;
-        var previewIndex = parts.indexOf("preview");
-        var base = onProjectPages
-          ? "/" + parts.slice(0, previewIndex >= 0 ? previewIndex + 1 : 1).join("/") + "/"
-          : "/";
-        document.getElementById("home-link").href = base + "#catalogue";
+        var target = new URL("../", window.location.href);
+        target.search = window.location.search;
+        target.hash = window.location.hash;
+        window.location.replace(target.href);
       })();
+    </script>
+  </head>
+  <body>
+    <p>The Gaileia Compendium has moved to <a id="production-link" href="../">the main site</a>.</p>
+    <script>
+      document.getElementById("production-link").href = "../" + window.location.search + window.location.hash;
     </script>
   </body>
 </html>
