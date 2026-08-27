@@ -3,7 +3,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 import { spawnSync } from "node:child_process";
 
-const buildCheck = spawnSync(process.execPath, ["scripts/build-preview-data.mjs", "--check"], {
+const buildCheck = spawnSync(process.execPath, ["scripts/build-catalogue-data.mjs", "--check"], {
   encoding: "utf8"
 });
 assert.equal(buildCheck.status, 0, buildCheck.stderr || buildCheck.stdout);
@@ -11,7 +11,7 @@ assert.equal(buildCheck.status, 0, buildCheck.stderr || buildCheck.stdout);
 const context = { window: {}, console };
 vm.createContext(context);
 
-for (const file of ["preview/assets/js/catalogue-data.js"]) {
+for (const file of ["assets/js/catalogue-data.js"]) {
   vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
 }
 
@@ -455,10 +455,10 @@ for (const retiredFormulaId of [
   assert.ok(!byId[retiredFormulaId], `${retiredFormulaId} should not remain in the current formula list`);
 }
 
-const appSource = fs.readFileSync("preview/assets/js/app.js", "utf8");
-const cssSource = fs.readFileSync("preview/assets/css/styles.css", "utf8");
-const htmlSource = fs.readFileSync("preview/index.html", "utf8");
-const visibilitySource = fs.readFileSync("preview/assets/js/visibility-config.js", "utf8");
+const appSource = fs.readFileSync("assets/js/app.js", "utf8");
+const cssSource = fs.readFileSync("assets/css/styles.css", "utf8");
+const htmlSource = fs.readFileSync("index.html", "utf8");
+const visibilitySource = fs.readFileSync("assets/js/visibility-config.js", "utf8");
 const canonicalEntries = JSON.parse(fs.readFileSync("content/entries.json", "utf8"));
 const canonicalCollections = JSON.parse(fs.readFileSync("content/collections.json", "utf8"));
 assert.equal(canonicalEntries.entries.length, entries.length);
@@ -478,7 +478,14 @@ assert.match(appSource, /linkRulesTerms\(detailView\)/, "rules-term linking must
 assert.match(appSource, /\[data-no-rule-link\]/, "marked headings must opt out of automatic rules links");
 assert.match(appSource, /window\.GAILEIA_CATEGORY_SYMBOLS/);
 assert.match(htmlSource, /assets\/js\/catalogue-data\.js/);
+assert.match(htmlSource, /rel="canonical" href="https:\/\/casstform\.github\.io\/pathfinder-gaileia-homebrew\/"/);
+assert.doesNotMatch(htmlSource, /preview passcode|PC preview/);
 assert.doesNotMatch(htmlSource, /feedback\d-data|phase3-data|catalogue-updates|assets\/js\/content\.js/);
+assert.equal(fs.existsSync("assets/js/content.js"), false, "the retired root catalogue layer must stay removed");
+assert.equal(fs.existsSync("preview/assets"), false, "the preview must not retain a duplicate production asset tree");
+const previewRedirectSource = fs.readFileSync("preview/index.html", "utf8");
+assert.match(previewRedirectSource, /window\.location\.replace\(target\.href\)/);
+assert.match(previewRedirectSource, /target\.hash = window\.location\.hash/);
 assert.match(visibilitySource, /window\.GAILEIA_VISIBILITY_CONFIG/);
 assert.match(visibilitySource, /gmPasscodeSha256/);
 assert.match(
@@ -508,4 +515,4 @@ assert.match(htmlSource, /id="entry-total">82</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Preview catalogue validation passed: 82 entries, 14 collections, and canonical data is current.");
+console.log("Production compendium validation passed: 82 entries, 14 collections, and canonical data is current.");
