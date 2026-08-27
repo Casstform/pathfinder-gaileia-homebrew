@@ -1065,6 +1065,19 @@ h1 {
   margin-top: 0.36rem;
 }
 
+.detail-body .trait-list {
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.detail-body .inline-traits {
+  margin-top: 0.4rem;
+}
+
+.detail-body .trait-list > .trait {
+  margin-top: 0;
+}
+
 .stat-block {
   margin-block: 0.9rem;
   border-block: 1px solid var(--line);
