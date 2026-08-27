@@ -40,6 +40,7 @@ Source inventory frozen on August 20, 2026. Each listed source was read from the
 | Items | Inubrix Ammunition | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9 | Complete; Item 11 rules text and supplied metal-armor and shield interactions preserved |
 | Oziza | Albatrabbit Tattoo | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9 | Complete; includes Bulk, the supplied once-per-day Tailwind activation, and explicit Rank and Actions fields |
 | Formulae | Feedback 9 crafting batch | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 9; linked Archives of Nethys entries | Complete; all eighteen regular formulae show the supplied Crafting DC breakdowns |
+| Formulae | Black Powder (Dose or Round); Black Powder (Horn); Generic Firearm Ammunition | Feedback for Homebrew GitHub Site \| Tabletop Projects – Feedback 10; linked Archives of Nethys entries | Complete; WE4LAND ownership, supplied Crafting DC breakdowns, and all three supplied cost fields preserved |
 
 ## Deliberately excluded
 
