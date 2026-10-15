@@ -100,7 +100,20 @@ assert.equal(byId["yellow-bullet"].title, "Citrine Bullet");
 assert.match(byId["yellow-bullet"].contentHtml, /<dt>Price<\/dt><dd>3 gp<\/dd>/);
 assert.match(byId["bull-et"].contentHtml, /transformed the projectile into a life-sized bison/);
 assert.match(byId["seam-coil-bullet"].contentHtml, /split into two, with an arc of electricity/);
-assert.match(byId["echoes-of-a-signal"].contentHtml, /href="#save-point-spell">save point<\/a>/);
+const echoesHtml = byId["echoes-of-a-signal"].contentHtml;
+assert.match(echoesHtml, /href="https:\/\/2e\.aonsrd\.com\/spells\/7-akashic-revival"[^>]*>save point<\/a>/);
+const apparitionDetails = echoesHtml.slice(echoesHtml.lastIndexOf("<h2>Apparition Spells</h2>"));
+assert.ok(echoesHtml.lastIndexOf("<h2>Apparition Spells</h2>") > echoesHtml.indexOf("<h2>Vessel Spell</h2>"));
+const spellIds = ["forbidding-ward", "enhance-weapon", "status", "haste", "peaceful-bubble", "truespeech", "field-of-life", "planar-seal", "save-point", "foresight"];
+assert.equal((apparitionDetails.match(/class="rules-subcard"/g) || []).length, 10);
+let previousSpellPosition = -1;
+for (const id of spellIds) {
+  const position = apparitionDetails.indexOf(`id="${id}-spell"`);
+  assert.ok(position > previousSpellPosition, `${id} must appear in spell-rank order`);
+  previousSpellPosition = position;
+}
+assert.match(apparitionDetails, /Cantrip 1/);
+for (let rank = 1; rank <= 9; rank++) assert.ok(apparitionDetails.includes(`Spell ${rank}</strong>`));
 assert.doesNotMatch(byId["echoes-of-a-signal"].contentHtml, /final selected version/i);
 assert.match(byId["seeker-rifle"].contentHtml, /1d8 bludgeoning/);
 assert.match(byId["rebels-revolver-restored"].contentHtml, /Martial Weapons/);
@@ -533,3 +546,4 @@ assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
 console.log("Production compendium validation passed: 85 entries, 14 collections, and canonical data is current.");
+
