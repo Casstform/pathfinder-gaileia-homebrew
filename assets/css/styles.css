@@ -1797,32 +1797,3 @@ tbody tr:nth-child(even) {
     font-size: 8.5pt;
   }
 }
-
-
-/* Shared, modeless link previews: desktop hover, keyboard focus, and touch. */
-.link-preview {
-  position: fixed;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  width: min(620px, calc(100vw - 24px));
-  max-height: min(620px, calc(100dvh - 24px));
-  color: var(--ink, #292720);
-  background: #fbf4e4;
-  border: 1px solid #80735c;
-  border-radius: 5px;
-  box-shadow: 0 8px 32px rgb(0 0 0 / 35%);
-  font-size: 0.95rem;
-  line-height: 1.55;
-}
-.link-preview[hidden] { display: none; }
-.link-preview-header { display: flex; align-items: center; gap: 1rem; padding: 0.55rem 0.8rem; color: #fff; background: var(--red); }
-.link-preview-header h2 { flex: 1; margin: 0; font-size: 1.15rem; }
-.link-preview-close { color: #fff; background: transparent; border: 1px solid currentColor; border-radius: 3px; min-width: 36px; min-height: 36px; font-size: 1.4rem; cursor: pointer; }
-.link-preview-body { overflow: auto; overscroll-behavior: contain; padding: 0.8rem 1rem; min-height: 0; }
-.link-preview-body > :first-child { margin-top: 0; }
-.link-preview-text { white-space: pre-line; overflow-wrap: anywhere; }
-.link-preview-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; padding: 0.65rem 1rem; border-top: 1px solid var(--line); font-size: 0.8rem; }
-.link-preview-footer a { font-weight: 700; }
-.link-preview :focus-visible { outline: 3px solid #b38b36; outline-offset: 3px; }
-@media print { .link-preview { display: none !important; } }

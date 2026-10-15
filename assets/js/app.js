@@ -960,12 +960,4 @@
   renderCatalogue();
   route();
   loadSharedGmOnlyIds();
-  window.GaileiaPreviews?.init({
-    getEntry(id) {
-      if (!state.visibilityReady && state.mode === "pc") return null;
-      const entry = entries.find(candidate => candidate.id === id);
-      return entry && canOpenInCurrentMode(entry) ? entry : null;
-    }
-  });
 })();
-

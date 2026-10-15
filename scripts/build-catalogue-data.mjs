@@ -34,18 +34,3 @@ if (checkOnly) {
   fs.writeFileSync(outputPath, generated);
   console.log(`Wrote ${outputPath}.`);
 }
-
-
-const previewsDocument = readJson("content/link-previews.json");
-if (previewsDocument.schemaVersion !== 1) throw new Error("Unsupported link preview schema");
-const previewsPath = "assets/js/link-preview-data.js";
-const previewsGenerated = `// Generated from content/link-previews.json by scripts/build-catalogue-data.mjs.\nwindow.GAILEIA_LINK_PREVIEWS = ${JSON.stringify(previewsDocument.previews)};\n`;
-if (checkOnly) {
-  if (!fs.existsSync(previewsPath) || fs.readFileSync(previewsPath, "utf8") !== previewsGenerated) {
-    console.error(`${previewsPath} is stale. Run: node scripts/build-catalogue-data.mjs`);
-    process.exit(1);
-  }
-} else {
-  fs.writeFileSync(previewsPath, previewsGenerated);
-  console.log(`Wrote ${previewsPath}.`);
-}
