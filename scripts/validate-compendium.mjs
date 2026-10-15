@@ -547,3 +547,7 @@ assert.match(htmlSource, /id="formula-filters"/);
 
 console.log("Production compendium validation passed: 85 entries, 14 collections, and canonical data is current.");
 
+
+const previewCheck = spawnSync(process.execPath, ["scripts/test-link-previews.mjs"], { encoding: "utf8" });
+assert.equal(previewCheck.status, 0, previewCheck.stderr || previewCheck.stdout);
+console.log(previewCheck.stdout.trim());
