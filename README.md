@@ -100,12 +100,3 @@ SOURCE_INVENTORY.md
 GitHub Pages deploys the production compendium from `main` and the repository root. `.nojekyll` ensures the files are published unchanged.
 
 The repository contains web-ready transcriptions, not private source files. This is unofficial fan-made material for personal campaign use. Pathfinder and Starfinder are trademarks of Paizo Inc.; this project is not affiliated with or endorsed by Paizo.
-
-
-## Link previews
-
-Hover over a supported rules link or focus it with the keyboard to read a scrollable preview. Press Arrow Down from the focused link to enter the preview; Escape closes it. On touch screens, the first tap previews and a second tap follows the link. The preview also includes an explicit Open reference link. Unrecognized external links behave normally.
-
-Local entry previews respect the current PC/GM visibility rules. Spell cards on the current page take priority over external references so homebrew wording stays authoritative. Other Archives of Nethys links use saved reference text in `content/link-previews.json`, retrieved October 15, 2026. These snapshots do not update automatically; update the source JSON and run `node scripts/build-catalogue-data.mjs` to refresh `assets/js/link-preview-data.js`. Large reference pages are excerpted and direct readers to the source for the remainder. No third-party proxy or runtime cross-origin request is required.
-
-`node scripts/test-link-previews.mjs` exercises interaction and visibility behavior using a lightweight DOM harness. It also runs as part of the production validator. Browser visual verification is separate from these automated checks.
