@@ -26,7 +26,7 @@ const categorySymbols = context.window.GAILEIA_CATEGORY_SYMBOLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 85, "expected 85 catalogue entries after Feedback 10");
+assert.equal(entries.length, 100, "expected 100 catalogue entries with veteran Catena and their devices");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(collectionsConfig.schemaVersion, 1);
@@ -379,7 +379,7 @@ for (const id of feedback7NewEntries) {
   assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
   assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
 }
-assert.equal(entries.filter((entry) => entry.category === "Items").length, 29);
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 39);
 assert.equal(entries.filter((entry) => entry.category === "Oziza").length, 4);
 assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
 assert.equal(byId["tiger-stance-claws"].category, "Saraik");
@@ -485,6 +485,35 @@ for (const retiredFormulaId of ["formula-alchemists-toolkit"]) {
   assert.ok(!byId[retiredFormulaId], `${retiredFormulaId} should not remain in the current formula list`);
 }
 
+
+const veteranCatenaIds = ["catena-field-operative","catena-severer","catena-pursuer","catena-custodian","catena-bulwark"];
+const solidarityDeviceIds = ["black-globe","mirror-turn-prism","backstitch-cloth","locked-time-leak","tuning-stake","forecasting-plug","wardshear-lacquer","tapestry-scribe","nullfoam-canister","hostbreaker-bell"];
+for (const id of veteranCatenaIds) {
+  const entry = byId[id];
+  assert.ok(entry, `missing veteran Catena ${id}`);
+  assert.equal(entry.category, "Fauna/Flora");
+  assert.equal(entry.levelLabel, "Creature 20");
+  assert.equal(entry.gmOnly, true, `${id} must stay locked GM-only`);
+  assert.match(entry.contentHtml, /Noqual/);
+  assert.match(entry.contentHtml, /GM Tactics/);
+}
+for (const id of solidarityDeviceIds) {
+  const entry = byId[id];
+  assert.ok(entry, `missing Solidarity Project item ${id}`);
+  assert.equal(entry.category, "Items");
+  assert.equal(entry.gmOnly, true, `${id} must stay locked GM-only`);
+  assert.match(entry.levelLabel, /^Item (16|17|18|19)$/);
+  assert.ok(entry.contentHtml.includes("<dt>Price</dt>"));
+  assert.ok(entry.contentHtml.includes("<dt>Activate</dt>"));
+}
+for (const entry of [...veteranCatenaIds, ...solidarityDeviceIds].map(id => byId[id])) {
+  assert.match(entry.contentHtml, /(counteract|damage|Stride|immobilized|restrained|saving|resistance|reaction|React|Spell|spell)/i);
+}
+assert.match(byId["nullfoam-canister"].contentHtml, /passes through at least 5 feet of foam/);
+assert.match(byId["backstitch-cloth"].contentHtml, /Escape DC 39/);
+assert.ok(byId["catena-field-operative"].contentHtml.includes('#entry/black-globe'));
+assert.ok(byId["catena-custodian"].contentHtml.includes('#entry/forecasting-plug'));
+
 const appSource = fs.readFileSync("assets/js/app.js", "utf8");
 const cssSource = fs.readFileSync("assets/css/styles.css", "utf8");
 const htmlSource = fs.readFileSync("index.html", "utf8");
@@ -541,9 +570,9 @@ assert.doesNotMatch(
 assert.match(htmlSource, /id="manage-visibility"/);
 assert.match(htmlSource, /id="visibility-dialog"/);
 assert.match(htmlSource, /id="visibility-manager-list"/);
-assert.match(htmlSource, /id="entry-total">85</);
+assert.match(htmlSource, /id="entry-total">100</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Production compendium validation passed: 85 entries, 14 collections, and canonical data is current.");
+console.log("Production compendium validation passed: 100 entries, 14 collections, and canonical data is current.");
 

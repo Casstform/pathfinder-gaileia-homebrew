@@ -2165,6 +2165,279 @@
     "formulaOwners": [
       "WE4LAND"
     ]
+  },
+  {
+    "id": "catena-field-operative",
+    "title": "Catena Field Operative",
+    "category": "Fauna/Flora",
+    "typeLabel": "Creature",
+    "levelLabel": "Creature 20",
+    "headingLabel": "Creature 20",
+    "traits": [
+      "Rare",
+      "Medium",
+      "Humanoid"
+    ],
+    "gmOnly": true,
+    "summary": "A flexible level-20 veteran trained to identify, intercept, and arrest dangerous magic users.",
+    "intro": "A veteran all-rounder assigned when the subject's Chain is uncertain or spans multiple operational Links.",
+    "source": "Gaileia — Military Codex; veteran Catena design (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Perception</dt><dd>+36; siccatite detection array (30 feet)</dd></div><div class=\"stat-line\"><dt>Languages</dt><dd>Common, two regional languages</dd></div><div class=\"stat-line\"><dt>Skills</dt><dd>Arcana +38, Athletics +38, Occultism +36, Nature +36, Crafting +34, Intimidation +34, Religion +32, Survival +32</dd></div><div class=\"stat-line\"><dt>Abilities</dt><dd>Str +7, Dex +5, Con +6, Int +6, Wis +5, Cha +2</dd></div><div class=\"stat-line\"><dt>Items</dt><dd>High-grade noqual armor, noqual chainblade, arrest hook, repeating bolt-launcher (six-round magazine); <a href=\"#entry/black-globe\">Black Globe</a>; <a href=\"#entry/locked-time-leak\">Locked Time Leak</a>; <a href=\"#entry/tapestry-scribe\">Tapestry Scribe</a>; <a href=\"#entry/nullfoam-canister\">Nullfoam Canister</a></dd></div><div class=\"stat-line\"><dt>AC</dt><dd>44 (45 vs. spell attacks)</dd></div><div class=\"stat-line\"><dt>Saves</dt><dd>Fort +36, Ref +33, Will +35</dd></div><div class=\"stat-line\"><dt>HP</dt><dd>330</dd></div><div class=\"stat-line\"><dt>Speed</dt><dd>30 feet</dd></div></dl>\n<section class=\"rules-subcard\"><h3>Shared Catena Training and Noqual Gear</h3><p><strong>Siccatite Detection Array</strong> The operative senses nearby rank 1+ arcane, occult, or primal casting within 30 feet and learns an approximate rank band (1–4, 5–8, 9–10), without automatically learning the spell, locating its caster, or detecting divine magic. <strong>Chain Classification</strong> Arcana, Occultism, and Nature can be used to Recall Knowledge and assess demonstrated Links; no automatic knowledge of hidden powers. <strong>Noqual Armor</strong> +1 circumstance bonus to AC against spell attacks (listed separately). <strong>Noqual Weapons</strong> Against summoned creatures and spell effects that can be damaged, gain a circumstance damage bonus equal to twice the weapon damage dice; on a critical hit against a spellcaster, the target becomes stupefied 1 for one round.</p><p><strong>Reactions:</strong> One reaction per round unless another ability explicitly grants more. A reaction spent on an item cannot also be spent on Reactive Strike or another reaction.</p></section>\n<h2>Offense</h2><dl class=\"stat-block\"><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — noqual chainblade +38 [+33/+28] (magical, one-handed), Damage 4d8+18 slashing</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — arrest hook +36 [+31/+26] (grapple, reach 10 feet, nonlethal), Damage 4d6+16 bludgeoning</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Ranged — repeating bolt-launcher +36 [+31/+26] (range increment 80 feet; six bolts, swap magazine ◆ Interact), Damage 4d6+15 piercing</dd></div></dl>\n<h2>Special Abilities</h2>\n<section class=\"rules-subcard\"><h3>Read the Chain <span class=\"action-icon\" aria-label=\"one action\">◆</span></h3><p><strong>Concentrate.</strong> Choose a creature within 60 feet observed using magic in the last minute. Attempt Arcana, Occultism, or Nature against its spell DC. <strong>Critical Success</strong> Identify one demonstrated Link; gain a +2 circumstance bonus to your next Strike against it before end of turn. <strong>Success</strong> Identify one demonstrated Link and gain +1 instead. <strong>Failure</strong> No extra information or bonus. The subject becomes temporarily immune to this ability for one minute.</p></section>\n<section class=\"rules-subcard\"><h3>Binding Sweep <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack.</strong> Make an arrest-hook Strike. On a hit, the creature attempts a DC 41 Fortitude save. <strong>Critical Success/Success</strong> Normal damage. <strong>Failure</strong> Normal damage and grabbed until the end of the operative's next turn. <strong>Critical Failure</strong> As failure, plus off-guard until it Escapes or the grab ends. The operative must retain the hook and keep the target within reach.</p></section>\n<section class=\"rules-subcard\"><h3>Measured Advance <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p>Stride up to your Speed and make one chainblade Strike against a creature you've observed using magic. That creature cannot use reactions triggered by this movement, though reactions triggered by the Strike still function.</p></section>\n<section class=\"rules-subcard\"><h3>Reactive Strike <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p>As the standard Reactive Strike reaction, using a melee weapon. The operative cannot use this reaction in the same round as a reaction device unless it somehow gains an additional reaction.</p></section>\n<section class=\"rules-subcard\"><h3>GM Tactics</h3><p>Use Read the Chain to anticipate threats; close with Measured Advance, then Binding Sweep. Spend the Black Globe on encounter-changing magic, Locked Time Leak to avoid area effects, Tapestry Scribe against damage, and Nullfoam for group protection.</p></section>\n<p class=\"source-note\">Veteran Catena combat profile: level 20 creature, not a level-20 player-character build. Recoverable devices are linked above and use their own fixed item rules.</p>\n"
+  },
+  {
+    "id": "catena-severer",
+    "title": "Catena Severer",
+    "category": "Fauna/Flora",
+    "typeLabel": "Creature",
+    "levelLabel": "Creature 20",
+    "headingLabel": "Creature 20",
+    "traits": [
+      "Rare",
+      "Medium",
+      "Humanoid"
+    ],
+    "gmOnly": true,
+    "summary": "A level-20 anti-magic specialist who dismantles enchantments and disrupts high-rank spellcasting.",
+    "intro": "Assigned to threats classified primarily Sever or Ward, with precise technical knowledge of spell workings.",
+    "source": "Gaileia — Military Codex; veteran Catena design (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Perception</dt><dd>+36; siccatite detection array (30 feet)</dd></div><div class=\"stat-line\"><dt>Languages</dt><dd>Common, three regional languages</dd></div><div class=\"stat-line\"><dt>Skills</dt><dd>Arcana +41, Occultism +38, Nature +38, Crafting +38, Religion +34, Athletics +33, Society +34</dd></div><div class=\"stat-line\"><dt>Abilities</dt><dd>Str +5, Dex +4, Con +5, Int +8, Wis +6, Cha +2</dd></div><div class=\"stat-line\"><dt>Items</dt><dd>Noqual armor, noqual severing sabre, bolt-launcher (six-shot magazine); <a href=\"#entry/black-globe\">Black Globe</a>; <a href=\"#entry/black-globe\">Black Globe</a>; <a href=\"#entry/mirror-turn-prism\">Mirror-Turn Prism</a>; <a href=\"#entry/backstitch-cloth\">Backstitch Cloth</a></dd></div><div class=\"stat-line\"><dt>AC</dt><dd>43 (44 vs. spell attacks)</dd></div><div class=\"stat-line\"><dt>Saves</dt><dd>Fort +33, Ref +30, Will +39</dd></div><div class=\"stat-line\"><dt>HP</dt><dd>300</dd></div><div class=\"stat-line\"><dt>Speed</dt><dd>25 feet</dd></div></dl>\n<section class=\"rules-subcard\"><h3>Shared Catena Training and Noqual Gear</h3><p><strong>Siccatite Detection Array</strong> The operative senses nearby rank 1+ arcane, occult, or primal casting within 30 feet and learns an approximate rank band (1–4, 5–8, 9–10), without automatically learning the spell, locating its caster, or detecting divine magic. <strong>Chain Classification</strong> Arcana, Occultism, and Nature can be used to Recall Knowledge and assess demonstrated Links; no automatic knowledge of hidden powers. <strong>Noqual Armor</strong> +1 circumstance bonus to AC against spell attacks (listed separately). <strong>Noqual Weapons</strong> Against summoned creatures and spell effects that can be damaged, gain a circumstance damage bonus equal to twice the weapon damage dice; on a critical hit against a spellcaster, the target becomes stupefied 1 for one round.</p><p><strong>Reactions:</strong> One reaction per round unless another ability explicitly grants more. A reaction spent on an item cannot also be spent on Reactive Strike or another reaction.</p></section>\n<h2>Offense</h2><dl class=\"stat-block\"><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — noqual severing sabre +36 [+31/+26] (magical), Damage 4d8+16 slashing</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Ranged — bolt-launcher +34 [+29/+24] (range increment 80 feet; six-shot magazine), Damage 4d6+15 piercing</dd></div></dl>\n<h2>Special Abilities</h2>\n<section class=\"rules-subcard\"><h3>Expose the Pattern <span class=\"action-icon\" aria-label=\"one action\">◆</span></h3><p><strong>Concentrate.</strong> Choose a creature within 60 feet whose casting you've witnessed during the last minute. Attempt Arcana, Occultism, or Nature against its spell DC. <strong>Critical Success</strong> The creature is off-guard to your next Strike before the end of your next turn, and you learn the rank and tradition of its last observed spell. <strong>Success</strong> It is off-guard to that Strike. <strong>Failure</strong> No effect. The creature then becomes temporarily immune for one minute.</p></section>\n<section class=\"rules-subcard\"><h3>Thwarting Cut <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack.</strong> Make a severing sabre Strike. On a hit against a spellcasting creature, it takes a –1 circumstance penalty to spell attack rolls until the beginning of your next turn (–2 on a critical hit). Noqual's critical effect applies normally.</p></section>\n<section class=\"rules-subcard\"><h3>Reactive Strike <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p>Standard Reactive Strike with the severing sabre. Competes with both Black Globes and the Mirror-Turn Prism for this round's reaction.</p></section>\n<section class=\"rules-subcard\"><h3>GM Tactics</h3><p>Keep distance where possible, reserve Black Globes for dangerous castings, redirect a single-target spell with Mirror-Turn Prism, and use Backstitch Cloth against a magical ward already active. Vulnerable in sustained direct melee.</p></section>\n<p class=\"source-note\">Veteran Catena combat profile: level 20 creature, not a level-20 player-character build. Recoverable devices are linked above and use their own fixed item rules.</p>\n"
+  },
+  {
+    "id": "catena-pursuer",
+    "title": "Catena Pursuer",
+    "category": "Fauna/Flora",
+    "typeLabel": "Creature",
+    "levelLabel": "Creature 20",
+    "headingLabel": "Creature 20",
+    "traits": [
+      "Rare",
+      "Medium",
+      "Humanoid"
+    ],
+    "gmOnly": true,
+    "summary": "A fast level-20 tracker trained against teleportation, flight, invisibility, and illusory escape.",
+    "intro": "A Step, Breach, and Veil specialist; the escape of a marked magical quarry is treated as a solvable tactical problem.",
+    "source": "Gaileia — Military Codex; veteran Catena design (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Perception</dt><dd>+39; siccatite detection array (30 feet), trace lenses</dd></div><div class=\"stat-line\"><dt>Languages</dt><dd>Common, two regional languages</dd></div><div class=\"stat-line\"><dt>Skills</dt><dd>Survival +41, Acrobatics +38, Stealth +38, Athletics +34, Arcana +34, Occultism +34, Nature +34</dd></div><div class=\"stat-line\"><dt>Abilities</dt><dd>Str +5, Dex +8, Con +4, Int +5, Wis +7, Cha +2</dd></div><div class=\"stat-line\"><dt>Items</dt><dd>Lightweight noqual armor, noqual hookblade, repeating pursuit launcher (six-shot magazine), two greater revealing mists; <a href=\"#entry/tuning-stake\">Tuning Stake</a>; <a href=\"#entry/locked-time-leak\">Locked Time Leak</a>; <a href=\"#entry/locked-time-leak\">Locked Time Leak</a>; <a href=\"#entry/black-globe\">Black Globe</a></dd></div><div class=\"stat-line\"><dt>AC</dt><dd>43 (44 vs. spell attacks)</dd></div><div class=\"stat-line\"><dt>Saves</dt><dd>Fort +30, Ref +36, Will +33</dd></div><div class=\"stat-line\"><dt>HP</dt><dd>300</dd></div><div class=\"stat-line\"><dt>Speed</dt><dd>40 feet</dd></div></dl>\n<section class=\"rules-subcard\"><h3>Shared Catena Training and Noqual Gear</h3><p><strong>Siccatite Detection Array</strong> The operative senses nearby rank 1+ arcane, occult, or primal casting within 30 feet and learns an approximate rank band (1–4, 5–8, 9–10), without automatically learning the spell, locating its caster, or detecting divine magic. <strong>Chain Classification</strong> Arcana, Occultism, and Nature can be used to Recall Knowledge and assess demonstrated Links; no automatic knowledge of hidden powers. <strong>Noqual Armor</strong> +1 circumstance bonus to AC against spell attacks (listed separately). <strong>Noqual Weapons</strong> Against summoned creatures and spell effects that can be damaged, gain a circumstance damage bonus equal to twice the weapon damage dice; on a critical hit against a spellcaster, the target becomes stupefied 1 for one round.</p><p><strong>Reactions:</strong> One reaction per round unless another ability explicitly grants more. A reaction spent on an item cannot also be spent on Reactive Strike or another reaction.</p></section>\n<h2>Offense</h2><dl class=\"stat-block\"><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — noqual hookblade +38 [+34/+30] (agile, magical), Damage 4d6+16 slashing</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Ranged — pursuit launcher +38 [+33/+28] (range increment 100 feet; six-shot magazine), Damage 4d6+17 piercing</dd></div></dl>\n<h2>Special Abilities</h2>\n<section class=\"rules-subcard\"><h3>Mark Magical Signature <span class=\"action-icon\" aria-label=\"one action\">◆</span></h3><p><strong>Concentrate.</strong> Choose a creature within 60 feet observed using arcane, occult, or primal magic within the last minute. For one minute, your trace lenses give an imprecise sense for that subject's lingering signature within 60 feet. You learn direction, but not exact square or the destination of a teleport beyond range. Only one subject can be marked at a time.</p></section>\n<section class=\"rules-subcard\"><h3>Pierce the Veil <span class=\"action-icon\" aria-label=\"one action\">◆</span></h3><p><strong>Concentrate.</strong> Seek within 60 feet using Perception and trace lenses, checking for inconsistencies caused by magical illusion. Make normal detection checks against the effect's DC; this does not automatically overcome invisibility.</p></section>\n<section class=\"rules-subcard\"><h3>Grounding Shot <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack.</strong> Fire a tethered pursuit-launcher bolt. On a hit, the target attempts a DC 41 Reflex save. <strong>Critical Success/Success</strong> Normal damage. <strong>Failure</strong> Immobilized until the end of its next turn or Escape DC 41. <strong>Critical Failure</strong> As failure plus 2d6 piercing damage. The bolt must secure to terrain within 15 feet of its target; otherwise only normal damage applies. Tether Hardness 15, HP 40. It does not stop teleportation.</p></section>\n<section class=\"rules-subcard\"><h3>Running Volley <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p>Stride up to your Speed and make a pursuit launcher Strike at any point during the movement. The movement triggers reactions normally.</p></section>\n<section class=\"rules-subcard\"><h3>No Escape <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p><strong>Trigger</strong> A marked, perceptible creature within 60 feet moves or finishes teleporting. After its movement ends, Stride up to half your Speed toward its last observed position. You cannot follow to an unknown teleportation destination.</p></section>\n<section class=\"rules-subcard\"><h3>GM Tactics</h3><p>Mark prey early, Seek as necessary, then use Grounding Shot to immobilize. Set a Tuning Stake at predicted exits. The Locked Time Leaks allow movement through hostile spell coverage; the Black Globe interrupts a crucial escape.</p></section>\n<p class=\"source-note\">Veteran Catena combat profile: level 20 creature, not a level-20 player-character build. Recoverable devices are linked above and use their own fixed item rules.</p>\n"
+  },
+  {
+    "id": "catena-custodian",
+    "title": "Catena Custodian",
+    "category": "Fauna/Flora",
+    "typeLabel": "Creature",
+    "levelLabel": "Creature 20",
+    "headingLabel": "Creature 20",
+    "traits": [
+      "Rare",
+      "Medium",
+      "Humanoid"
+    ],
+    "gmOnly": true,
+    "summary": "A level-20 captor specializing in restraints, hostile enchantment, summoning, and prisoner transfers.",
+    "intro": "A veteran responsible for high-risk capture and transport, especially against Grip, Claim, and Host Links.",
+    "source": "Gaileia — Military Codex; veteran Catena design (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Perception</dt><dd>+36; siccatite detection array (30 feet)</dd></div><div class=\"stat-line\"><dt>Languages</dt><dd>Common, two regional languages</dd></div><div class=\"stat-line\"><dt>Skills</dt><dd>Athletics +41, Occultism +38, Arcana +36, Nature +36, Crafting +34, Medicine +34, Diplomacy +34, Intimidation +34</dd></div><div class=\"stat-line\"><dt>Abilities</dt><dd>Str +8, Dex +3, Con +7, Int +5, Wis +6, Cha +3</dd></div><div class=\"stat-line\"><dt>Items</dt><dd>High-grade noqual heavy armor, noqual arrest staff, reinforced baton, reinforced containment cuffs, folding containment panel; <a href=\"#entry/tuning-stake\">Tuning Stake</a>; <a href=\"#entry/forecasting-plug\">Forecasting Plug</a>; <a href=\"#entry/hostbreaker-bell\">Hostbreaker Bell</a>; <a href=\"#entry/nullfoam-canister\">Nullfoam Canister</a></dd></div><div class=\"stat-line\"><dt>AC</dt><dd>44 (45 vs. spell attacks)</dd></div><div class=\"stat-line\"><dt>Saves</dt><dd>Fort +36, Ref +30, Will +36</dd></div><div class=\"stat-line\"><dt>HP</dt><dd>345</dd></div><div class=\"stat-line\"><dt>Speed</dt><dd>25 feet</dd></div></dl>\n<section class=\"rules-subcard\"><h3>Shared Catena Training and Noqual Gear</h3><p><strong>Siccatite Detection Array</strong> The operative senses nearby rank 1+ arcane, occult, or primal casting within 30 feet and learns an approximate rank band (1–4, 5–8, 9–10), without automatically learning the spell, locating its caster, or detecting divine magic. <strong>Chain Classification</strong> Arcana, Occultism, and Nature can be used to Recall Knowledge and assess demonstrated Links; no automatic knowledge of hidden powers. <strong>Noqual Armor</strong> +1 circumstance bonus to AC against spell attacks (listed separately). <strong>Noqual Weapons</strong> Against summoned creatures and spell effects that can be damaged, gain a circumstance damage bonus equal to twice the weapon damage dice; on a critical hit against a spellcaster, the target becomes stupefied 1 for one round.</p><p><strong>Reactions:</strong> One reaction per round unless another ability explicitly grants more. A reaction spent on an item cannot also be spent on Reactive Strike or another reaction.</p></section>\n<h2>Offense</h2><dl class=\"stat-block\"><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — noqual arrest staff +36 [+31/+26] (grapple, reach 10 feet, nonlethal), Damage 4d8+16 bludgeoning</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — reinforced baton +35 [+31/+27] (agile, nonlethal), Damage 4d6+14 bludgeoning</dd></div></dl>\n<h2>Special Abilities</h2>\n<section class=\"rules-subcard\"><h3>Chain Snare <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack.</strong> Make an arrest-staff Strike. On a hit, the target attempts a DC 41 Fortitude save. <strong>Critical Success/Success</strong> Normal damage. <strong>Failure</strong> Grabbed until the end of the Custodian's next turn. <strong>Critical Failure</strong> Restrained until the beginning of that turn, then grabbed for the remaining duration. The Custodian must retain the staff and keep target in reach.</p></section>\n<section class=\"rules-subcard\"><h3>Fasten Containment Cuffs <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack, Manipulate.</strong> <strong>Requirements</strong> An adjacent creature is grabbed or restrained by you; you have a free hand and cuffs. Attempt Athletics against its Fortitude DC. <strong>Critical Success</strong> The target is restrained by cuffs until it Escapes or they are removed/destroyed. <strong>Success</strong> Grabbed by the cuffs until Escape or removal. <strong>Failure</strong> No attachment. <strong>Critical Failure</strong> No attachment and you lose your current grab. The independent cuffs have Escape DC 41; Hardness 15, HP 50, Broken Threshold 25. They do not independently suppress spellcasting.</p></section>\n<section class=\"rules-subcard\"><h3>Deploy Containment Panel <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Manipulate; once per minute.</strong> Unfold a 10-foot-long, 5-foot-high physical barrier adjacent to you, providing standard cover as appropriate. Hardness 15, HP 60, Broken Threshold 30. The barrier does not block magic beyond its normal physical effect.</p></section>\n<section class=\"rules-subcard\"><h3>Reactive Strike <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p>Standard Reactive Strike with the arrest staff or baton.</p></section>\n<section class=\"rules-subcard\"><h3>GM Tactics</h3><p>Plant the Tuning Stake by an exit, use Chain Snare, move adjacent, and attach cuffs. Forecasting Plug protects the escort officer's mind; Hostbreaker Bell removes a summoned rescuer; Nullfoam protects prisoners and guards from incoming spell damage.</p></section>\n<p class=\"source-note\">Veteran Catena combat profile: level 20 creature, not a level-20 player-character build. Recoverable devices are linked above and use their own fixed item rules.</p>\n"
+  },
+  {
+    "id": "catena-bulwark",
+    "title": "Catena Bulwark",
+    "category": "Fauna/Flora",
+    "typeLabel": "Creature",
+    "levelLabel": "Creature 20",
+    "headingLabel": "Creature 20",
+    "traits": [
+      "Rare",
+      "Medium",
+      "Humanoid"
+    ],
+    "gmOnly": true,
+    "summary": "A level-20 frontline enforcer whose heavy noqual armor and endurance withstand destructive magic.",
+    "intro": "The physical anti-magic combatant most reminiscent of the superstition instinct: enduring hostile magic and breaking through wards.",
+    "source": "Gaileia — Military Codex; veteran Catena design (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Perception</dt><dd>+33; siccatite detection array (30 feet)</dd></div><div class=\"stat-line\"><dt>Languages</dt><dd>Common, one regional language</dd></div><div class=\"stat-line\"><dt>Skills</dt><dd>Athletics +38, Crafting +38, Arcana +34, Occultism +34, Nature +34, Intimidation +34</dd></div><div class=\"stat-line\"><dt>Abilities</dt><dd>Str +8, Dex +3, Con +8, Int +4, Wis +4, Cha +2</dd></div><div class=\"stat-line\"><dt>Items</dt><dd>High-grade noqual heavy plate, noqual great hammer, three reinforced throwing spears; <a href=\"#entry/tapestry-scribe\">Tapestry Scribe</a>; <a href=\"#entry/tapestry-scribe\">Tapestry Scribe</a>; <a href=\"#entry/wardshear-lacquer\">Wardshear Lacquer</a>; <a href=\"#entry/nullfoam-canister\">Nullfoam Canister</a></dd></div><div class=\"stat-line\"><dt>AC</dt><dd>45 (46 vs. spell attacks)</dd></div><div class=\"stat-line\"><dt>Saves</dt><dd>Fort +39, Ref +30, Will +33</dd></div><div class=\"stat-line\"><dt>HP</dt><dd>350</dd></div><div class=\"stat-line\"><dt>Speed</dt><dd>25 feet</dd></div></dl>\n<section class=\"rules-subcard\"><h3>Shared Catena Training and Noqual Gear</h3><p><strong>Siccatite Detection Array</strong> The operative senses nearby rank 1+ arcane, occult, or primal casting within 30 feet and learns an approximate rank band (1–4, 5–8, 9–10), without automatically learning the spell, locating its caster, or detecting divine magic. <strong>Chain Classification</strong> Arcana, Occultism, and Nature can be used to Recall Knowledge and assess demonstrated Links; no automatic knowledge of hidden powers. <strong>Noqual Armor</strong> +1 circumstance bonus to AC against spell attacks (listed separately). <strong>Noqual Weapons</strong> Against summoned creatures and spell effects that can be damaged, gain a circumstance damage bonus equal to twice the weapon damage dice; on a critical hit against a spellcaster, the target becomes stupefied 1 for one round.</p><p><strong>Reactions:</strong> One reaction per round unless another ability explicitly grants more. A reaction spent on an item cannot also be spent on Reactive Strike or another reaction.</p></section>\n<h2>Offense</h2><dl class=\"stat-block\"><div class=\"stat-line\"><dt>Strike</dt><dd>Melee — noqual great hammer +38 [+33/+28] (magical, shove, two-handed), Damage 4d10+20 bludgeoning</dd></div><div class=\"stat-line\"><dt>Strike</dt><dd>Ranged — reinforced throwing spear +35 [+30/+25] (thrown 30 feet), Damage 4d6+17 piercing</dd></div></dl>\n<h2>Special Abilities</h2>\n<section class=\"rules-subcard\"><h3>Fortified Posture <span class=\"action-icon\" aria-label=\"one action\">◆</span></h3><p><strong>Stance.</strong> Gain resistance 10 against damage caused by arcane, occult, or primal spells while in this stance, but take a –10-foot status penalty to your Speeds. Resistance from this stance does not stack with resistance from Nullfoam; apply the highest applicable resistance only.</p></section>\n<section class=\"rules-subcard\"><h3>Press Through <span class=\"action-icon\" aria-label=\"two actions\">◆◆</span></h3><p><strong>Attack.</strong> Stride up to your Speed and make one great hammer Strike. If the target benefits from an ongoing non-divine spell granting resistance to physical damage or an item bonus to AC, the Strike deals an extra 2d6 bludgeoning damage before applying resistance. This does not counteract the spell.</p></section>\n<section class=\"rules-subcard\"><h3>Interpose Noqual Plate <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p><strong>Trigger</strong> An ally within 10 feet would take spell damage, and you can interpose your armor between them and the effect's origin. Reduce the spell's damage to that ally by 15, then take 10 bludgeoning recoil damage that cannot be reduced or prevented.</p></section>\n<section class=\"rules-subcard\"><h3>Reactive Strike <span class=\"action-icon\" aria-label=\"reaction\">↺</span></h3><p>Standard Reactive Strike with the great hammer.</p></section>\n<section class=\"rules-subcard\"><h3>GM Tactics</h3><p>Advance through incoming damage, use Nullfoam as cover, and spend Tapestry Scribes on heavy spell hits. Apply Wardshear Lacquer before striking a warded enemy. Powerful in melee but relatively vulnerable to nondamaging magical control.</p></section>\n<p class=\"source-note\">Veteran Catena combat profile: level 20 creature, not a level-20 player-character build. Recoverable devices are linked above and use their own fixed item rules.</p>\n"
+  },
+  {
+    "id": "black-globe",
+    "title": "Black Globe",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 19",
+    "headingLabel": "Item 19",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical"
+    ],
+    "gmOnly": true,
+    "summary": "A spinning black void inside a small vessel devours an attempted spell counteraction.",
+    "intro": "A locket or chamber encloses a spinning black void. During activation, the spell's manifestation is drawn around the void in orbit, then vanishes into it if counteracted. After the attempt, the void collapses on itself, leaving the vessel empty.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>7,000 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, locket or chamber</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>↺ Reaction (concentrate)</dd></div><div class=\"stat-line\"><dt>Trigger</dt><dd>A creature within 30 feet begins casting an arcane, occult, or primal spell whose manifestation you can perceive.</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>Trained in Arcana, Occultism, or Nature; line of effect to the manifestation.</dd></div></dl>\n<p>A locket or chamber encloses a spinning black void. During activation, the spell's manifestation is drawn around the void in orbit, then vanishes into it if counteracted. After the attempt, the void collapses on itself, leaving the vessel empty.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Attempt a +32 counteract check at counteract rank 9 against the triggering spell, before it resolves. On a successful counteraction under the normal rules, the spell is disrupted and any resources used to cast it are expended. The Globe is consumed after any attempt, whether successful or not. It cannot identify an imperceptible casting or counteract divine magic.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>A single, high-value reaction competing with all other reactions.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "mirror-turn-prism",
+    "title": "Mirror-Turn Prism",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 19",
+    "headingLabel": "Item 19",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical"
+    ],
+    "gmOnly": true,
+    "summary": "A green mirrored prism turns an incoming single-target spell back on its caster.",
+    "intro": "A prism of green glass with an internal mirrored surface. Its reflections fold across one another at the moment of impact.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>7,500 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, brooch</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>—</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>↺ Reaction (concentrate)</dd></div><div class=\"stat-line\"><dt>Trigger</dt><dd>You are the sole target of a perceptible arcane, occult, or primal spell.</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>The spell is not an area effect and does not target multiple creatures or objects.</dd></div></dl>\n<p>A prism of green glass with an internal mirrored surface. Its reflections fold across one another at the moment of impact.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Attempt a +32 counteract check at rank 9 against the triggering spell. On success, you are unaffected; instead the spell resolves against its original caster, provided the caster is a legal target within the spell's range. The original caster rolls any spell attack against its own AC, or makes any required save against its own spell DC; all other spell statistics remain unchanged. If the caster is not a legal target, the spell is merely counteracted for you. On failure the spell affects you normally. The prism is consumed either way.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>Reflection applies only to a single-target spell, not an area or multi-target effect.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "backstitch-cloth",
+    "title": "Backstitch Cloth",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 19",
+    "headingLabel": "Item 19",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical"
+    ],
+    "gmOnly": true,
+    "summary": "An unraveling branded garment strips magic and fastens steel-strong cloth shackles.",
+    "intro": "Often branded as a bandana, belt strap, neckcloth, or armband, this piece of fabric comes apart when used. When it successfully strips a beneficial enchantment, separated strands race toward the target and lash together like steel.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>6,000 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, garment or strap</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>◆◆ Two actions (concentrate, manipulate)</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>A creature or object within 30 feet bears an ongoing arcane, occult, or primal spell effect you can perceive or identify.</dd></div></dl>\n<p>Often branded as a bandana, belt strap, neckcloth, or armband, this piece of fabric comes apart when used. When it successfully strips a beneficial enchantment, separated strands race toward the target and lash together like steel.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Choose one ongoing effect and attempt a +32 counteract check at rank 9 against it. On success the effect ends. If the ended spell was beneficial to a creature, the strands bind that creature: on a successful counteract check it is immobilized until the end of its next turn; on a critically successful counteract check it is restrained for the same duration instead. Escape DC 39; the bindings have Hardness 15 and 50 HP and can be destroyed early. The cloth is consumed, even on a failed counteract. This cannot undo an instantaneous spell or counteract an innate non-spell ability.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>A physical follow-up restraint lasting at most one round; not an indefinite shackle.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "locked-time-leak",
+    "title": "Locked Time Leak",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 18",
+    "headingLabel": "Item 18",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical",
+      "Time"
+    ],
+    "gmOnly": true,
+    "summary": "A wrist device leaks fluid through channels while the world seems to stop.",
+    "intro": "A small plate is depressed with a click like glass breaking. Fluid slowly bleeds into channels around the wearer's wrist, momentarily disrupting their relationship to time. Projectiles hang still and flames cease to move before the fluid is drained.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>4,000 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, wrist</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>↺ Reaction (concentrate)</dd></div><div class=\"stat-line\"><dt>Trigger</dt><dd>You are within the area of a perceptible arcane, occult, or primal area spell as it is being cast.</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>You are not immobilized and can Step.</dd></div></dl>\n<p>A small plate is depressed with a click like glass breaking. Fluid slowly bleeds into channels around the wearer's wrist, momentarily disrupting their relationship to time. Projectiles hang still and flames cease to move before the fluid is drained.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Before the triggering spell resolves, Step up to 10 feet. This movement does not trigger reactions. If you leave the spell's area, you avoid it; otherwise it resolves normally. The movement must still obey Step restrictions, including restrictions imposed by difficult terrain and solid barriers. The device becomes inert after activation.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>One evasive reaction, not a full extra turn or time-stop spell.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "tuning-stake",
+    "title": "Tuning Stake",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 18",
+    "headingLabel": "Item 18",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical"
+    ],
+    "gmOnly": true,
+    "summary": "A translucent green shard interrupts the first teleport across its rippling field.",
+    "intro": "This green, glasslike shard makes the surface around it ripple as if a stone had been thrown into water when it is embedded.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>4,500 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Held in 1 hand</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>1</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>◆◆ Two actions (manipulate)</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>An adjacent solid surface to embed the shard.</dd></div></dl>\n<p>This green, glasslike shard makes the surface around it ripple as if a stone had been thrown into water when it is embedded.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>The stake creates a stationary 15-foot emanation that lasts for one minute. The first arcane, occult, or primal teleportation that would move a creature into or out of the emanation triggers the stake's +31 counteract check at rank 9 against that teleportation effect. On success, the teleportation fails for that creature; on failure it proceeds. Whether successful or not, the stake is consumed after the first attempt; it also becomes inert if the minute ends. It doesn't prevent mundane movement or interfere with non-teleportation movement abilities.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>A small defensive zone that consumes itself on one counteract attempt.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "forecasting-plug",
+    "title": "Forecasting Plug",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 18",
+    "headingLabel": "Item 18",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical",
+      "Mental"
+    ],
+    "gmOnly": true,
+    "summary": "A sensitive mercurial earplug senses and attempts to prevent invasive mental magic.",
+    "intro": "A malleable metal plug fits into one ear. On successful use, it melts into a mercurial liquid and evaporates with body heat; after an unsuccessful attempt, it hardens and falls out.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>4,000 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, one ear</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>—</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>↺ Reaction (concentrate)</dd></div><div class=\"stat-line\"><dt>Trigger</dt><dd>You are about to be affected by an arcane, occult, or primal magical effect that would control your actions, possess you, or directly alter your emotions, memories, or decisions.</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>The plug is inserted in your ear.</dd></div></dl>\n<p>A malleable metal plug fits into one ear. On successful use, it melts into a mercurial liquid and evaporates with body heat; after an unsuccessful attempt, it hardens and falls out.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>The plug itself warns you before the effect takes hold, even if you did not recognize the magic. Attempt a +31 counteract check at rank 9 against the triggering effect as it applies to you. On success it is disrupted for you; on failure it resolves normally. Either way the plug is consumed. It cannot restore memories already modified or end coercion that is not magical.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>Protection against Claim and Sway, not blanket immunity to illusion or mental effects.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "wardshear-lacquer",
+    "title": "Wardshear Lacquer",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 18",
+    "headingLabel": "Item 18",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Alchemical"
+    ],
+    "gmOnly": true,
+    "summary": "An alchemical noqual lacquer tears through an ongoing spell on a struck target.",
+    "intro": "A cloudy metallic lacquer suspends reactive noqual particles and other compounds. It crystallizes sharply when the treated weapon contacts an active magical defense.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>4,500 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Held in 1 hand</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>◆ One action (manipulate)</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>You hold a melee weapon you can coat.</dd></div></dl>\n<p>A cloudy metallic lacquer suspends reactive noqual particles and other compounds. It crystallizes sharply when the treated weapon contacts an active magical defense.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Coat one melee weapon for one minute. On its next successful Strike, the lacquer is expended and you may attempt a +31 counteract check at rank 9 against one ongoing arcane, occult, or primal defensive spell on the hit creature or object, such as an active protective barrier, magical resistance, or bonus to AC or saves. On success that chosen effect ends; the Strike deals normal damage regardless. The coating is used up on the first hit whether or not a suitable spell exists. It cannot dispel permanent magic items.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>Requires a preparatory action and a hit before a fixed-modifier counteract attempt.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "tapestry-scribe",
+    "title": "Tapestry Scribe",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 17",
+    "headingLabel": "Item 17",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical"
+    ],
+    "gmOnly": true,
+    "summary": "A charm-sized tapestry records a spell's absorbed force as woven art.",
+    "intro": "Usually worn at the belt or on an item tassel, a tiny tapestry weaves a striking artistic depiction as it absorbs magical damage. Releasing the stored energy makes it weave back into an undecorated, plain surface.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>2,800 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Worn, belt tassel or charm</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>↺ Reaction (concentrate)</dd></div><div class=\"stat-line\"><dt>Trigger</dt><dd>You would take damage from an arcane, occult, or primal spell.</dd></div></dl>\n<p>Usually worn at the belt or on an item tassel, a tiny tapestry weaves a striking artistic depiction as it absorbs magical damage. Releasing the stored energy makes it weave back into an undecorated, plain surface.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Reduce the triggering spell's damage to you by 20 (this reduction is applied after any other damage resistance and cannot reduce the damage below 0). The tapestry stores damage actually prevented, maximum 20. Before the end of your next turn, you can spend ◆ one action (concentrate) to discharge stored energy against one creature within 30 feet; it takes damage equal to the amount stored, with a DC 37 basic Reflex save. Choose one damage type dealt by the original spell for the discharge. If not discharged by then, the charge dissipates. Either way the tapestry becomes inert after the window ends.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>The stored energy cannot exceed 20 and costs a second action to redirect.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "nullfoam-canister",
+    "title": "Nullfoam Canister",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 16",
+    "headingLabel": "Item 16",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Alchemical"
+    ],
+    "gmOnly": true,
+    "summary": "A crystalline foam forms temporary terrain and protective screens against spell damage.",
+    "intro": "A pressurized canister bursts into white foam, crystallizing into a dense network of microscopic noqual-bearing filaments.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>1,800 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Held in 1 hand</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>◆◆ Two actions (manipulate)</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>An unobstructed target point on the ground within 30 feet.</dd></div></dl>\n<p>A pressurized canister bursts into white foam, crystallizing into a dense network of microscopic noqual-bearing filaments.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Throw the canister to create a 10-foot burst of foam. The area is difficult terrain and persists until the beginning of your third turn after activation (approximately two rounds). A creature gains resistance 15 against damage from arcane, occult, and primal spells if it occupies any of the foam or if a straight line from that spell's point of origin to the creature's space passes through at least 5 feet of foam. For a non-area spell lacking a distinct origin, use the caster's space. Resistance applies once, even through multiple foam squares. Foam does not block line of effect, protect against nondamaging effects, or protect from divine magic. The same protection can benefit foes as allies.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>A bunker or intervening screen; the foam also obstructs movement without preventing magical targeting.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
+  },
+  {
+    "id": "hostbreaker-bell",
+    "title": "Hostbreaker Bell",
+    "category": "Items",
+    "typeLabel": "Item",
+    "levelLabel": "Item 17",
+    "headingLabel": "Item 17",
+    "traits": [
+      "Rare",
+      "Consumable",
+      "Magical",
+      "Sonic"
+    ],
+    "gmOnly": true,
+    "summary": "A near-silent noqual bell brings ongoing summonings to an abrupt end.",
+    "intro": "A small silver-colored bell with a noqual clapper rings with almost no audible sound, while the air around magically sustained beings shivers.",
+    "source": "Gaileia — Solidarity Project Catena equipment (homebrew, October 2026)",
+    "contentHtml": "\n<dl class=\"stat-block\"><div class=\"stat-line\"><dt>Price</dt><dd>2,800 gp</dd></div><div class=\"stat-line\"><dt>Usage</dt><dd>Held in 1 hand</dd></div><div class=\"stat-line\"><dt>Bulk</dt><dd>Light</dd></div><div class=\"stat-line\"><dt>Activate</dt><dd>◆◆ Two actions (concentrate, manipulate)</dd></div><div class=\"stat-line\"><dt>Requirements</dt><dd>A creature within 60 feet whose presence depends on an ongoing arcane, occult, or primal summoning spell.</dd></div></dl>\n<p>A small silver-colored bell with a noqual clapper rings with almost no audible sound, while the air around magically sustained beings shivers.</p>\n<section class=\"rules-subcard\"><h3>Effect</h3><p>Attempt a +30 counteract check at rank 8 against the spell sustaining the target. On success that summoning ends, and creatures maintained by the same effect disappear as the spell specifies. The bell does not destroy naturally present creatures, end permanent creations, or banish creatures just because they originate elsewhere. It is consumed after the attempt.</p></section>\n<section class=\"rules-subcard\"><h3>GM Balance Note</h3><p>Specialized for Host Links; cannot remove independently existing creatures.</p></section>\n<p class=\"source-note\">A restricted Solidarity Project field device. Player characters may use an intact recovered item if they meet its requirements. Single-use and fixed-modifier rules apply regardless of Catena affiliation.</p>\n"
   }
 ];
 
