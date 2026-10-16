@@ -26,7 +26,7 @@ const categorySymbols = context.window.GAILEIA_CATEGORY_SYMBOLS;
 const byId = Object.fromEntries(entries.map((entry) => [entry.id, entry]));
 const ids = entries.map((entry) => entry.id);
 
-assert.equal(entries.length, 100, "expected 100 catalogue entries with veteran Catena and their devices");
+assert.equal(entries.length, 109, "expected 109 catalogue entries with three Catena tiers and their equipment");
 assert.equal(new Set(ids).size, ids.length, "entry IDs must be unique");
 assert.equal(categories.length - 1, 14, "expected 14 collections");
 assert.equal(collectionsConfig.schemaVersion, 1);
@@ -379,7 +379,7 @@ for (const id of feedback7NewEntries) {
   assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
   assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
 }
-assert.equal(entries.filter((entry) => entry.category === "Items").length, 39);
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 46);
 assert.equal(entries.filter((entry) => entry.category === "Oziza").length, 4);
 assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
 assert.equal(byId["tiger-stance-claws"].category, "Saraik");
@@ -515,6 +515,39 @@ assert.match(byId["backstitch-cloth"].contentHtml, /Escape DC 39/);
 assert.ok(byId["catena-field-operative"].contentHtml.includes('#entry/black-globe'));
 assert.ok(byId["catena-custodian"].contentHtml.includes('#entry/forecasting-plug'));
 
+
+const juniorCatenaIds = ["catena-rookie", "catena-officer"];
+const juniorDeviceIds = ["black-globe-lesser","nullfoam-canister-lesser","black-globe-service","tapestry-scribe-service","nullfoam-canister-service","tuning-stake-service","forecasting-plug-service"];
+for (const id of juniorCatenaIds) {
+  const entry = byId[id];
+  assert.ok(entry, `missing junior Catena ${id}`);
+  assert.equal(entry.category, "Fauna/Flora");
+  assert.equal(entry.gmOnly, true, `${id} must be permanently GM-only`);
+  assert.match(entry.levelLabel, /^Creature (6|13)$/);
+  assert.ok(entry.contentHtml.includes("GM Tactics"));
+  assert.ok(entry.contentHtml.includes("Chain Classification"));
+}
+for (const id of juniorDeviceIds) {
+  const entry = byId[id];
+  assert.ok(entry, `missing service or lesser consumable ${id}`);
+  assert.equal(entry.category, "Items");
+  assert.equal(entry.gmOnly, true, `${id} must be permanently GM-only`);
+  assert.ok(entry.traits.includes("Consumable"));
+  assert.ok(entry.contentHtml.includes("<dt>Price</dt>"));
+  assert.ok(entry.contentHtml.includes("<dt>Activate</dt>"));
+  assert.ok(entry.contentHtml.includes("<h3>Effect</h3>"));
+  assert.ok(!entry.contentHtml.includes(`<p>${entry.intro}</p>`), `${id} repeats the italicized description`);
+}
+assert.equal(byId["catena-rookie"].levelLabel, "Creature 6");
+assert.equal(byId["catena-officer"].levelLabel, "Creature 13");
+assert.ok(byId["catena-rookie"].contentHtml.includes("#entry/black-globe-lesser"));
+assert.ok(byId["catena-officer"].contentHtml.includes("#entry/tuning-stake-service"));
+assert.ok(byId["catena-officer"].contentHtml.includes("#entry/forecasting-plug-service"));
+assert.ok(byId["nullfoam-canister-lesser"].contentHtml.includes("5 feet of foam"));
+assert.ok(byId["nullfoam-canister-service"].contentHtml.includes("5 feet of foam"));
+assert.ok(byId["black-globe-lesser"].contentHtml.includes("counteract rank 2"));
+assert.ok(byId["black-globe-service"].contentHtml.includes("counteract rank 6"));
+
 const appSource = fs.readFileSync("assets/js/app.js", "utf8");
 const cssSource = fs.readFileSync("assets/css/styles.css", "utf8");
 const htmlSource = fs.readFileSync("index.html", "utf8");
@@ -571,9 +604,9 @@ assert.doesNotMatch(
 assert.match(htmlSource, /id="manage-visibility"/);
 assert.match(htmlSource, /id="visibility-dialog"/);
 assert.match(htmlSource, /id="visibility-manager-list"/);
-assert.match(htmlSource, /id="entry-total">100</);
+assert.match(htmlSource, /id="entry-total">109</);
 assert.match(htmlSource, /id="collection-total">14</);
 assert.match(htmlSource, /id="formula-filters"/);
 
-console.log("Production compendium validation passed: 100 entries, 14 collections, and canonical data is current.");
+console.log("Production compendium validation passed: 109 entries, 14 collections, and canonical data is current.");
 
