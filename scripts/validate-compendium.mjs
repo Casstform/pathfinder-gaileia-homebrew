@@ -502,6 +502,7 @@ for (const id of solidarityDeviceIds) {
   assert.ok(entry, `missing Solidarity Project item ${id}`);
   assert.equal(entry.category, "Items");
   assert.equal(entry.gmOnly, true, `${id} must stay locked GM-only`);
+  assert.ok(!entry.contentHtml.includes(`<p>${entry.intro}</p>`), `${id} should not duplicate its italicized introduction`);
   assert.match(entry.levelLabel, /^Item (16|17|18|19)$/);
   assert.ok(entry.contentHtml.includes("<dt>Price</dt>"));
   assert.ok(entry.contentHtml.includes("<dt>Activate</dt>"));
