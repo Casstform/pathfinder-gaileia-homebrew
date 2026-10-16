@@ -503,16 +503,16 @@ for (const id of solidarityDeviceIds) {
   assert.equal(entry.category, "Items");
   assert.equal(entry.gmOnly, true, `${id} must stay locked GM-only`);
   assert.match(entry.levelLabel, /^Item (16|17|18|19)$/);
-  assert.match(entry.contentHtml, /<dt>Price<\\/dt>/);
-  assert.match(entry.contentHtml, /<dt>Activate<\\/dt>/);
+  assert.ok(entry.contentHtml.includes("<dt>Price</dt>"));
+  assert.ok(entry.contentHtml.includes("<dt>Activate</dt>"));
 }
 for (const entry of [...veteranCatenaIds, ...solidarityDeviceIds].map(id => byId[id])) {
   assert.match(entry.contentHtml, /(counteract|damage|Stride|immobilized|restrained|saving|resistance|reaction|React|Spell|spell)/i);
 }
 assert.match(byId["nullfoam-canister"].contentHtml, /passes through at least 5 feet of foam/);
 assert.match(byId["backstitch-cloth"].contentHtml, /Escape DC 39/);
-assert.match(byId["catena-field-operative"].contentHtml, /#entry\\/black-globe/);
-assert.match(byId["catena-custodian"].contentHtml, /#entry\\/forecasting-plug/);
+assert.ok(byId["catena-field-operative"].contentHtml.includes('#entry/black-globe'));
+assert.ok(byId["catena-custodian"].contentHtml.includes('#entry/forecasting-plug'));
 
 const appSource = fs.readFileSync("assets/js/app.js", "utf8");
 const cssSource = fs.readFileSync("assets/css/styles.css", "utf8");
