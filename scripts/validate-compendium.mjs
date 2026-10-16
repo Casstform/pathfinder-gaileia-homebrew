@@ -379,7 +379,7 @@ for (const id of feedback7NewEntries) {
   assert.ok(byId[id], `Feedback 7 entry ${id} is missing`);
   assert.match(byId[id].source, /Compendium-Items-25-8-26\.json/);
 }
-assert.equal(entries.filter((entry) => entry.category === "Items").length, 29);
+assert.equal(entries.filter((entry) => entry.category === "Items").length, 39);
 assert.equal(entries.filter((entry) => entry.category === "Oziza").length, 4);
 assert.equal(entries.filter((entry) => entry.category === "Saraik").length, 3);
 assert.equal(byId["tiger-stance-claws"].category, "Saraik");
